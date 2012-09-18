@@ -1,0 +1,12 @@
+This project is a Rhino fork, maintained to support features needed by HtmlUnit.
+
+To build the project, you have to use ant.
+
+buid.xml is the original Rhino build file, and htmlunit.xml is the one used by HtmlUnit. 
+
+Notice that "org.mozilla.*" is automatically renamed to "net.sourceforge.htmlunit.corejs.*"
+
+Run "ant -f htmlunit.xml -p -v" to see all the tasks available
+
+Mostly you will need:
+"ant -f htmlunit.xml jar-all"
