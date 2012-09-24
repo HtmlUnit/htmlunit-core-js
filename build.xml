@@ -17,7 +17,7 @@ Ahmed Ashour
 
 	<property name="version" value="2.11-SNAPSHOT"/>
 
-	<property name="rhino.basedir" location="../htmlunit-core-js"/>
+	<property name="rhino.basedir" location="../htmlunit-rhino-fork"/>
 	<property name="repackaged-rhino.dir" value="target/repackaged-rhino"/>
 	<property name="jar" location="target/htmlunit-core-js-${version}.jar" />
 	<property name="jar.sources" location="target/htmlunit-core-js-${version}-sources.jar" />
