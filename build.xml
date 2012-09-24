@@ -130,6 +130,7 @@ Ahmed Ashour
 			<arg value="-DpomFile=pom.xml" />
 			<arg value="-Dfile=${jar}" />
 		</artifact:mvn>
+		<!-- this doesn't work as it produces a new snapshot timestamp different from the one for the jar
 		<artifact:mvn>
 			<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.7:deploy-file" />
 			<arg value="-Durl=${maven-snapshots-repository-url}" />
@@ -138,6 +139,7 @@ Ahmed Ashour
 			<arg value="-Dfile=${jar.sources}" />
 			<arg value="-Dclassifier=sources" />
 		</artifact:mvn>
+		-->
 	</target>
 
 	<target name="install-mvn-local" depends="check-maven-ant-tasks,jar-with-source"
