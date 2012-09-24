@@ -19,6 +19,27 @@ public class ArgumentsTest {
      * @throws Exception if the test fails
      */
     @Test
+    public void argumentsShouldBeNullOutsideOfAFunction() throws Exception {
+        final String script = "function f() {\n"
+                + "}\n"
+                + "f(1, 2);\n"
+                + "f.arguments";
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                Assert.assertEquals(null, result);
+                return null;
+            }
+        };
+
+        Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void _toString() throws Exception {
         _toString(true, "[object Object]");
         _toString(false, "[object Arguments]");
