@@ -70,6 +70,7 @@
   </target>
 
   <target name="junit" depends="junit-compile">
+    <mkdir dir="${build.dir}/htmlunittest"/>
     <junit printsummary="on" fork="true" forkmode="once" maxmemory="${test.vm.mx}" showoutput="true"
     	failureproperty="junitFailed">
       <classpath>

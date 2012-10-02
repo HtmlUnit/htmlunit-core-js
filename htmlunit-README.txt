@@ -11,10 +11,7 @@ This is meant for project committers:
   - Add 'htmlunittestsrc' which contains 'build.xml' and the test cases
 
 - To run HtmlUnit fork tests:
-    ant -f htmlunit.xml test
-
-- To run original Rhino tests:
-    ant junit-all
+    ant test
 
 - Deploy snapshot:
   - Ensure that you have pgp installed and that you create own keys, see
