@@ -1,0 +1,20 @@
+# Set default behavior, in case users don't have core.autocrlf set.
+* text=auto
+
+.classpath text
+.project text
+*.html text
+*.java text
+*.js text
+*.jsp text
+*.php text
+*.properties text
+*.sh text
+*.xml text
+
+*.bmp binary
+*.gif binary
+*.jar binary
+*.jpg binary
+*.jpeg binary
+*.png binary
