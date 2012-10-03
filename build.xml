@@ -34,28 +34,28 @@ Ahmed Ashour
 	<property name="maven-snapshots-repository-url" value="https://oss.sonatype.org/content/repositories/snapshots/" />
 
 	<target name="clean-compile">
-	    <ant dir="${rhino.basedir}" target="clean"/>
-	    <ant dir="${rhino.basedir}" target="compile"/>
+		<ant dir="${rhino.basedir}" target="clean"/>
+		<ant dir="${rhino.basedir}" target="compile"/>
 		<delete dir="${dist.dir}"/>
 	</target>
 
 	<target name="test" depends="clean-compile" description="Runs htmlunit-specific tests">
 		<ant antfile="src/build.xml" target="junit"/>
-	</target> 
+	</target>
 
 	<target name="repackage" depends="clean-compile" description="Copy org.mozilla.* to net.sourceforge.htmlunit.corejs and compiles">
 		<property name="corejs.dir" value="${repackaged-rhino.dir}/src/net/sourceforge/htmlunit/corejs"/>
-		
+
 		<mkdir dir="${corejs.dir}"/>
 		<copy toDir="${corejs.dir}">
-		    <fileset dir='${rhino.basedir}/src/org/mozilla'>
+			<fileset dir='${rhino.basedir}/src/org/mozilla'>
 				<include name="**/*"/>
-		    </fileset>
-		    <fileset dir='${rhino.basedir}/toolsrc/org/mozilla'>
+			</fileset>
+			<fileset dir='${rhino.basedir}/toolsrc/org/mozilla'>
 				<include name="javascript/tools/debugger/**/*.java"/>
 				<include name="javascript/tools/shell/**/*.java"/>
 				<include name="javascript/tools/*.java"/>
-		    </fileset>
+			</fileset>
 		</copy>
 
 		<replace dir="${corejs.dir}" token="org.mozilla" value="net.sourceforge.htmlunit.corejs"/>
@@ -66,24 +66,24 @@ Ahmed Ashour
 			<src path='${repackaged-rhino.dir}/src' />
 		</javac>
 		<copy toDir="${repackaged-rhino.dir}/classes">
-		    <fileset dir="${repackaged-rhino.dir}/src">
+			<fileset dir="${repackaged-rhino.dir}/src">
 				<exclude name="**/*.java"/>
-		    </fileset>
+			</fileset>
 		</copy>
 	</target>
 
 	<target name="jar-with-source" depends="repackage, generate-rhino-diff">
 		<basename property="rhino.diff.filename" file="${rhino.diff}"/>
 		<dirname property="rhino.diff.dirname" file="${rhino.diff}"/>
-	 	<jar destfile="${jar}">
-		    <fileset dir='${repackaged-rhino.dir}/classes' />
-		    <fileset dir='${rhino.diff.dirname}' includes="${rhino.diff.filename}"/>
+		<jar destfile="${jar}">
+			<fileset dir='${repackaged-rhino.dir}/classes' />
+			<fileset dir='${rhino.diff.dirname}' includes="${rhino.diff.filename}"/>
 		</jar>
 		<jar destfile="${jar.sources}">
-		    <fileset dir='${repackaged-rhino.dir}/src'>
+			<fileset dir='${repackaged-rhino.dir}/src'>
 				<include name="**/*"/>
-		    </fileset>
-		    <fileset dir='${rhino.diff.dirname}' includes="${rhino.diff.filename}"/>
+			</fileset>
+			<fileset dir='${rhino.diff.dirname}' includes="${rhino.diff.filename}"/>
 		</jar>
 	</target>
 
@@ -94,22 +94,22 @@ Ahmed Ashour
 		           windowtitle="HtmlUnit core-js-${version}"
 		           doctitle="HtmlUnit core-js-${version}" encoding="ISO-8859-1"
 		 />
-	 	<jar destfile="${jar.javadoc}">
-		    <fileset dir='${javadoc.dir}' />
+		<jar destfile="${jar.javadoc}">
+			<fileset dir='${javadoc.dir}' />
 		</jar>
 	</target>
 
 	<target name="bundle">
-<!--		<gpg file="pom.xml"/>
+		<!--		<gpg file="pom.xml"/>
 		<gpg file="${jar}"/>
 		<gpg file="${jar.sources}"/>
 		<gpg file="${jar.javadoc}"/> -->
-	 	<jar destfile="build/bundle.jar">
-		    <fileset dir='.'>
+		<jar destfile="build/bundle.jar">
+			<fileset dir='.'>
 				<include name="pom.xml"/>
 				<include name="pom.xml.asc"/>
-		    </fileset>
-    	   <fileset dir="build" includes="*.jar,*.jar.asc" />
+			</fileset>
+			<fileset dir="build" includes="*.jar,*.jar.asc" />
 		</jar>
 		<delete file="pom.xml.asc"/>
 	</target>
@@ -117,7 +117,7 @@ Ahmed Ashour
 	<target name="check-maven-ant-tasks">
 		<property name="maven-ant-tasks.url" value="http://repo1.maven.org/maven2/org/apache/maven/maven-ant-tasks/2.1.3/maven-ant-tasks-2.1.3.jar"/>
 		<get src="${maven-ant-tasks.url}" dest="lib" skipexisting="true"/>
-	</target>	
+	</target>
 
 	<target name="deploy-snapshot" depends="check-maven-ant-tasks,jar-all"
 			description="Deploys a snapshot to Sonatype snapshot repository">
@@ -154,7 +154,7 @@ Ahmed Ashour
 		<artifact:pom id="maven.project" file="pom.xml" />
 		<artifact:install file="${jar}">
 			<pom refid="maven.project"/>
-			<attach file="${jar.sources}" classifier="sources" /> 
+			<attach file="${jar.sources}" classifier="sources" />
 		</artifact:install>
 	</target>
 
