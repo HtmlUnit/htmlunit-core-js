@@ -1,12 +1,47 @@
 This project is a Rhino fork, maintained to support features needed by HtmlUnit.
 
-To build the project, you have to use ant.
+It is split into two projects "htmlunit-rhino-fork", which contains the minimal changes to rhino,
+and "htmlunit-core-js" which has the test cases and packaging.
 
-buid.xml is the original Rhino build file, and htmlunit.xml is the one used by HtmlUnit. 
+Notice that "org.mozilla.*" is renamed to "net.sourceforge.htmlunit.corejs.*"
 
-Notice that "org.mozilla.*" is automatically renamed to "net.sourceforge.htmlunit.corejs.*"
+Steps:
+    - Clone the two projects into sibling folders
+    - Create eclipse project for "htmlunit-rhino-fork", with 'src' 'testsrc' and 'toolsrc' folder as source folders,
+      while having build/classes as the output folder 
 
-Run "ant -p -v" to see all the tasks available
+- To generate the JARs:
+      ant jar-all
+    
+- Deploy snapshot:
+  - Ensure that you have pgp installed and that you create own keys, see
+      https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
 
-Mostly you will need:
-"ant jar-all"
+  - Configure your Maven settings.xml, see
+      https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+
+  - Run:
+      ant deploy-snapshot
+
+- To release:
+  1- Change version in pom.xml and build.xml
+  2- Make sure rhinoDiff.txt is updated
+  3- ensure that you have pgp installed and that you create own keys (see
+      https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven)
+  
+  4- Configure your Maven settings.xml, see
+      https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+
+  5- Deploy the release files into Sonatype staging repository:
+      ant jar-all
+
+      - for 2.11, run the below:
+
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=build/htmlunit-core-js-2.11.jar
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=build/htmlunit-core-js-2.11-sources.jar -Dclassifier=sources
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=build/htmlunit-core-js-2.11-javadoc.jar -Dclassifier=javadoc
+
+  6- Go to https://oss.sonatype.org/index.html#stagingRepositories and release the repository
+
+TODO:
+    - GPG automated from ant (in "bundle" target), if possible
