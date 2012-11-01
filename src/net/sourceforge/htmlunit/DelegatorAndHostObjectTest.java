@@ -15,6 +15,7 @@ import org.mozilla.javascript.ScriptableObject;
  * 
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 public class DelegatorAndHostObjectTest {
 
@@ -49,19 +50,17 @@ public class DelegatorAndHostObjectTest {
 
 	@Test
 	public void delegatorAndHostObjectFunction() {
-		testIt("new MyHostObject().createDelegator().foo()", 42);
+		test("new MyHostObject().createDelegator().foo()", 42);
 	}
 
 	@Test
 	public void delegatorAndHostObjectGetterSetter() {
-		testIt("var t = new MyHostObject().createDelegator(); t.x = 12; t.x;",
-				12);
+		test("var t = new MyHostObject().createDelegator(); t.x = 12; t.x;", 12);
 	}
 
 	@Test
 	public void delegatorAsParameter() {
-		testIt("var t = new MyHostObject().createDelegator(); t.methodWithParam(t);",
-				123);
+		test("var t = new MyHostObject().createDelegator(); t.methodWithParam(t);", 123);
 	}
 
 	@Test
@@ -69,11 +68,15 @@ public class DelegatorAndHostObjectTest {
 		final String script = "var t = new MyHostObject().createDelegator();\n"
 			+ "t.__defineGetter__('foo', function(a) { return 'hello' });\n"
 		    + "t.foo;";
-		testIt(script, "hello");
+		test(script, "hello");
 	}
 
+    @Test
+    public void strictEquals() {
+        test("var o = new MyHostObject(); o.createDelegator() === o", true);
+    }
 
-	private void testIt(final String script, final Object expected) {
+	private void test(final String script, final Object expected) {
 		final ContextAction action = new ContextAction() {
 			public Object run(final Context cx) {
 				try {
