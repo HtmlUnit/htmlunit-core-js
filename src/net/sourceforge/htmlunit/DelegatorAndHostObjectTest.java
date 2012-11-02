@@ -76,6 +76,11 @@ public class DelegatorAndHostObjectTest {
         test("var o = new MyHostObject(); o.createDelegator() === o", true);
     }
 
+    @Test
+    public void strictEqualsDelegators() {
+        test("var o = new MyHostObject(); o.createDelegator() === o.createDelegator()", true);
+    }
+
 	private void test(final String script, final Object expected) {
 		final ContextAction action = new ContextAction() {
 			public Object run(final Context cx) {
