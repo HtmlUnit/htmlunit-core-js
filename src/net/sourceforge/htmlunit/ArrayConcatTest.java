@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ArrayConcatTest {
 
     /**
-	 * @throws Exception if the test fails
+	 * @throws Exception if the test fails.
 	 */
 	@Test
 	public void concat() throws Exception {
