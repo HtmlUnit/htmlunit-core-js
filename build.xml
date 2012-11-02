@@ -2,7 +2,7 @@
 
 <!-- ====================================================================== 
 
-htmlunit-core-js is a Rhino fork containing patches that haven't yet been
+htmlunit-core-js is a Rhino fork containing patches that haven't (yet) been
 applied in Rhino but that are needed for HtmlUnit.
 
 The build file tries to ensure that no patch is kept when it is not needed anymore.
