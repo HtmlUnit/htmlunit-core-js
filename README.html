@@ -8,7 +8,10 @@ Notice that "org.mozilla.*" is renamed to "net.sourceforge.htmlunit.corejs.*"
 Steps:
     - Clone the two projects into sibling folders
     - Create eclipse project for "htmlunit-rhino-fork", with 'src' 'testsrc' and 'toolsrc' folder as source folders,
-      while having build/classes as the output folder 
+      while having build/classes as the output folder
+    - In "htmlunit-rhino-fork", run:
+        - git remote add upstream https://github.com/mozilla/rhino.git
+        - git fetch upstream
 
 - To generate the JARs:
       ant jar-all
