@@ -34,6 +34,12 @@ public class ScriptableObjectTest {
         test(false, "typeof new Object().constructor", "function");
     }
 
+    @Test
+    public void arrayConstructor() {
+        test(true, "typeof [].constructor", "function");
+        test(false, "typeof [].constructor", "function");
+    }
+
 	private void test(final boolean isConstructor, final String script, final Object expected) {
         final ContextFactory cf = new ContextFactory() {
             @Override
