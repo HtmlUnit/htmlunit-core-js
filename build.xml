@@ -43,7 +43,7 @@ Ahmed Ashour
 		<ant antfile="src/build.xml" target="junit"/>
 	</target>
 
-	<target name="repackage" depends="clean-compile" description="Copy org.mozilla.* to net.sourceforge.htmlunit.corejs and compiles">
+	<target name="repackage" depends="clean-compile">
 		<property name="corejs.dir" value="${repackaged-rhino.dir}/src/net/sourceforge/htmlunit/corejs"/>
 
 		<mkdir dir="${corejs.dir}"/>
