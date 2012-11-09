@@ -20,11 +20,14 @@ public class StackTraceTest {
 	 */
 	@Test
     public void testFailureStackTrace() {
+        final String lineSeparator = System.getProperty("line.separator");
         final String source1 = "function f2() { throw 'hello'; }; f2();";
         final String source2 = "function f2() { 'H'.toLowerCase(); throw 'hello'; }; f2();";
         
-        runWithExpectedStackTrace(source1, "	at test.js (f2)\n\tat test.js\n"); // works
-        runWithExpectedStackTrace(source2, "	at test.js (f2)\n\tat test.js\n"); // fails
+        runWithExpectedStackTrace(source1,
+                "	at test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // works
+        runWithExpectedStackTrace(source2,
+                "	at test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // fails
     }
 
 	private void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {

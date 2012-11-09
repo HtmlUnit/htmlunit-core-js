@@ -43,7 +43,7 @@ Ahmed Ashour
 		<ant antfile="src/build.xml" target="junit"/>
 	</target>
 
-	<target name="repackage" depends="clean-compile">
+	<target name="repackage" depends="test">
 		<property name="corejs.dir" value="${repackaged-rhino.dir}/src/net/sourceforge/htmlunit/corejs"/>
 
 		<mkdir dir="${corejs.dir}"/>
