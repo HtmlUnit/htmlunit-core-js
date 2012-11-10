@@ -5,10 +5,10 @@
 htmlunit-core-js is a Rhino fork containing patches that haven't (yet) been
 applied in Rhino but that are needed for HtmlUnit.
 
-The build file tries to ensure that no patch is kept when it is not needed anymore.
-
 CAUTION: before to release, the rhinoDiff.txt needs to be generated to respect 
 the terms of the MPL.
+
+"eclipse.bin" should be defined in 'build.properties', and is used to beautify the source code.
 
 Marc Guillemot
 Ahmed Ashour
@@ -19,6 +19,7 @@ Ahmed Ashour
 
 	<property name="target-jvm" value="1.5"/>
 	<property name="source-level" value="1.5"/>
+    <property file="build.properties"/>
 	<property name="rhino.basedir" location="../htmlunit-rhino-fork"/>
 	<property name="classes" value="${rhino.basedir}/build/classes"/>
 	<property name="repackaged-rhino.dir" value="target/repackaged-rhino"/>
@@ -61,6 +62,8 @@ Ahmed Ashour
 		<replace dir="${corejs.dir}" token="org.mozilla" value="net.sourceforge.htmlunit.corejs"/>
 		<replace dir="${corejs.dir}" token="org/mozilla" value="net/sourceforge/htmlunit/corejs"/>
 
+		<antcall target="beautify"/>
+
 		<mkdir dir='${repackaged-rhino.dir}/classes'/>
 		<javac destdir='${repackaged-rhino.dir}/classes' debug='true' encoding="ISO-8859-1" source='1.5' target='1.5' includeAntRuntime='false'>
 			<src path='${repackaged-rhino.dir}/src' />
@@ -71,6 +74,24 @@ Ahmed Ashour
 			</fileset>
 		</copy>
 	</target>
+
+    <target name="beautify" depends="beautify-check" if="eclipse.bin">
+        <exec executable="${eclipse.bin}" failonerror="true">
+            <arg value="-nosplash"/>
+            <arg value="-application"/>
+            <arg value="org.eclipse.jdt.core.JavaCodeFormatter"/>
+            <arg value="-verbose"/>
+            <arg value="-config"/>
+            <arg value="eclipse.formatter.prefs"/>
+            <arg value="${repackaged-rhino.dir}/src/"/>
+        </exec>
+    </target>
+
+    <target name="beautify-check" unless="eclipse.bin">
+    	<echo message="*******************************************************************"/>
+    	<echo message="&quot;eclipse.bin&quot; is not defined, skipping beautifying the source code."/>
+        <echo message="*******************************************************************"/>
+    </target>
 
 	<target name="jar-with-source" depends="repackage, generate-rhino-diff">
 		<basename property="rhino.diff.filename" file="${rhino.diff}"/>
