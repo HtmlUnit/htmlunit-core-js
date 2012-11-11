@@ -141,7 +141,7 @@ Ahmed Ashour
 		<get src="${maven-ant-tasks.url}" dest="lib" skipexisting="true"/>
 	</target>
 
-	<target name="deploy-snapshot" depends="check-maven-ant-tasks,jar-all"
+	<target name="deploy-snapshot" depends="check-maven-ant-tasks,jar-with-source"
 			description="Deploys a snapshot to Sonatype snapshot repository">
 
 		<path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
