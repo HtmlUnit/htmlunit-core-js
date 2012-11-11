@@ -18,7 +18,7 @@ import org.mozilla.javascript.ScriptableObject;
 public class MemberBoxTest extends TestCase {
 
     @Test
-	public void testOnlyGetterError() {
+	public void descriptionofIllegalArgumentException() {
 		final String script = "var o = new MyHostObject(); o.someFunction(new Object())";
 		
 		final ContextAction action = new ContextAction() {
