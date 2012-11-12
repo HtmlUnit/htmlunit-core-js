@@ -1,7 +1,5 @@
 package net.sourceforge.htmlunit;
 
-import junit.framework.TestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
@@ -15,10 +13,10 @@ import org.mozilla.javascript.ScriptableObject;
  *
  * @author Ahmed Ashour
  */
-public class MemberBoxTest extends TestCase {
+public class MemberBoxTest {
 
     @Test
-	public void descriptionofIllegalArgumentException() {
+	public void descriptionOfIllegalArgumentException() {
 		final String script = "var o = new MyHostObject(); o.someFunction(new Object())";
 		
 		final ContextAction action = new ContextAction() {
@@ -28,7 +26,7 @@ public class MemberBoxTest extends TestCase {
                     ScriptableObject.defineClass(scope, MyHostObject.class);
 
 					cx.evaluateString(scope, script, "test_script", 1, null);
-					fail("An exception should be thrown");
+					Assert.fail("An exception should be thrown");
 				}
 				catch (final Exception e) {
 				    Assert.assertEquals("Exception invoking MyHostObject.jsFunction_someFunction() "

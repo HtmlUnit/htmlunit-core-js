@@ -87,8 +87,7 @@ public class DelegatorAndHostObjectTest {
 				try {
 					Scriptable scope = cx.initStandardObjects();
 					ScriptableObject.defineClass(scope, MyHostObject.class);
-					final Object o = cx.evaluateString(scope, script,
-							"test_script", 1, null);
+					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
 					Assert.assertEquals(expected, o);
 					return o;
 				} catch (final Exception e) {
