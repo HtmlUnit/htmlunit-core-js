@@ -3,8 +3,9 @@ package net.sourceforge.htmlunit;
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-import junit.framework.TestCase;
-
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
@@ -17,10 +18,10 @@ import org.mozilla.javascript.ScriptableObject;
  * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=604674">bug 604674</a>.
  * @author Marc Guillemot
  */
-public class ExceptionMessageTest extends TestCase {
-    
-    @Override
-    protected void setUp() throws Exception {
+public class ExceptionMessageTest {
+
+    @BeforeClass
+    public static void setUp() throws Exception {
     	Locale.setDefault(Locale.ENGLISH); // to be sure that error messages are in English
     }
 
@@ -28,13 +29,14 @@ public class ExceptionMessageTest extends TestCase {
      * Unit test for bug 608235
      * https://bugzilla.mozilla.org/show_bug.cgi?id=608235
      */
-	public void testUndefinedFromUndefined() {
-		testExceptionMessage("undefined[undefined]", "TypeError: Cannot read property \"undefined\" from undefined");
-		testExceptionMessage("undefined[undefined] = 1", "TypeError: Cannot set property \"undefined\" of undefined to \"1\"");
-		testExceptionMessage("undefined.undefined()", "TypeError: Cannot call method \"undefined\" of undefined");
+    @Test
+	public void undefinedFromUndefined() {
+		exceptionMessage("undefined[undefined]", "TypeError: Cannot read property \"undefined\" from undefined");
+		exceptionMessage("undefined[undefined] = 1", "TypeError: Cannot set property \"undefined\" of undefined to \"1\"");
+		exceptionMessage("undefined.undefined()", "TypeError: Cannot call method \"undefined\" of undefined");
 	}
 
-	private void testExceptionMessage(final String script, final String expectedMesage) {
+	private void exceptionMessage(final String script, final String expectedMesage) {
 		final ContextAction action = new ContextAction() {
 			public Object run(final Context cx) {
 				try {
@@ -44,7 +46,7 @@ public class ExceptionMessageTest extends TestCase {
 					throw new RuntimeException("Should have failed!");
 				}
 				catch (final EcmaError e) {
-					assertEquals(expectedMesage + " (test_script#1)", e.getMessage());
+					Assert.assertEquals(expectedMesage + " (test_script#1)", e.getMessage());
 					return null;
 				}
 				catch (final Exception e) {
@@ -60,12 +62,13 @@ public class ExceptionMessageTest extends TestCase {
      * Unit test for bug 604674
      * https://bugzilla.mozilla.org/show_bug.cgi?id=604674
      */
-	public void testOnlyGetterError() {
-		testOnlyGetterError(Context.FEATURE_STRICT_MODE);
-		testOnlyGetterError(Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY);
+	@Test
+	public void onlyGetterError() {
+		onlyGetterError(Context.FEATURE_STRICT_MODE);
+		onlyGetterError(Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY);
 	}
 
-	private void testOnlyGetterError(final int feature) {
+	private void onlyGetterError(final int feature) {
 		final ContextFactory cf = new ContextFactory() {
 			@Override
 			protected boolean hasFeature(Context cx, int featureIndex) {
@@ -93,7 +96,7 @@ public class ExceptionMessageTest extends TestCase {
 					throw new RuntimeException("Should have failed!");
 				}
 				catch (final EcmaError e) {
-					assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
+					Assert.assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
 					return null;
 				}
 				catch (final Exception e) {

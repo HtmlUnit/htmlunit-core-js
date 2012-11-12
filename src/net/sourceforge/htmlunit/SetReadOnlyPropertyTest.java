@@ -2,8 +2,7 @@ package net.sourceforge.htmlunit;
 
 import java.lang.reflect.Method;
 
-import junit.framework.TestCase;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -23,16 +22,16 @@ import org.mozilla.javascript.ScriptableObject;
  *
  * @author Ahmed Ashour
  */
-public class SetReadOnlyPropertyTest extends TestCase {
+public class SetReadOnlyPropertyTest {
 
     @Test
-	public void testOnlyGetterError() {
-        testOnlyGetterError(Boolean.TRUE);
-        testOnlyGetterError(null);
-        testOnlyGetterError(Boolean.FALSE);
+	public void onlyGetterError() {
+        onlyGetterError(Boolean.TRUE);
+        onlyGetterError(null);
+        onlyGetterError(Boolean.FALSE);
     }
 
-    private void testOnlyGetterError(final Boolean isSetterAllowed) {
+    private void onlyGetterError(final Boolean isSetterAllowed) {
         MyHostObject.isReadOnlySettable = isSetterAllowed;
 		final ContextFactory cf = new ContextFactory() {
 			@Override
@@ -63,16 +62,16 @@ public class SetReadOnlyPropertyTest extends TestCase {
 					}
 
                     if (isSetterAllowed.equals(Boolean.TRUE)) {
-                        assertEquals(123, number.intValue());
+                        Assert.assertEquals(123, number.intValue());
                     }
                     else {
-                        assertEquals(0, number.intValue());
+                        Assert.assertEquals(0, number.intValue());
                     }
 					return null;
 				}
 				catch (final EcmaError e) {
 				    if (MyHostObject.isReadOnlySettable == null) {
-                        assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
+				        Assert.assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
                         return null;
 				    }
                     throw new RuntimeException("Should not throw EcmaError!");
