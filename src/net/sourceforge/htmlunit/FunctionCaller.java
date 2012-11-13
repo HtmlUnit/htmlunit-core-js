@@ -16,7 +16,33 @@ import org.mozilla.javascript.Scriptable;
  */
 public class FunctionCaller {
 
-	/**
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void notEnumerated() throws Exception {
+        final String script = "function f() {\n"
+                + "  var s = '';\n"
+                + "  for (i in f) s += i + ',';\n"
+                + "  return s;\n"
+                + "}\n"
+    			+ "function g() {\n"
+    			+ "  return f();\n"
+    			+ "}\n"
+                + "g();\n";
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                Assert.assertEquals("", result);
+                return null;
+            }
+        };
+
+        Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
 	 * JS catch block should always catch JS exceptions
 	 */
 	@Test

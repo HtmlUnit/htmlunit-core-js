@@ -19,6 +19,29 @@ public class ArgumentsTest {
      * @throws Exception if the test fails
      */
     @Test
+    public void notEnumerated() throws Exception {
+        final String script = "function f() {\n"
+                + "  var s = '';\n"
+                + "  for (i in f) s += i + ',';\n"
+                + "  return s;\n"
+                + "}\n"
+                + "f();\n";
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                Assert.assertEquals("", result);
+                return null;
+            }
+        };
+
+        Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void argumentsShouldBeNullOutsideOfAFunction() throws Exception {
         final String script = "function f() {\n"
                 + "}\n"
