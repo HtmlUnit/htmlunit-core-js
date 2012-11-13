@@ -1,8 +1,10 @@
 package net.sourceforge.htmlunit;
 
 import java.lang.reflect.Method;
+import java.util.Locale;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -23,6 +25,10 @@ import org.mozilla.javascript.ScriptableObject;
  * @author Ahmed Ashour
  */
 public class SetReadOnlyPropertyTest {
+	@BeforeClass
+	public static void initLocale() {
+		Locale.setDefault(Locale.US); // to be sure to have English error messages
+	}
 
     @Test
 	public void onlyGetterError() {
