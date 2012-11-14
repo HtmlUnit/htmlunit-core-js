@@ -154,8 +154,11 @@ Ahmed Ashour
 			<arg value="-DrepositoryId=${maven-snapshots-repository-id}" />
 			<arg value="-DpomFile=pom.xml" />
 			<arg value="-Dfile=${jar}" />
-            <arg value="-DuniqueVersion=false" />
 		</artifact:mvn>
+
+		<!-- "uniqueVersion=true" will not have sources because of different timestamps,
+		     "uniqueVersion=false" will not be refreshed from snapshot repository  -->
+		<!--
 		<artifact:mvn>
 			<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.7:deploy-file" />
 			<arg value="-Durl=${maven-snapshots-repository-url}" />
@@ -164,7 +167,7 @@ Ahmed Ashour
 			<arg value="-Dfile=${jar.sources}" />
 			<arg value="-Dclassifier=sources" />
             <arg value="-DuniqueVersion=false" />
-		</artifact:mvn>
+		</artifact:mvn> -->
 	</target>
 
 	<target name="install-mvn-local" depends="check-maven-ant-tasks,jar-with-source"
