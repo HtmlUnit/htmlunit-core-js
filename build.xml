@@ -183,6 +183,19 @@ Ahmed Ashour
 		</artifact:install>
 	</target>
 
+    <target name="copy-to-htmlunit" depends="repackage">
+        <copy todir="../htmlunit/src/main/java" overwrite="true">
+            <fileset dir="${repackaged-rhino.dir}/src">
+            	<exclude name="**/*.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="../htmlunit/src/main/resources" overwrite="true">
+            <fileset dir="${repackaged-rhino.dir}/src">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+    </target>
+
 	<target name="generate-rhino-diff">
 		<echo>Generating diff to ${rhino.diff}</echo>
 		<exec executable="git" dir="${rhino.basedir}" output="${rhino.diff}" failonerror="true">
