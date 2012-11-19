@@ -6,7 +6,6 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.ScriptableObject;
 
 /**
  * Unit tests for {@link org.mozilla.javascript.ScriptRuntime}
@@ -31,21 +30,37 @@ public class ScriptRuntimeTest {
 	            + "var output = '';\n"
 	            + "test();\n"
 	            + "output";
-	    //Not Yet Implemented
-        //functionDeclaredForwardInBlock(script, "exception", false);
-        //functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", true);
+        functionDeclaredForwardInBlock(script, "exception", false);
+        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", true);
+    }
+
+	@Test
+    public void functionDeclaredForwardInBlock2() {
+        final String script =
+                  "var output = '';\n"
+                + "if (true) {\n"
+                + "  try {\n"
+                + "    output += '' + foo;\n"
+                + "  } catch (e) {\n"
+                + "    output += 'exception';\n"
+                + "  }\n"
+                + "  function foo() {}\n"
+                + "}\n"
+                + "output";
+        functionDeclaredForwardInBlock(script, "exception", false);
+        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", true);
     }
 
 	private void functionDeclaredForwardInBlock(final String script, final Object expected,
 	        final boolean functionDeclaredForwardInBlock) {
         final ContextFactory cf = new ContextFactory() {
-//            @Override
-//            protected boolean hasFeature(Context cx, int featureIndex) {
-//                if (Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK == featureIndex) {
-//                    return functionDeclaredForwardInBlock;
-//                }
-//                return super.hasFeature(cx, featureIndex);
-//            }
+            @Override
+            protected boolean hasFeature(Context cx, int featureIndex) {
+                if (Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK == featureIndex) {
+                    return functionDeclaredForwardInBlock;
+                }
+                return super.hasFeature(cx, featureIndex);
+            }
         };
 
         final ContextAction action = new ContextAction() {
@@ -61,6 +76,6 @@ public class ScriptRuntimeTest {
 			}
 		};
 
-		Utils.runWithAllOptimizationLevels(cf, action);
+		Utils.runWithOptimizationLevel(cf, action, -1);
 	}
 }
