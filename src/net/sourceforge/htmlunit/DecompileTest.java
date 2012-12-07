@@ -1,6 +1,5 @@
 package net.sourceforge.htmlunit;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
@@ -18,8 +17,7 @@ public class DecompileTest {
 	 * @see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=519692">Bug 519692</a> 
 	 */
 	@Test
-	public void newObject0Arg()
-	{
+	public void newObject0Arg() {
 		final String source = "var x = new Date().getTime();";
 		final ContextAction action = new ContextAction() {
 			public Object run(final Context cx) {
