@@ -14,7 +14,7 @@ import org.mozilla.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class FunctionCaller {
+public class FunctionCallerTest {
 
     /**
      * @throws Exception if the test fails
@@ -135,5 +135,34 @@ public class FunctionCaller {
             }
         };
         Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * Tests the caller arguments
+     */
+    @Test
+    public void callerArgumentsCallee() throws Exception {
+        final String script = "function f() {\n"
+	        + "  var caller = arguments.callee.caller;\n"
+	        + "  output += (caller == g) + ', ';\n"
+	        + "  output += (caller.arguments.callee == g);\n"
+	        + "}\n"
+            + "function g() {\n"
+            + "  f(123)\n"
+            + "}\n"
+            + "var output = '';\n"
+            + "g();\n"
+            + "output";
+        
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                Assert.assertEquals("true, true", result);
+                return null;
+            }
+        };
+        Utils.runWithOptimizationLevel(action, -1);
     }
 }
