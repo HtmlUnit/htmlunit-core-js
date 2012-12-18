@@ -43,7 +43,7 @@ public class FunctionCaller {
     }
 
     /**
-	 * JS catch block should always catch JS exceptions
+	 * Property caller should be defined only during function execution
 	 */
 	@Test
 	public void callee() throws Exception {
