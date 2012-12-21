@@ -17,6 +17,27 @@ import org.mozilla.javascript.Scriptable;
 public class FunctionCallerTest {
 
     /**
+     * This was failing probably as consequence of making inner functions available first
+     * when the line of their declaration has been reached.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void upperScopeVarShouldntBeSetWithVarFunctionWithSameName() throws Exception {
+        final String script = "var g = true; (function() { var g = function g() { return 1; };\n"
+                + "return this.g == undefined })();g;\n";
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                Assert.assertEquals(Boolean.TRUE, result);
+                return null;
+            }
+        };
+
+        Utils.runWithOptimizationLevel(action, -1);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
