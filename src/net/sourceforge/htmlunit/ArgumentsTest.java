@@ -26,19 +26,11 @@ public class ArgumentsTest {
                 + "  return s;\n"
                 + "}\n"
                 + "f();\n";
-        final ContextAction action = new ContextAction() {
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals("", result);
-                return null;
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        runScript(script, "");
     }
 
-    /**
+
+	/**
      * @throws Exception if the test fails
      */
     @Test
@@ -47,16 +39,7 @@ public class ArgumentsTest {
                 + "}\n"
                 + "f(1, 2);\n"
                 + "f.arguments";
-        final ContextAction action = new ContextAction() {
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals(null, result);
-                return null;
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        runScript(script, null);
     }
 
     /**
@@ -64,59 +47,22 @@ public class ArgumentsTest {
      */
     @Test
     public void _toString() throws Exception {
-        _toString(true, "[object Object]");
-        _toString(false, "[object Arguments]");
-    }
-
-    private void _toString(final boolean hasFeature, final String expected) throws Exception {
-
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT == featureIndex) {
-                    return hasFeature;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
         final String script = "function f() {\n"
                 + "  output = arguments.toString();\n"
                 + "}\n"
                 + "var output = '';\n"
                 + "f();\n"
                 + "output";
-        final ContextAction action = new ContextAction() {
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals(expected, result);
-                return null;
-            }
-        };
 
-        Utils.runWithAllOptimizationLevels(cf, action);
+        runScript(script, "[object Object]", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT, true);
+        runScript(script, "[object Arguments]", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT, false);
     }
 
-    /**
+	/**
      * @throws Exception if the test fails
      */
     @Test
     public void readonly() throws Exception {
-        readonly(true, "2-world-undefined-undefined");
-        readonly(false, "2-hi-undefined-you");
-    }
-
-    private void readonly(final boolean hasFeature, final String expected) throws Exception {
-
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY == featureIndex) {
-                    return hasFeature;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
         final String script = "function test() {\n"
                 + "  test1('hello', 'world');\n"
                 + "}\n"
@@ -131,11 +77,32 @@ public class ArgumentsTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
+
+        runScript(script, "2-world-undefined-undefined", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY, true);
+        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY, false);
+    }
+
+
+    private void runScript(final String script, final String expectedResult) {
+    	runScript(script, expectedResult, Integer.MAX_VALUE, false);
+	}
+
+    private void runScript(final String script, final String expectedResult,
+			final int featureToSet, final boolean featureValue) {
+        final ContextFactory cf = new ContextFactory() {
+            @Override
+            protected boolean hasFeature(final Context cx, final int featureIndex) {
+                if (featureToSet == featureIndex) {
+                    return featureValue;
+                }
+                return super.hasFeature(cx, featureIndex);
+            }
+        };
         final ContextAction action = new ContextAction() {
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals(expected, result);
+                Assert.assertEquals(expectedResult, result);
                 return null;
             }
         };
