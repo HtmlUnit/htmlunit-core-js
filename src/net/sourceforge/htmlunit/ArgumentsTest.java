@@ -62,7 +62,28 @@ public class ArgumentsTest {
      * @throws Exception if the test fails
      */
     @Test
-    public void readonly() throws Exception {
+    public void writableWithinFunction() throws Exception {
+        final String script = "function test1() {\n"
+                + "  arguments[1] = 'hi';\n"
+                + "  arguments[3] = 'you';\n"
+                + "  output += arguments.length + '-';\n"
+                + "  output += arguments[1] + '-';\n"
+                + "  output += arguments[2] + '-';\n"
+                + "  output += arguments[3];\n"
+                + "}\n"
+                + "var output = '';\n"
+                + "test1('hello', 'world');\n"
+                + "output";
+
+        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
+        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void readonlyWhenAccessThroughFunction() throws Exception {
         final String script = "function test() {\n"
                 + "  test1('hello', 'world');\n"
                 + "}\n"
@@ -78,16 +99,29 @@ public class ArgumentsTest {
                 + "test();\n"
                 + "output";
 
-        runScript(script, "2-world-undefined-undefined", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY, true);
-        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY, false);
+        runScript(script, "2-world-undefined-undefined", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
+        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
     }
 
+	/**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void equalsWithFnArguments() throws Exception {
+        final String script = "function test1() {\n"
+                + "  return arguments == test1.arguments;\n"
+                + "}\n"
+                + "test1('hello', 'world')";
 
-    private void runScript(final String script, final String expectedResult) {
+        runScript(script, false, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
+        runScript(script, true, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+    }
+
+    private void runScript(final String script, final Object expectedResult) {
     	runScript(script, expectedResult, Integer.MAX_VALUE, false);
 	}
 
-    private void runScript(final String script, final String expectedResult,
+    private void runScript(final String script, final Object expectedResult,
 			final int featureToSet, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
@@ -107,6 +141,6 @@ public class ArgumentsTest {
             }
         };
 
-        Utils.runWithAllOptimizationLevels(cf, action);
+        Utils.runWithOptimizationLevel(cf, action, -1);
     }
 }
