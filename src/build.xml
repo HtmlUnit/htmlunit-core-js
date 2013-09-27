@@ -4,7 +4,7 @@
   <!--
     URL from which junit.jar can be retrieved
   -->
-  <property name="test.junit.url" value="http://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.jar"/>
+  <property name="test.junit.url" value="http://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar"/>
 
   <!--
     Destination to which testing classes should be built
