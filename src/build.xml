@@ -4,7 +4,8 @@
   <!--
     URL from which junit.jar can be retrieved
   -->
-  <property name="test.junit.url" value="http://repo1.maven.org/maven2/junit/junit/4.10/junit-4.10.jar"/>
+  <property name="test.junit.url" value="http://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar"/>
+  <property name="test.hamcrest.url" value="http://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
 
   <!--
     Destination to which testing classes should be built
@@ -29,6 +30,7 @@
   <target name="get-junit">
     <mkdir dir="lib"/>
     <get src="${test.junit.url}" dest="lib/junit.jar" usetimestamp="true"/>
+    <get src="${test.hamcrest.url}" dest="lib/hamcrest.jar" usetimestamp="true"/>
   </target>
 
   <target name="junit-compile">
@@ -78,6 +80,7 @@
         <pathelement path="${test.classes}" />
         <pathelement path="lib/emma.jar"/>
         <pathelement path="lib/junit.jar" />
+        <pathelement path="lib/hamcrest.jar" />
       </classpath>
       <batchtest todir="${build.dir}/htmlunittest">
         <fileset dir="${test.classes}" includes="**/*Test.class"/>
