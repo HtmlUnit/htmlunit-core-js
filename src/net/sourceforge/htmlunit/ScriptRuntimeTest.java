@@ -30,8 +30,9 @@ public class ScriptRuntimeTest {
 	            + "var output = '';\n"
 	            + "test();\n"
 	            + "output";
-        functionDeclaredForwardInBlock(script, "exception", false);
-        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", true);
+        final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
+        functionDeclaredForwardInBlock(script, "exception", feature, false);
+        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", feature, true);
     }
 
 	@Test
@@ -50,8 +51,9 @@ public class ScriptRuntimeTest {
 	            + "var output = '';\n"
 	            + "test();\n"
 	            + "output";
-        functionDeclaredForwardInBlock(script, "undefined", false);
-        functionDeclaredForwardInBlock(script, "undefined", true);
+        final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
+        functionDeclaredForwardInBlock(script, "undefined", feature, false);
+        functionDeclaredForwardInBlock(script, "undefined", feature, true);
     }
 
 	@Test
@@ -67,17 +69,18 @@ public class ScriptRuntimeTest {
                 + "  function foo() {}\n"
                 + "}\n"
                 + "output";
-        functionDeclaredForwardInBlock(script, "exception", false);
-        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", true);
+        final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
+        functionDeclaredForwardInBlock(script, "exception", feature, false);
+        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", feature, true);
     }
 
 	private void functionDeclaredForwardInBlock(final String script, final Object expected,
-	        final boolean functionDeclaredForwardInBlock) {
+	        final int feature, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK == featureIndex) {
-                    return functionDeclaredForwardInBlock;
+                if (featureIndex == feature) {
+                    return featureValue;
                 }
                 return super.hasFeature(cx, featureIndex);
             }
