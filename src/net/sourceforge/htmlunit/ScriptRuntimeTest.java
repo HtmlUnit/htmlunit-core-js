@@ -31,8 +31,8 @@ public class ScriptRuntimeTest {
 	            + "test();\n"
 	            + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-        functionDeclaredForwardInBlock(script, "exception", feature, false);
-        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", feature, true);
+        test(script, "exception", feature, false);
+        test(script, "\nfunction foo() {\n}\n", feature, true);
     }
 
 	@Test
@@ -52,8 +52,8 @@ public class ScriptRuntimeTest {
 	            + "test();\n"
 	            + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-        functionDeclaredForwardInBlock(script, "undefined", feature, false);
-        functionDeclaredForwardInBlock(script, "undefined", feature, true);
+        test(script, "undefined", feature, false);
+        test(script, "undefined", feature, true);
     }
 
 	@Test
@@ -70,11 +70,11 @@ public class ScriptRuntimeTest {
                 + "}\n"
                 + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-        functionDeclaredForwardInBlock(script, "exception", feature, false);
-        functionDeclaredForwardInBlock(script, "\nfunction foo() {\n}\n", feature, true);
+        test(script, "exception", feature, false);
+        test(script, "\nfunction foo() {\n}\n", feature, true);
     }
 
-	private void functionDeclaredForwardInBlock(final String script, final Object expected,
+	private void test(final String script, final Object expected,
 	        final int feature, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
@@ -101,4 +101,26 @@ public class ScriptRuntimeTest {
 
 		Utils.runWithOptimizationLevel(cf, action, -1);
 	}
+
+	@Test
+    public void enumChangeObject() {
+        final String script =
+                "var value = {\n"
+                + "'xxx': 'testxxx',\n"
+                + "'50': 'test50',\n"
+                + "'zzz': 'testzzz',\n"
+                + "'100': 'test100',\n"
+                + "'0': 'test0',\n"
+                + "'yyy': 'testyyy'\n"
+                + "};\n"
+                + " var output = '';\n"
+                + "for (var x in value) {\n"
+                + "   output += x + ',';\n"
+                + "};"
+                + "output";
+        final int feature = Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST;
+        test(script, "xxx,50,zzz,100,0,yyy,", feature, false);
+        test(script, "0,50,100,xxx,zzz,yyy,", feature, true);
+    }
+
 }
