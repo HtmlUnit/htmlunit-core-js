@@ -1,11 +1,14 @@
 package net.sourceforge.htmlunit;
 
+import net.sourceforge.htmlunit.DelegatorAndHostObjectTest.MyHostObject;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 /**
  * Tests for Arguments object.
@@ -142,5 +145,48 @@ public class ArgumentsTest {
         };
 
         Utils.runWithOptimizationLevel(cf, action, -1);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void override() throws Exception {
+        final String script = "function test1(arguments) {\n"
+                + "  return arguments;\n"
+                + "}\n"
+                + "test1('hello')";
+
+        test(script, "hello");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void normal() throws Exception {
+        final String script = "function test1(hi) {\n"
+                + "  return typeof arguments;\n"
+                + "}\n"
+                + "test1('hello')";
+
+        test(script, "object");
+    }
+
+    private void test(final String script, final Object expected) {
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                try {
+                    Scriptable scope = cx.initStandardObjects();
+                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
+                    Assert.assertEquals(expected, o);
+                    return o;
+                } catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        Utils.runWithAllOptimizationLevels(action);
     }
 }
