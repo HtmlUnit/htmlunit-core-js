@@ -147,7 +147,7 @@ public class ArgumentsTest {
     /**
      * @throws Exception if the test fails
      */
-//    @Test
+    @Test
     public void override() throws Exception {
         final String script = "function test1(arguments) {\n"
                 + "  return arguments;\n"
@@ -160,7 +160,7 @@ public class ArgumentsTest {
     /**
      * @throws Exception if the test fails
      */
-//    @Test
+    @Test
     public void normal() throws Exception {
         final String script = "function test1(hi) {\n"
                 + "  return typeof arguments;\n"
