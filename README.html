@@ -12,6 +12,12 @@ Steps:
     - In "htmlunit-rhino-fork", run:
         - git remote add upstream https://github.com/mozilla/rhino.git
         - git fetch upstream
+        
+        With proxy:
+        - git config --global http.proxy http://proxyhost:port
+        
+        To unset proxy:
+        - git config --global --unset http.proxy
 
 - To generate the JARs:
       ant jar-all
@@ -26,6 +32,9 @@ Steps:
   - Run:
       ant deploy-snapshot
 
+	  With proxy:
+	  ant -autoproxy deploy-snapshot
+	  
 - To release:
   1- Change version in pom.xml and build.xml
   2- Make sure rhinoDiff.txt is updated
