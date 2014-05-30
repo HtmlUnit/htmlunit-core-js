@@ -47,11 +47,13 @@ Steps:
   5- Deploy the release files into Sonatype staging repository:
       ant jar-all
 
-      - for 2.13, run the below:
+      - for 2.15, run the below:
 
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.13.jar
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.13-sources.jar -Dclassifier=sources
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.13-javadoc.jar -Dclassifier=javadoc
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.15.jar
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.15-sources.jar -Dclassifier=sources
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.15-javadoc.jar -Dclassifier=javadoc
+
+      You may need to get latest version of gpg (v2) if the uploading hangs.
 
   6- Go to https://oss.sonatype.org/index.html, "stagingRepositories" and close, then release the repository
 
@@ -59,5 +61,5 @@ TODO:
     - GPG automated from ant (in "bundle" target), if possible
 
   7- To tag:
-      git tag -s core-js-2.11 -m "core-js-2.11 released"
+      git tag -s core-js-2.15 -m "core-js-2.15 released"
       git push --tags
