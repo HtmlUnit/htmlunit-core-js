@@ -123,4 +123,45 @@ public class ScriptRuntimeTest {
         test(script, "0,50,100,xxx,zzz,yyy,", feature, true);
     }
 
+    private void test(final String script, final Object expected) {
+        final ContextAction action = new ContextAction() {
+            public Object run(final Context cx) {
+                try {
+                    Scriptable scope = cx.initStandardObjects();
+                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
+                    Assert.assertEquals(expected, o);
+                    return o;
+                } catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void apply() throws Exception {
+        final String script = 
+                  "  var myObject = {'length': 2, '0': 'eat', '1': 'bananas'};\n"
+                + "  function test() {\n"
+                + "    test2.apply(null, myObject);\n"
+                + "  }\n"
+                + "\n"
+                + "  function test2() {\n"
+                + "    output += arguments.length;\n"
+                + "    for (var i in arguments) {\n"
+                + "      output += ', ' + arguments[i];\n"
+                + "    }\n"
+                + "  }\n"
+                + "var output = '';\n"
+                + "test();"
+                + "output";
+
+        final String expected = "2, eat, bananas";
+        test(script, expected);
+    }
 }
