@@ -20,6 +20,22 @@ public class LookupSetterTest {
 		test("function", "typeof (new Foo()).__lookupGetter__('s')");
 	}
 
+	@Test
+	public void callLookedUpGetter() throws Exception {
+		test("hello", "new Foo().s;");
+		test("hello", "var f = new Foo(); f.__lookupGetter__('s').call(f);");
+	}
+
+	@Test
+	public void lookedUpGetter_toString() throws Exception {
+		test("function s() {\n    [native code]\n}", "new Foo().__lookupGetter__('s').toString()");
+	}
+
+	@Test
+	public void lookedUpGetter_equals() throws Exception {
+		test("true", "new Foo().__lookupGetter__('s') == new Foo().__lookupGetter__('s')");
+	}
+
 	private void test(final String expected, final String src) throws Exception {
 		final ContextAction action = new ContextActionImpl() {
 			@Override
@@ -27,7 +43,7 @@ public class LookupSetterTest {
 				final Scriptable scope = cx.initStandardObjects(new TopScope());
 				ScriptableObject.defineClass(scope, Foo.class);
 				cx.evaluateString(scope, defineSetterAndGetterX, "initX", 1, null);
-				Object result = cx.evaluateString(scope, src, "test", 1, null);
+				Object result = String.valueOf(cx.evaluateString(scope, src, "test", 1, null));
 				Assert.assertEquals(expected, result);
 				return null;
 			}
@@ -37,7 +53,6 @@ public class LookupSetterTest {
 	}
 
 	public static class Foo extends ScriptableObject {
-		private static final long serialVersionUID = 2997084265543252674L;
 		private String s = "hello";
 
 		public Foo() { /* Empty. */
