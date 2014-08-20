@@ -24,10 +24,12 @@ Steps:
 
 - Deploy snapshot:
   - Ensure that you have pgp installed and that you create own keys, see
-      https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven
+      http://central.sonatype.org/pages/working-with-pgp-signatures.html
 
   - Configure your Maven settings.xml, see
-      https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+      http://central.sonatype.org/pages/ossrh-guide.html
+      	then 'Apache Maven' page
+      	the server id in settings.xml should be 'sonatype-nexus-snapshots'
 
   - Run:
       ant deploy-snapshot
