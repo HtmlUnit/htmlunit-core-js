@@ -41,19 +41,19 @@ Steps:
   1- Change version in pom.xml and build.xml
   2- Make sure rhinoDiff.txt is updated
   3- ensure that you have pgp installed and that you create own keys (see
-      https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven)
+      http://central.sonatype.org/pages/working-with-pgp-signatures.html)
 
   4- Configure your Maven settings.xml, see
-      https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+      http://central.sonatype.org/pages/apache-maven.html
 
   5- Deploy the release files into Sonatype staging repository:
       ant jar-all
 
-      - for 2.15, run the below:
+      - for 2.16, run the below:
 
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.15.jar
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.15-sources.jar -Dclassifier=sources
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=sonatype-nexus-staging -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.15-javadoc.jar -Dclassifier=javadoc
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.16.jar
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.16-sources.jar -Dclassifier=sources
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.16-javadoc.jar -Dclassifier=javadoc
 
       You may need to get latest version of gpg (v2) if the uploading hangs.
 
