@@ -32,7 +32,7 @@ public class ScriptRuntimeTest {
 	            + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
         test(script, "exception", feature, false);
-        test(script, "\nfunction foo() {\n}\n", feature, true);
+        test(script, "function foo() {\n}", feature, true);
     }
 
 	@Test
@@ -71,7 +71,7 @@ public class ScriptRuntimeTest {
                 + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
         test(script, "exception", feature, false);
-        test(script, "\nfunction foo() {\n}\n", feature, true);
+        test(script, "function foo() {\n}", feature, true);
     }
 
 	private void test(final String script, final Object expected,
