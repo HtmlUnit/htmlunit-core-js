@@ -22,6 +22,9 @@ Steps:
 - To generate the JARs:
       ant jar-all
 
+  With proxy:
+	  ant -autoproxy jar-all
+
 - Deploy snapshot:
   - Ensure that you have pgp installed and that you create own keys, see
       http://central.sonatype.org/pages/working-with-pgp-signatures.html
@@ -29,14 +32,18 @@ Steps:
   - Configure your Maven settings.xml, see
       http://central.sonatype.org/pages/ossrh-guide.html
       	then 'Apache Maven' page
-      	the server id in settings.xml should be 'sonatype-nexus-snapshots'
+      	the server id in settings.xml should be 'ossrh'
 
   - Run:
       ant deploy-snapshot
 
 	  With proxy:
 	  ant -autoproxy deploy-snapshot
-	  
+
+    If there is an issue of maven version needed by deploy-plugin:
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/content/repositories/snapshots/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.17-SNAPSHOT.jar    
+
+
 - To release:
   1- Change version in pom.xml and build.xml
   2- Make sure rhinoDiff.txt is updated
@@ -59,9 +66,19 @@ Steps:
 
   6- Go to https://oss.sonatype.org/, login, "stagingRepositories" and close, wait a little, then release the repository
 
-TODO:
-    - GPG automated from ant (in "bundle" target), if possible
+     TODO:
+        - GPG automated from ant (in "bundle" target), if possible
 
   7- To tag:
       git tag -s core-js-2.16 -m "core-js-2.16 released"
       git push --tags
+
+- To update Rhino:
+
+      git fetch upstream
+      git checkout master
+      git rebase upstream/master
+      git push -f origin master
+
+  Rebase with eclipse:
+       team -> Rebase -> upstream/master
