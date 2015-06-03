@@ -56,11 +56,11 @@ Steps:
   5- Deploy the release files into Sonatype staging repository:
       ant jar-all
 
-      - for 2.16, run the below:
+      - for 2.17, run the below:
 
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.16.jar
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.16-sources.jar -Dclassifier=sources
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.16-javadoc.jar -Dclassifier=javadoc
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.17.jar
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.17-sources.jar -Dclassifier=sources
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.17-javadoc.jar -Dclassifier=javadoc
 
       You may need to get latest version of gpg (v2) if the uploading hangs.
 
@@ -70,7 +70,7 @@ Steps:
         - GPG automated from ant (in "bundle" target), if possible
 
   7- To tag:
-      git tag -s core-js-2.16 -m "core-js-2.16 released"
+      git tag -s core-js-2.17 -m "core-js-2.17 released"
       git push --tags
 
 - To update Rhino:
