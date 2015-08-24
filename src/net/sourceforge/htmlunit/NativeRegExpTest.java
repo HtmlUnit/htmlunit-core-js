@@ -1,10 +1,13 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.regexp.SubString;
 
 /**
  * Tests for NativeRegExp object.
@@ -29,6 +32,19 @@ public class NativeRegExpTest {
     public void undefined() throws Exception {
         final String script = "new RegExp(undefined).test('AA')";
         test(script, Boolean.TRUE);
+    }
+
+    /**
+     * Test for bug #1706.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void changed() throws Exception {
+        final String script = "'alpha'.replace(/alpha/, '');/beta/.test('abc beta def');";
+        assertTrue(SubString.emptySubString.toString().isEmpty());
+        test(script, Boolean.TRUE);
+        assertTrue(SubString.emptySubString.toString().isEmpty());
     }
 
     private void test(final String script, final Object expected) {
