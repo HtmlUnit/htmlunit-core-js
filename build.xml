@@ -17,8 +17,8 @@ Ahmed Ashour
 
 	<property name="version" value="2.18-SNAPSHOT"/>
 
-	<property name="target-jvm" value="1.5"/>
-	<property name="source-level" value="1.5"/>
+	<property name="target-jvm" value="1.7"/>
+	<property name="source-level" value="1.7"/>
     <property file="build.properties"/>
 	<property name="rhino.basedir" location="../htmlunit-rhino-fork"/>
 	<property name="classes" value="${rhino.basedir}/build/classes"/>
@@ -65,7 +65,7 @@ Ahmed Ashour
 		<antcall target="beautify"/>
 
 		<mkdir dir='${repackaged-rhino.dir}/classes'/>
-		<javac destdir='${repackaged-rhino.dir}/classes' debug='true' encoding="ISO-8859-1" source='1.5' target='1.5' includeAntRuntime='false'>
+		<javac destdir='${repackaged-rhino.dir}/classes' debug='true' encoding="ISO-8859-1" source='1.7' target='1.7' includeAntRuntime='false'>
 			<src path='${repackaged-rhino.dir}/src' />
 		</javac>
 		<copy toDir="${repackaged-rhino.dir}/classes">
