@@ -20,6 +20,7 @@ public class MemberBoxTest {
 		final String script = "var o = new MyHostObject(); o.someFunction(new Object())";
 		
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();

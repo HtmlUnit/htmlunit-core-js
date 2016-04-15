@@ -20,6 +20,7 @@ public class DecompileTest {
 	public void newObject0Arg() {
 		final String source = "var x = new Date().getTime();";
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				final Script script = cx.compileString(source, "my script", 0, null);
 				Assert.assertEquals(source, cx.decompileScript(script, 4).trim());

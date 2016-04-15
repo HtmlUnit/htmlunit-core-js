@@ -34,6 +34,7 @@ public class NativeGlobalTest {
 
     private void doTest(final double expected, final String src, final boolean contextFeature) throws Exception {
 		final ContextFactory myContextFactory = new ContextFactory() {
+            @Override
 			protected boolean hasFeature(final Context cx, final int featureIndex) {
 				if (Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10 == featureIndex) {
 					return contextFeature;
@@ -43,6 +44,7 @@ public class NativeGlobalTest {
 		};
 		
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				final Scriptable scope = cx.initStandardObjects();
 				Object result = cx.evaluateString(scope, src, "test.js", 0, null);

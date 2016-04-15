@@ -87,6 +87,7 @@ public class ScriptRuntimeTest {
         };
 
         final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();
@@ -125,6 +126,7 @@ public class ScriptRuntimeTest {
 
     private void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 try {
                     Scriptable scope = cx.initStandardObjects();

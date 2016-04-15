@@ -32,6 +32,7 @@ public class StackTraceTest {
 
 	private void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {
         final ContextAction action = new ContextAction() {
+            @Override
         	public Object run(final Context cx) {
         		final Scriptable scope = cx.initStandardObjects();
         		try {

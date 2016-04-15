@@ -50,6 +50,7 @@ public class WriteReadOnlyPropertyTest {
 		final String script = "foo.myProp = 123; foo.myProp";
 
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 
 				final ScriptableObject top = cx.initStandardObjects();
@@ -87,6 +88,7 @@ public class WriteReadOnlyPropertyTest {
 			+ "o2.myProp = 'bar'; result = o1.myProp;";
 
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				final ScriptableObject top = cx.initStandardObjects();
 				Object result = cx.evaluateString(top, script, "script", 0, null);

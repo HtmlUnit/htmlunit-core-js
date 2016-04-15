@@ -48,6 +48,7 @@ public class NativeErrorTest {
                 + "output";
         
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);

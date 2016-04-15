@@ -73,6 +73,7 @@ public class ParserTest {
         };
 
         final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();

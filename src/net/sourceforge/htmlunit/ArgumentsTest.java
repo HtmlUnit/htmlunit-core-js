@@ -133,6 +133,7 @@ public class ArgumentsTest {
             }
         };
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
@@ -172,6 +173,7 @@ public class ArgumentsTest {
 
     private void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 try {
                     Scriptable scope = cx.initStandardObjects();

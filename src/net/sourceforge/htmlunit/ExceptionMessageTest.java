@@ -38,6 +38,7 @@ public class ExceptionMessageTest {
 
 	private void exceptionMessage(final String script, final String expectedMesage) {
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();
@@ -82,6 +83,7 @@ public class ExceptionMessageTest {
 		final String script = "o.readonlyProp = 123";
 		
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();

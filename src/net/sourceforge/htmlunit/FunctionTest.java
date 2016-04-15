@@ -25,6 +25,7 @@ public class FunctionTest {
 
     private void assertEvaluates(final Object expected, final String source) {
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object rep = cx.evaluateString(scope, source, "test.js", 0, null);

@@ -67,6 +67,7 @@ public class ExceptionPropertiesTest {
 
 	private void testIt(final String script, final Object expected) {
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					final ScriptableObject scope = cx.initStandardObjects();

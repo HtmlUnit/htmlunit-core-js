@@ -48,8 +48,8 @@ public class ContextMethodsTest {
 		
 		final String source = "eval('1 + 2')";
 		
-		final ContextAction action = new ContextAction()
-		{
+		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(Context cx) {
 				final Scriptable scope = cx.initStandardObjects();
 				final Script script = cx.compileString(source, "", 1, (Object) null);

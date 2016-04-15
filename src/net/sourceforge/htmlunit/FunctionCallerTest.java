@@ -25,6 +25,7 @@ public class FunctionCallerTest {
         final String script = "var g = true; (function() { var g = function g() { return 1; };\n"
                 + "return this.g == undefined })();g;\n";
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
@@ -51,6 +52,7 @@ public class FunctionCallerTest {
     			+ "}\n"
                 + "g();\n";
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
@@ -81,6 +83,7 @@ public class FunctionCallerTest {
 			+ "f();\n";
 		
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				final Scriptable scope = cx.initStandardObjects();
 				
@@ -113,6 +116,7 @@ public class FunctionCallerTest {
             + "output";
         
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 
@@ -146,6 +150,7 @@ public class FunctionCallerTest {
             + "output";
 
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 
@@ -175,6 +180,7 @@ public class FunctionCallerTest {
             + "output";
         
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 

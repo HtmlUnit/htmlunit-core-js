@@ -66,12 +66,14 @@ public class LookupSetterTest {
 			this.s = s;
 		}
 
+        @Override
 		public String getClassName() {
 			return "Foo";
 		}
 	}
 
 	public static class TopScope extends ScriptableObject {
+        @Override
 		public String getClassName() {
 			return "TopScope";
 		}

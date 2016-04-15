@@ -52,6 +52,7 @@ public class SetReadOnlyPropertyTest {
 		final String script = "o.readonlyProp = 123;o.readonlyProp";
 		
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();

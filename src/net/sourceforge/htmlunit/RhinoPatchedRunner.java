@@ -36,9 +36,7 @@ public class RhinoPatchedRunner extends JUnit4ClassRunner {
 				}
 			};
 		}
-		else {
-			return super.wrapMethod(method);
-		}
+		return super.wrapMethod(method);
 	}
 	
 }

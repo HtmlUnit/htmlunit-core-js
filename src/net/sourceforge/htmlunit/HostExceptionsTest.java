@@ -68,6 +68,7 @@ public class HostExceptionsTest {
 		final String script = "var foo = new MyScriptable(); try { " + jsExpression + "} catch(e) {}";
 
 		final ContextFactory myContextFactory = new ContextFactory() {
+            @Override
 			protected boolean hasFeature(final Context cx, final int featureIndex) {
 				if (Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION == featureIndex) {
 					return contextFeatureJSCatchOn;
@@ -77,6 +78,7 @@ public class HostExceptionsTest {
 		};
 		
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				final Scriptable scope = cx.initStandardObjects();
 				try {

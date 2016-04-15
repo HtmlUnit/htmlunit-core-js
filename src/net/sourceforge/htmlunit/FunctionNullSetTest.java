@@ -43,6 +43,7 @@ public class FunctionNullSetTest {
         };
         final String script = "function onclick() {onclick=null}";
         final ContextAction action = new ContextAction() {
+            @Override
             public Object run(final Context cx) {
                 try {
                     final Scriptable scope = cx.initStandardObjects();

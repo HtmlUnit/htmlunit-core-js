@@ -57,6 +57,7 @@ public class EvalScopeTest {
             }
         };
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					final MyHostObject prototype = new MyHostObject();

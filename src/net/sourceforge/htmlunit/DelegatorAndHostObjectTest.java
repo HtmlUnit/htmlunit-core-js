@@ -83,6 +83,7 @@ public class DelegatorAndHostObjectTest {
 
 	private void test(final String script, final Object expected) {
 		final ContextAction action = new ContextAction() {
+            @Override
 			public Object run(final Context cx) {
 				try {
 					Scriptable scope = cx.initStandardObjects();
