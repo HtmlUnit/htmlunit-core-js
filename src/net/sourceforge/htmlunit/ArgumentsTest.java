@@ -117,11 +117,11 @@ public class ArgumentsTest {
         runScript(script, true, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
     }
 
-    private void runScript(final String script, final Object expectedResult) {
+    private static void runScript(final String script, final Object expectedResult) {
     	runScript(script, expectedResult, Integer.MAX_VALUE, false);
 	}
 
-    private void runScript(final String script, final Object expectedResult,
+    private static void runScript(final String script, final Object expectedResult,
 			final int featureToSet, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
@@ -171,7 +171,7 @@ public class ArgumentsTest {
         test(script, "object");
     }
 
-    private void test(final String script, final Object expected) {
+    private static void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {

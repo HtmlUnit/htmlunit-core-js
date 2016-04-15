@@ -74,7 +74,7 @@ public class ScriptRuntimeTest {
         test(script, "function foo() {\n}", feature, true);
     }
 
-	private void test(final String script, final Object expected,
+	private static void test(final String script, final Object expected,
 	        final int feature, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
@@ -124,7 +124,7 @@ public class ScriptRuntimeTest {
         test(script, "0,50,100,xxx,zzz,yyy,", feature, true);
     }
 
-    private void test(final String script, final Object expected) {
+    private static void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {

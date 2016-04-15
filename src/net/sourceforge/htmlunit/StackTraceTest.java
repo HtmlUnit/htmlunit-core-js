@@ -30,7 +30,7 @@ public class StackTraceTest {
                 "	at test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // fails
     }
 
-	private void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {
+	private static void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {
         final ContextAction action = new ContextAction() {
             @Override
         	public Object run(final Context cx) {

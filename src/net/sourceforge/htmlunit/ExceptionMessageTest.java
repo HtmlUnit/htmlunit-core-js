@@ -36,7 +36,7 @@ public class ExceptionMessageTest {
 		exceptionMessage("undefined.undefined()", "TypeError: Cannot call method \"undefined\" of undefined");
 	}
 
-	private void exceptionMessage(final String script, final String expectedMesage) {
+	private static void exceptionMessage(final String script, final String expectedMesage) {
 		final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {
@@ -69,7 +69,7 @@ public class ExceptionMessageTest {
 		onlyGetterError(Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY);
 	}
 
-	private void onlyGetterError(final int feature) {
+	private static void onlyGetterError(final int feature) {
 		final ContextFactory cf = new ContextFactory() {
 			@Override
 			protected boolean hasFeature(Context cx, int featureIndex) {

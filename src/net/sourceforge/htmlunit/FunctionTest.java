@@ -23,7 +23,7 @@ public class FunctionTest {
         assertEvaluates(true, "new Function('return true//;').call()");
     }
 
-    private void assertEvaluates(final Object expected, final String source) {
+    private static void assertEvaluates(final Object expected, final String source) {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(Context cx) {

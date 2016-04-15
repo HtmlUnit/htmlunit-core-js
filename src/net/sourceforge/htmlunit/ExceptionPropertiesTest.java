@@ -26,13 +26,13 @@ public class ExceptionPropertiesTest {
 		testScriptStackTrace(script, "\tat myScript.js:3 (f)" + LS + "\tat myScript.js:5" + LS);
 	}
 
-	private void testScriptStackTrace(final String script, final String expectedStackTrace) {
+	private static void testScriptStackTrace(final String script, final String expectedStackTrace) {
 		testScriptStackTrace(script, expectedStackTrace, -1);
 		testScriptStackTrace(script, expectedStackTrace, 0);
 		testScriptStackTrace(script, expectedStackTrace, 1);
 	}
 
-	private void testScriptStackTrace(final String script, final String expectedStackTrace,
+	private static void testScriptStackTrace(final String script, final String expectedStackTrace,
 			final int optimizationLevel) {
 		try {
 			Utilities.executeScript(script, optimizationLevel);
@@ -65,7 +65,7 @@ public class ExceptionPropertiesTest {
 		testIt("function f() {\n null.method(); \n}\n try { f() } catch (e) { e.stack }", expectedStack);
 	}
 
-	private void testIt(final String script, final Object expected) {
+	private static void testIt(final String script, final Object expected) {
 		final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {

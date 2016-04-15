@@ -45,7 +45,7 @@ public class PrimitiveTypeScopeResolutionTest {
     	testWithTwoScopes(str1, str2);
     }
 
-    private void testWithTwoScopes(final String scriptScope1, final String scriptScope2) {
+    private static void testWithTwoScopes(final String scriptScope1, final String scriptScope2) {
     	final ContextAction action = new ContextAction()
     	{
             @Override

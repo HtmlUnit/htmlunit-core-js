@@ -43,8 +43,8 @@ public class DelegatorAndHostObjectTest {
 			return x;
 		}
 
-		public void jsSet_x(int x) {
-			this.x = x;
+		public void jsSet_x(int s) {
+			this.x = s;
 		}
 	}
 
@@ -81,7 +81,7 @@ public class DelegatorAndHostObjectTest {
         test("var o = new MyHostObject(); o.createDelegator() === o.createDelegator()", true);
     }
 
-	private void test(final String script, final Object expected) {
+	private static void test(final String script, final Object expected) {
 		final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {

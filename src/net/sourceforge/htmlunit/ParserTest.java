@@ -61,7 +61,7 @@ public class ParserTest {
         
     }
 
-	private void test(final String script, final Object expected, final boolean functionObjectMethod) {
+	private static void test(final String script, final Object expected, final boolean functionObjectMethod) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {

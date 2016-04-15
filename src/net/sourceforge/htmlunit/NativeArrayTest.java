@@ -40,7 +40,7 @@ public class NativeArrayTest {
         );
     }
 
-    private void test(final String script) {
+    private static void test(final String script) {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {

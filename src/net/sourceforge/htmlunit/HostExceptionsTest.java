@@ -64,7 +64,7 @@ public class HostExceptionsTest {
 		}
 	}
 
-	private void doTest(final String jsExpression, final boolean contextFeatureJSCatchOn) throws Exception {
+	private static void doTest(final String jsExpression, final boolean contextFeatureJSCatchOn) throws Exception {
 		final String script = "var foo = new MyScriptable(); try { " + jsExpression + "} catch(e) {}";
 
 		final ContextFactory myContextFactory = new ContextFactory() {

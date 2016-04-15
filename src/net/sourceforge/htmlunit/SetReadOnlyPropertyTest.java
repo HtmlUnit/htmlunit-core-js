@@ -37,7 +37,7 @@ public class SetReadOnlyPropertyTest {
         onlyGetterError(Boolean.FALSE);
     }
 
-    private void onlyGetterError(final Boolean isSetterAllowed) {
+    private static void onlyGetterError(final Boolean isSetterAllowed) {
         MyHostObject.isReadOnlySettable = isSetterAllowed;
 		final ContextFactory cf = new ContextFactory() {
 			@Override

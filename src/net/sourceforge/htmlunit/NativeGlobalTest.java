@@ -32,7 +32,7 @@ public class NativeGlobalTest {
         doTest(8, "parseInt('8')", true);
 	}
 
-    private void doTest(final double expected, final String src, final boolean contextFeature) throws Exception {
+    private static void doTest(final double expected, final String src, final boolean contextFeature) throws Exception {
 		final ContextFactory myContextFactory = new ContextFactory() {
             @Override
 			protected boolean hasFeature(final Context cx, final int featureIndex) {

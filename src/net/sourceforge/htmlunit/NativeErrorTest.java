@@ -23,7 +23,7 @@ public class NativeErrorTest {
         stack(false, "undefined");
     }
 
-    private void stack(final boolean hasFeature, final String expected) throws Exception {
+    private static void stack(final boolean hasFeature, final String expected) throws Exception {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {

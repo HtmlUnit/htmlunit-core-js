@@ -40,7 +40,7 @@ public class ScriptableObjectTest {
         test(false, "typeof [].constructor", "function");
     }
 
-	private void test(final boolean isConstructor, final String script, final Object expected) {
+	private static void test(final boolean isConstructor, final String script, final Object expected) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {

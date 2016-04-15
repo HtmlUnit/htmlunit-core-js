@@ -47,7 +47,7 @@ public class NativeRegExpTest {
         assertTrue(SubString.emptySubString.toString().isEmpty());
     }
 
-    private void test(final String script, final Object expected) {
+    private static void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {

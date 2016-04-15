@@ -62,8 +62,8 @@ public class LookupSetterTest {
 			return this.s;
 		}
 
-		public void jsSet_s(String s) {
-			this.s = s;
+		public void jsSet_s(String string) {
+			this.s = string;
 		}
 
         @Override

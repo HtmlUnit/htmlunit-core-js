@@ -43,7 +43,7 @@ public class EvalScopeTest {
                 + "output";
     }
 
-    private void eval(final String script, final boolean hasFeature, final String expected) {
+    private static void eval(final String script, final boolean hasFeature, final String expected) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {

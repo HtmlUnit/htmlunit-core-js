@@ -30,7 +30,7 @@ public class FunctionNullSetTest {
     /**
      * @param expectedNull is the object setter is called (which sets the object value to null)
      */
-    private void setFunctionToNull(final boolean hasFeature, final boolean expectedNull) throws Exception {
+    private static void setFunctionToNull(final boolean hasFeature, final boolean expectedNull) throws Exception {
 
         final ContextFactory cf = new ContextFactory() {
             @Override
