@@ -28,7 +28,7 @@ public class ContextMethodsTest {
 	 */
 	@Test
 	public void captureEvalScript() throws Exception {
-		final List<String> compiled = new ArrayList<String>();
+		final List<String> compiled = new ArrayList<>();
 		final ContextFactory cf = new ContextFactory() {
 			@Override
 			protected Context makeContext() {
