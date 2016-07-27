@@ -2,5 +2,6 @@
 /lib
 /build.properties
 /pom.xml.asc
-/.classpath
-/.project
+.classpath
+.project
+.settings
