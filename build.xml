@@ -15,7 +15,7 @@ Ahmed Ashour
 ====================================================================== -->
 <project name="htmlunit-core-js build" default="jar-all" basedir="." xmlns:artifact="urn:maven-artifact-ant">
 
-	<property name="version" value="2.23-SNAPSHOT"/>
+	<property name="version" value="2.23"/>
 
 	<property name="target-jvm" value="1.7"/>
 	<property name="source-level" value="1.7"/>
@@ -198,10 +198,9 @@ Ahmed Ashour
 
 	<target name="generate-rhino-diff">
 		<echo>Generating diff to ${rhino.diff}</echo>
-<!--		<exec executable="git" dir="${rhino.basedir}" output="${rhino.diff}" failonerror="true">
+		<exec executable="git" dir="${rhino.basedir}" output="${rhino.diff}" failonerror="true">
 			<arg value="diff"/>
 			<arg value="upstream/master..HEAD"/>
 		</exec>
-		-->
 	</target>
 </project>
