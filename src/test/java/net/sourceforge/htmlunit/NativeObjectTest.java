@@ -1,6 +1,8 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -32,7 +34,67 @@ public class NativeObjectTest {
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals("1", result);
+                assertEquals("1", result);
+                return null;
+            }
+        };
+
+       Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getPrototypeOfString() throws Exception {
+        final String script = "Object.getPrototypeOf('')";
+        
+        final ContextAction action = new ContextAction() {
+            @Override
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                assertEquals("", result);
+                return null;
+            }
+        };
+
+       Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getPrototypeOfNumber() throws Exception {
+        final String script = "Object.getPrototypeOf(1)";
+        
+        final ContextAction action = new ContextAction() {
+            @Override
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                assertEquals(0, result);
+                return null;
+            }
+        };
+
+       Utils.runWithAllOptimizationLevels(action);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getPrototypeOfBoolean() throws Exception {
+        final String script = "Object.getPrototypeOf(true)";
+        
+        final ContextAction action = new ContextAction() {
+            @Override
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
+                assertFalse((Boolean) result);
                 return null;
             }
         };

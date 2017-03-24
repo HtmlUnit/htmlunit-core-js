@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -48,7 +49,7 @@ public class NativeGlobalTest {
 			public Object run(final Context cx) {
 				final Scriptable scope = cx.initStandardObjects();
 				Object result = cx.evaluateString(scope, src, "test.js", 0, null);
-                Assert.assertEquals(expected, result);
+                assertEquals(expected, result);
 				return null;
 			}
 		};
