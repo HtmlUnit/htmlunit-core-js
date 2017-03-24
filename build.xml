@@ -15,10 +15,10 @@ Ahmed Ashour
 ====================================================================== -->
 <project name="htmlunit-core-js build" default="jar-all" basedir="." xmlns:artifact="urn:maven-artifact-ant">
 
-	<property name="version" value="2.23"/>
+	<property name="version" value="2.26-SNAPSHOT"/>
 
-	<property name="target-jvm" value="1.7"/>
-	<property name="source-level" value="1.7"/>
+	<property name="target-jvm" value="1.8"/>
+	<property name="source-level" value="1.8"/>
     <property file="build.properties"/>
 	<property name="rhino.basedir" location="../htmlunit-rhino-fork"/>
 	<property name="classes" value="${rhino.basedir}/build/classes"/>
@@ -65,7 +65,7 @@ Ahmed Ashour
 		<antcall target="beautify"/>
 
 		<mkdir dir='${repackaged-rhino.dir}/classes'/>
-		<javac destdir='${repackaged-rhino.dir}/classes' debug='true' encoding="ISO-8859-1" source='1.7' target='1.7' includeAntRuntime='false'>
+		<javac destdir='${repackaged-rhino.dir}/classes' debug='true' encoding="ISO-8859-1" source='${source-level}' target='${target-jvm}' includeAntRuntime='false'>
 			<src path='${repackaged-rhino.dir}/src' />
 		</javac>
 		<copy toDir="${repackaged-rhino.dir}/classes">
