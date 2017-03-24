@@ -1,11 +1,12 @@
 package net.sourceforge.htmlunit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
+import org.mozilla.javascript.ContextFactory;
+import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -47,19 +48,41 @@ public class NativeObjectTest {
      */
     @Test
     public void getPrototypeOfString() throws Exception {
-        final String script = "Object.getPrototypeOf('')";
+        getPrototypeOfString("", "''", true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = EcmaError.class)
+    public void getPrototypeOfStringFalse() throws Exception {
+        getPrototypeOfString("", "''", false);
+    }
+
+    public void getPrototypeOfString(final Object expected, final String value, final boolean contextFeature) throws Exception {
+        final ContextFactory myContextFactory = new ContextFactory() {
+            @Override
+            protected boolean hasFeature(final Context cx, final int featureIndex) {
+                if (Context.FEATURE_HTMLUNIT_GET_PROTOTYPE_OF_STRING == featureIndex) {
+                    return contextFeature;
+                }
+                return super.hasFeature(cx, featureIndex);
+            };
+        };
+
+        final String script = "Object.getPrototypeOf(" + value + ")";
         
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("", result);
+                assertEquals(expected, result);
                 return null;
             }
         };
 
-       Utils.runWithAllOptimizationLevels(action);
+       Utils.runWithAllOptimizationLevels(myContextFactory, action);
     }
 
     /**
@@ -87,18 +110,14 @@ public class NativeObjectTest {
      */
     @Test
     public void getPrototypeOfBoolean() throws Exception {
-        final String script = "Object.getPrototypeOf(true)";
-        
-        final ContextAction action = new ContextAction() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertFalse((Boolean) result);
-                return null;
-            }
-        };
+        getPrototypeOfString(false, "true", true);
+    }
 
-       Utils.runWithAllOptimizationLevels(action);
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = EcmaError.class)
+    public void getPrototypeOfBooleanFalse() throws Exception {
+        getPrototypeOfString("", "true", false);
     }
 }
