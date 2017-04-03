@@ -56,11 +56,11 @@ Steps:
   5- Deploy the release files into Sonatype staging repository:
       ant jar-all
 
-      - for 2.23, run the below (usually with another command line, not Git Shell):
+      - for 2.26, run the below (usually with another command line, not Git Shell):
 
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.23.jar
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.23-sources.jar -Dclassifier=sources
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.23-javadoc.jar -Dclassifier=javadoc
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.26.jar
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.26-sources.jar -Dclassifier=sources
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.26-javadoc.jar -Dclassifier=javadoc
 
       You may need to get latest version of gpg (v2) if the uploading hangs.
 
