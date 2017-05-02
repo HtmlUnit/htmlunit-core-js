@@ -1,9 +1,10 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
@@ -47,7 +48,7 @@ public class ExceptionMessageTest {
 					throw new RuntimeException("Should have failed!");
 				}
 				catch (final EcmaError e) {
-					Assert.assertEquals(expectedMesage + " (test_script#1)", e.getMessage());
+					assertEquals(expectedMesage + " (test_script#1)", e.getMessage());
 					return null;
 				}
 				catch (final Exception e) {
@@ -98,7 +99,7 @@ public class ExceptionMessageTest {
 					throw new RuntimeException("Should have failed!");
 				}
 				catch (final EcmaError e) {
-					Assert.assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
+					assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
 					return null;
 				}
 				catch (final Exception e) {

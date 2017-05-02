@@ -1,10 +1,11 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -59,6 +60,6 @@ public class ContextMethodsTest {
 		cf.call(action);
 		
 		final String[] expected = { "eval('1 + 2')", "1 + 2" };
-		Assert.assertEquals(Arrays.asList(expected), compiled);
+		assertEquals(Arrays.asList(expected), compiled);
 	}
 }

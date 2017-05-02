@@ -1,9 +1,10 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
@@ -69,16 +70,16 @@ public class SetReadOnlyPropertyTest {
 					}
 
                     if (isSetterAllowed.equals(Boolean.TRUE)) {
-                        Assert.assertEquals(123, number.intValue());
+                        assertEquals(123, number.intValue());
                     }
                     else {
-                        Assert.assertEquals(0, number.intValue());
+                        assertEquals(0, number.intValue());
                     }
 					return null;
 				}
 				catch (final EcmaError e) {
 				    if (MyHostObject.isReadOnlySettable == null) {
-				        Assert.assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
+				        assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
                         return null;
 				    }
                     throw new RuntimeException("Should not throw EcmaError!");

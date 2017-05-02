@@ -1,6 +1,8 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.mozilla.javascript.regexp.RegExpImpl;
 import org.mozilla.javascript.regexp.SubString;
@@ -72,24 +74,24 @@ public class RegExpImplSubclassingTest {
 		final MyTestRegExpImplSubclass myTestRegExpImplSubclass = new MyTestRegExpImplSubclass();
 
 		myTestRegExpImplSubclass.setInput("testInput");
-		Assert.assertEquals("testInput", myTestRegExpImplSubclass.getInput());
+		assertEquals("testInput", myTestRegExpImplSubclass.getInput());
 
         myTestRegExpImplSubclass.setMultiline(true);
-        Assert.assertTrue(myTestRegExpImplSubclass.isMultiline());
+        assertTrue(myTestRegExpImplSubclass.isMultiline());
 
         myTestRegExpImplSubclass.setParens(new SubString[] {new SubString("test") });
-        Assert.assertEquals("test", myTestRegExpImplSubclass.getParens()[0].toString());
+        assertEquals("test", myTestRegExpImplSubclass.getParens()[0].toString());
 
         myTestRegExpImplSubclass.setLastMatch(SubString.emptySubString);
-        Assert.assertEquals("", myTestRegExpImplSubclass.getLastMatch().toString());
+        assertEquals("", myTestRegExpImplSubclass.getLastMatch().toString());
 
         myTestRegExpImplSubclass.setLastParen(new SubString("testLastParen"));
-        Assert.assertEquals("testLastParen", myTestRegExpImplSubclass.getLastParen().toString());
+        assertEquals("testLastParen", myTestRegExpImplSubclass.getLastParen().toString());
 
         myTestRegExpImplSubclass.setLeftContext(new SubString("testLeftContext"));
-        Assert.assertEquals("testLeftContext", myTestRegExpImplSubclass.getLeftContext().toString());
+        assertEquals("testLeftContext", myTestRegExpImplSubclass.getLeftContext().toString());
 
         myTestRegExpImplSubclass.setRightContext(null);
-        Assert.assertEquals(null, myTestRegExpImplSubclass.getRightContext());
+        assertEquals(null, myTestRegExpImplSubclass.getRightContext());
 	}
 }

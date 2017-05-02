@@ -1,6 +1,8 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -51,7 +53,7 @@ public class ParserTest {
         test(script, "hello", true);
         try {
             test(script, "hello", false);
-            Assert.fail("Should have failed");
+            fail("Should have failed");
         }
         catch(final RuntimeException e) {
             if (!(e.getCause() instanceof EvaluatorException)) {
@@ -79,7 +81,7 @@ public class ParserTest {
 					Scriptable scope = cx.initStandardObjects();
 					ScriptableObject.defineClass(scope, MyHostObject.class);
 					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-					Assert.assertEquals(expected, o);
+					assertEquals(expected, o);
 					return o;
 				} catch (final Exception e) {
 					throw new RuntimeException(e);

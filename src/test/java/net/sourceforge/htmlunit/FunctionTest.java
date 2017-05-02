@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -29,7 +30,7 @@ public class FunctionTest {
             public Object run(Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object rep = cx.evaluateString(scope, source, "test.js", 0, null);
-                Assert.assertEquals(expected, rep);
+                assertEquals(expected, rep);
                 return null;
             }
         };

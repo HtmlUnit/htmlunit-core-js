@@ -1,8 +1,9 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Method;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -63,7 +64,7 @@ public class FunctionNullSetTest {
 
                     realFunction_.call(cx, jsObj, jsObj, new Object[0]);
 
-                    Assert.assertEquals(expectedNull, jsObj.onclick_ == null);
+                    assertEquals(expectedNull, jsObj.onclick_ == null);
                 }
                 catch (final Exception e) {
                     throw new RuntimeException(e);

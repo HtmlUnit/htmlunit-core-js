@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -23,7 +24,7 @@ public class DecompileTest {
             @Override
 			public Object run(final Context cx) {
 				final Script script = cx.compileString(source, "my script", 0, null);
-				Assert.assertEquals(source, cx.decompileScript(script, 4).trim());
+				assertEquals(source, cx.decompileScript(script, 4).trim());
 				return null;
 			}
 		};

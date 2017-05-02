@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -29,7 +30,7 @@ public class FunctionCallerTest {
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals(Boolean.TRUE, result);
+                assertEquals(Boolean.TRUE, result);
                 return null;
             }
         };
@@ -56,7 +57,7 @@ public class FunctionCallerTest {
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals("", result);
+                assertEquals("", result);
                 return null;
             }
         };
@@ -121,7 +122,7 @@ public class FunctionCallerTest {
                 final Scriptable scope = cx.initStandardObjects();
                 
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals("2-2", result);
+                assertEquals("2-2", result);
                 return null;
             }
         };
@@ -155,7 +156,7 @@ public class FunctionCallerTest {
                 final Scriptable scope = cx.initStandardObjects();
                 
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals("2-hello-2", result);
+                assertEquals("2-hello-2", result);
                 return null;
             }
         };
@@ -185,7 +186,7 @@ public class FunctionCallerTest {
                 final Scriptable scope = cx.initStandardObjects();
                 
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals("true, true", result);
+                assertEquals("true, true", result);
                 return null;
             }
         };

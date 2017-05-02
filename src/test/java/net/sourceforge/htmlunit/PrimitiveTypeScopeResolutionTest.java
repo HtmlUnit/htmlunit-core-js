@@ -1,7 +1,5 @@
 package net.sourceforge.htmlunit;
 
-import net.sourceforge.htmlunit.Utils;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mozilla.javascript.Context;

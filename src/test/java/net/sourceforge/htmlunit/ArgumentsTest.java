@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -137,7 +138,7 @@ public class ArgumentsTest {
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                Assert.assertEquals(expectedResult, result);
+                assertEquals(expectedResult, result);
                 return null;
             }
         };
@@ -178,7 +179,7 @@ public class ArgumentsTest {
                 try {
                     Scriptable scope = cx.initStandardObjects();
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-                    Assert.assertEquals(expected, o);
+                    assertEquals(expected, o);
                     return o;
                 } catch (final Exception e) {
                     throw new RuntimeException(e);

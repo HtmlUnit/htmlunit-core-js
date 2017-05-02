@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -89,7 +90,7 @@ public class DelegatorAndHostObjectTest {
 					Scriptable scope = cx.initStandardObjects();
 					ScriptableObject.defineClass(scope, MyHostObject.class);
 					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-					Assert.assertEquals(expected, o);
+					assertEquals(expected, o);
 					return o;
 				} catch (final Exception e) {
 					throw new RuntimeException(e);

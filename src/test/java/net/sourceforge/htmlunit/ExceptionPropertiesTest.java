@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -38,7 +39,7 @@ public class ExceptionPropertiesTest {
 			Utilities.executeScript(script, optimizationLevel);
 		}
 		catch (final RhinoException e) {
-			Assert.assertEquals(expectedStackTrace, e.getScriptStackTrace());
+			assertEquals(expectedStackTrace, e.getScriptStackTrace());
 		}
 	}
 
@@ -73,7 +74,7 @@ public class ExceptionPropertiesTest {
 					final ScriptableObject scope = cx.initStandardObjects();
 					final Object o = cx.evaluateString(scope, script,
 							"myScript.js", 1, null);
-					Assert.assertEquals(expected, o);
+					assertEquals(expected, o);
 					return o;
 				}
 				catch (final RuntimeException e) {

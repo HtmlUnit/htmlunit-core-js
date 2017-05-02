@@ -1,8 +1,9 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Method;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -79,7 +80,7 @@ public class EvalScopeTest {
                     if (result instanceof Number) {
                         result = ((Number) result).intValue();
                     }
-                    Assert.assertEquals(expected, result.toString());
+                    assertEquals(expected, result.toString());
 					return null;
 				}
 				catch (final Exception e) {

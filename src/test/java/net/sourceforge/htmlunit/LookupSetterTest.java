@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -44,7 +45,7 @@ public class LookupSetterTest {
 				ScriptableObject.defineClass(scope, Foo.class);
 				cx.evaluateString(scope, defineSetterAndGetterX, "initX", 1, null);
 				Object result = String.valueOf(cx.evaluateString(scope, src, "test", 1, null));
-				Assert.assertEquals(expected, result);
+				assertEquals(expected, result);
 				return null;
 			}
 		};

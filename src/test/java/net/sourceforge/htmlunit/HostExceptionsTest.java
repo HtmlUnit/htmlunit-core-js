@@ -1,6 +1,8 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -41,11 +43,11 @@ public class HostExceptionsTest {
 	public void testDontCatchJavaException_inGetter() throws Exception {
 		try {
 			doTest("foo.willThrowJavaException", false);
-			Assert.fail("Should have throw!");
+			fail("Should have throw!");
 		}
 		catch(final Exception e)
 		{
-			Assert.assertSame(MyScriptable.javaException, e.getCause());
+			assertSame(MyScriptable.javaException, e.getCause());
 		}
 	}
 
@@ -56,11 +58,11 @@ public class HostExceptionsTest {
 	public void testDontCatchJavaException_inFunction() throws Exception {
 		try {
 			doTest("foo.throwJavaException()", false);
-			Assert.fail("Should have throw!");
+			fail("Should have throw!");
 		}
 		catch(final Exception e)
 		{
-			Assert.assertSame(MyScriptable.javaException, e.getCause());
+			assertSame(MyScriptable.javaException, e.getCause());
 		}
 	}
 

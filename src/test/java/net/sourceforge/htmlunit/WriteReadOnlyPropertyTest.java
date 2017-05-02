@@ -1,8 +1,11 @@
 package net.sourceforge.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.Method;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -35,10 +38,10 @@ public class WriteReadOnlyPropertyTest {
 	public void testWriteReadOnly_throws() throws Exception {
 		try {
 			testWriteReadOnly(false);
-			Assert.fail();
+			fail();
 		}
 		catch (EcmaError e) {
-			Assert.assertTrue(e.getMessage(), e.getMessage().contains("Cannot set property [Foo].myProp that has only a getter"));
+			assertTrue(e.getMessage(), e.getMessage().contains("Cannot set property [Foo].myProp that has only a getter"));
 		}
 	}
 
@@ -92,7 +95,7 @@ public class WriteReadOnlyPropertyTest {
 			public Object run(final Context cx) {
 				final ScriptableObject top = cx.initStandardObjects();
 				Object result = cx.evaluateString(top, script, "script", 0, null);
-				Assert.assertEquals("Prototype was corrupted", "hello", result);
+				assertEquals("Prototype was corrupted", "hello", result);
 				return null;
 			}
 		};

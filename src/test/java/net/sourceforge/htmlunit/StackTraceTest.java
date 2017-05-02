@@ -1,6 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
@@ -39,7 +40,7 @@ public class StackTraceTest {
         			cx.evaluateString(scope, _source, "test.js", 0, null);
         		}
         		catch (final JavaScriptException e) {
-        			Assert.assertEquals(_expectedStackTrace, e.getScriptStackTrace());
+        			assertEquals(_expectedStackTrace, e.getScriptStackTrace());
         			return null;
         		}
         		throw new RuntimeException("Exception expected!");
