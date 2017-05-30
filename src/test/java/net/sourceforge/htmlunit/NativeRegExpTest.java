@@ -42,9 +42,7 @@ public class NativeRegExpTest {
     @Test
     public void changed() throws Exception {
         final String script = "'alpha'.replace(/alpha/, '');/beta/.test('abc beta def');";
-        assertTrue(SubString.emptySubString.toString().isEmpty());
         test(script, Boolean.TRUE);
-        assertTrue(SubString.emptySubString.toString().isEmpty());
     }
 
     private static void test(final String script, final Object expected) {

@@ -82,7 +82,7 @@ public class RegExpImplSubclassingTest {
         myTestRegExpImplSubclass.setParens(new SubString[] {new SubString("test") });
         assertEquals("test", myTestRegExpImplSubclass.getParens()[0].toString());
 
-        myTestRegExpImplSubclass.setLastMatch(SubString.emptySubString);
+        myTestRegExpImplSubclass.setLastMatch(new SubString());
         assertEquals("", myTestRegExpImplSubclass.getLastMatch().toString());
 
         myTestRegExpImplSubclass.setLastParen(new SubString("testLastParen"));
