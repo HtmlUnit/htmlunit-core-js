@@ -15,7 +15,7 @@ Ahmed Ashour
 ====================================================================== -->
 <project name="htmlunit-core-js build" default="jar-all" basedir="." xmlns:artifact="urn:maven-artifact-ant">
 
-	<property name="version" value="2.27"/>
+	<property name="version" value="2.28-SNAPSHOT"/>
 
 	<property name="target-jvm" value="1.8"/>
 	<property name="source-level" value="1.8"/>
