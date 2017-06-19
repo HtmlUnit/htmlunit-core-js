@@ -68,4 +68,17 @@ public class FunctionTest {
         assertEvaluates("undefinedhi", script);
     }
 
+    @Test
+    public void functionHasNameOfVarInsideFunction() {
+        String script = "var output = '';\n"
+                + "function test() {\n"
+                + "  output += t;\n"
+                + "  var t = 1;\n"
+                + "  !function t() {output += 'hi';}();\n"
+                + "}\n"
+                + "test();\n"
+                + "output";
+        assertEvaluates("undefinedhi", script);
+    }
+
 }
