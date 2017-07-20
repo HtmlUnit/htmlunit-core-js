@@ -41,7 +41,7 @@ Steps:
 	  ant -autoproxy deploy-snapshot
 
     If there is an issue of maven version needed by deploy-plugin:
-      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/content/repositories/snapshots/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.28-SNAPSHOT.jar -DuniqueVersion=true    
+      mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/content/repositories/snapshots/ -DrepositoryId=ossrh -DpomFile=pom.xml -Dfile=target/htmlunit-core-js-2.28-SNAPSHOT.jar -Dfiles=target/htmlunit-core-js-2.28-SNAPSHOT-sources.jar -Dclassifiers=sources -Dtypes=jar -DuniqueVersion=true    
 
 
 - To release:
