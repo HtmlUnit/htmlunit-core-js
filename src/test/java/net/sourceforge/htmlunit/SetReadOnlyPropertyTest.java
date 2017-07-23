@@ -9,9 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.EcmaError;
-import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -33,23 +31,6 @@ public class SetReadOnlyPropertyTest {
 
     @Test
 	public void onlyGetterError() {
-        onlyGetterError(Boolean.TRUE);
-        onlyGetterError(null);
-        onlyGetterError(Boolean.FALSE);
-    }
-
-    private static void onlyGetterError(final Boolean isSetterAllowed) {
-        MyHostObject.isReadOnlySettable = isSetterAllowed;
-		final ContextFactory cf = new ContextFactory() {
-			@Override
-			protected boolean hasFeature(Context cx, int featureIndex) {
-			    if (Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY == featureIndex) {
-			        return true;
-			    }
-				return super.hasFeature(cx, featureIndex);
-			}
-		};
-		
 		final String script = "o.readonlyProp = 123;o.readonlyProp";
 		
 		final ContextAction action = new ContextAction() {
@@ -65,23 +46,11 @@ public class SetReadOnlyPropertyTest {
                     ScriptableObject.defineProperty(scope, "o", prototype, ScriptableObject.DONTENUM);
 
 					Number number = (Number) cx.evaluateString(scope, script, "test_script", 1, null);
-					if (isSetterAllowed == null) {
-					    throw new RuntimeException("Should have failed!");
-					}
 
-                    if (isSetterAllowed.equals(Boolean.TRUE)) {
-                        assertEquals(123, number.intValue());
-                    }
-                    else {
-                        assertEquals(0, number.intValue());
-                    }
+					assertEquals(123, number.intValue());
 					return null;
 				}
 				catch (final EcmaError e) {
-				    if (MyHostObject.isReadOnlySettable == null) {
-				        assertEquals("TypeError: Cannot set property [MyHostObject].readonlyProp that has only a getter to 123. (test_script#1)", e.getMessage());
-                        return null;
-				    }
                     throw new RuntimeException("Should not throw EcmaError!");
 				}
 				catch (final Exception e) {
@@ -90,11 +59,10 @@ public class SetReadOnlyPropertyTest {
 			}
 		};
 
-		Utils.runWithAllOptimizationLevels(cf, action);
+		Utils.runWithAllOptimizationLevels(action);
 	}
 
 	public static class MyHostObject extends ScriptableObject {
-	    static Boolean isReadOnlySettable = Boolean.TRUE;
 		private int x;
 
 		@Override
@@ -108,14 +76,7 @@ public class SetReadOnlyPropertyTest {
 
         @Override
         protected boolean isReadOnlySettable(String name, Object value) {
-            if (isReadOnlySettable == null) {
-                throw ScriptRuntime.typeError3("msg.set.prop.no.setter", name,
-                        this.getClassName(), Context.toString(value));
-            }
-            if (isReadOnlySettable.equals(Boolean.TRUE)) {
-                return true;
-            }
-            return false;
+            return true;
         }
 	}
 }

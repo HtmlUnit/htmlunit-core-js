@@ -67,7 +67,6 @@ public class ExceptionMessageTest {
 	@Test
 	public void onlyGetterError() {
 		onlyGetterError(Context.FEATURE_STRICT_MODE);
-		onlyGetterError(Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY);
 	}
 
 	private static void onlyGetterError(final int feature) {

@@ -55,8 +55,7 @@ public class ArgumentsTest {
                 + "f();\n"
                 + "output";
 
-        runScript(script, "[object Object]", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT, true);
-        runScript(script, "[object Arguments]", Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT, false);
+        runScript(script, "[object Arguments]");
     }
 
 	/**

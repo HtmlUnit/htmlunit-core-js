@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -34,8 +33,7 @@ public class ParserTest {
 	            + "var output;\n"
 	            + "o.click();\n"
 	            + "output";
-        test(script, "hello", true);
-        test(script, "hello", false);
+        test(script, "hello");
     }
 
 	/**
@@ -50,9 +48,8 @@ public class ParserTest {
             + "var output;\n"
             + "o.click();\n"
             + "output";
-        test(script, "hello", true);
         try {
-            test(script, "hello", false);
+            test(script, "hello");
             fail("Should have failed");
         }
         catch(final RuntimeException e) {
@@ -60,20 +57,9 @@ public class ParserTest {
                throw e; 
             }
         }
-        
     }
 
-	private static void test(final String script, final Object expected, final boolean functionObjectMethod) {
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD == featureIndex) {
-                    return functionObjectMethod;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
-
+	private static void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {
@@ -89,6 +75,6 @@ public class ParserTest {
 			}
 		};
 
-		Utils.runWithAllOptimizationLevels(cf, action);
+		Utils.runWithAllOptimizationLevels(action);
 	}
 }

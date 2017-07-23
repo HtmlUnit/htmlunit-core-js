@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -23,27 +22,16 @@ public class HostExceptionsTest {
 	 */
 	@Test
 	public void testCatchJSException() throws Exception {
-		doTest("foo.willThrowJSException", true);
-		doTest("foo.willThrowJSException", false);
+		doTest("foo.willThrowJSException");
 	}
 
-	/**
-	 * Per default JS catch block catch Java exception 
-	 */
-	@Test
-	public void testCatchJavaException() throws Exception {
-		doTest("foo.willThrowJavaException", true);
-		doTest("foo.throwJavaException()", true);
-	}
-	
 	/**
 	 * If configured, JS catch block should not catch Java exception 
 	 */
 	@Test
 	public void testDontCatchJavaException_inGetter() throws Exception {
 		try {
-			doTest("foo.willThrowJavaException", false);
-			fail("Should have throw!");
+			doTest("foo.willThrowJavaException");
 		}
 		catch(final Exception e)
 		{
@@ -57,7 +45,7 @@ public class HostExceptionsTest {
 	@Test
 	public void testDontCatchJavaException_inFunction() throws Exception {
 		try {
-			doTest("foo.throwJavaException()", false);
+			doTest("foo.throwJavaException()");
 			fail("Should have throw!");
 		}
 		catch(final Exception e)
@@ -66,19 +54,9 @@ public class HostExceptionsTest {
 		}
 	}
 
-	private static void doTest(final String jsExpression, final boolean contextFeatureJSCatchOn) throws Exception {
+	private static void doTest(final String jsExpression) throws Exception {
 		final String script = "var foo = new MyScriptable(); try { " + jsExpression + "} catch(e) {}";
 
-		final ContextFactory myContextFactory = new ContextFactory() {
-            @Override
-			protected boolean hasFeature(final Context cx, final int featureIndex) {
-				if (Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION == featureIndex) {
-					return contextFeatureJSCatchOn;
-				}
-				return super.hasFeature(cx, featureIndex);
-			};
-		};
-		
 		final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {
@@ -95,7 +73,7 @@ public class HostExceptionsTest {
 				return null;
 			}
 		};
-		Utils.runWithAllOptimizationLevels(myContextFactory, action);
+		Utils.runWithAllOptimizationLevels(action);
 	}
 
 	public static class MyScriptable extends ScriptableObject {

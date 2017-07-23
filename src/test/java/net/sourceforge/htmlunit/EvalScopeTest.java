@@ -19,13 +19,9 @@ public class EvalScopeTest {
 
     @Test
 	public void eval() {
-        eval("host2.eval('id')", true, "2");
-        eval("host2['eval']('id')", true, "2");
-        eval(createFunction("output=host1.eval('f')"), true, "3");
-        eval(createFunction("output=host1['eval']('f')"), true, "3");
-        eval(createFunction("output=host1.eval('f')"), false, "exception");
-        eval(createFunction("output=eval('f')"), false, "3");
-        eval(createFunction("arr=['f'];output=eval(arr.join(''))"), false, "3");
+        eval(createFunction("output=host1.eval('f')"), "exception");
+        eval(createFunction("output=eval('f')"), "3");
+        eval(createFunction("arr=['f'];output=eval(arr.join(''))"), "3");
     }
 
     private static String createFunction(final String outputSetter) {
@@ -44,13 +40,10 @@ public class EvalScopeTest {
                 + "output";
     }
 
-    private static void eval(final String script, final boolean hasFeature, final String expected) {
+    private static void eval(final String script, final String expected) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_EVAL_LOCAL_SCOPE == featureIndex) {
-                    return hasFeature;
-                }
                 if (Context.FEATURE_DYNAMIC_SCOPE == featureIndex) {
                     return true;
                 }

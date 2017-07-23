@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -25,32 +24,20 @@ public class ScriptableObjectTest {
 
     @Test
     public void constructor() {
-        test(true, "var o = new MyHostObject(); typeof o.constructor", "function");
-        test(false, "var o = new MyHostObject(); typeof o.constructor", "undefined");
+        test("var o = new MyHostObject(); typeof o.constructor");
     }
 
     @Test
     public void objectConstructor() {
-        test(true, "typeof new Object().constructor", "function");
-        test(false, "typeof new Object().constructor", "function");
+        test("typeof new Object().constructor");
     }
 
     @Test
     public void arrayConstructor() {
-        test(true, "typeof [].constructor", "function");
-        test(false, "typeof [].constructor", "function");
+        test("typeof [].constructor");
     }
 
-	private static void test(final boolean isConstructor, final String script, final Object expected) {
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_CONSTRUCTOR == featureIndex) {
-                    return isConstructor;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
+	private static void test(final String script) {
 		final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {
@@ -58,7 +45,7 @@ public class ScriptableObjectTest {
 					Scriptable scope = cx.initStandardObjects();
 					ScriptableObject.defineClass(scope, MyHostObject.class);
 					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-					assertEquals(expected, o);
+					assertEquals("function", o);
 					return o;
 				} catch (final Exception e) {
 					throw new RuntimeException(e);
@@ -66,6 +53,6 @@ public class ScriptableObjectTest {
 			}
 		};
 
-		Utils.runWithAllOptimizationLevels(cf, action);
+		Utils.runWithAllOptimizationLevels(action);
 	}
 }

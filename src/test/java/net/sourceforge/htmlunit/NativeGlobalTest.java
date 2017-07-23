@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Scriptable;
 
 /**
@@ -20,30 +19,16 @@ public class NativeGlobalTest {
 	 */
 	@Test
 	public void parseInt() throws Exception {
-	    doTest(0, "parseInt('08')", false);
-        doTest(8, "parseInt('08')", true);
+        doTest(8, "parseInt('08')");
 
-        doTest(0, "parseInt('08', 8)", false);
-        doTest(0, "parseInt('08', 8)", true);
+        doTest(0, "parseInt('08', 8)");
 
-        doTest(Double.NaN, "parseInt('8', 8)", false);
-        doTest(Double.NaN, "parseInt('8', 8)", true);
+        doTest(Double.NaN, "parseInt('8', 8)");
 
-        doTest(8, "parseInt('8')", false);
-        doTest(8, "parseInt('8')", true);
+        doTest(8, "parseInt('8')");
 	}
 
-    private static void doTest(final double expected, final String src, final boolean contextFeature) throws Exception {
-		final ContextFactory myContextFactory = new ContextFactory() {
-            @Override
-			protected boolean hasFeature(final Context cx, final int featureIndex) {
-				if (Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10 == featureIndex) {
-					return contextFeature;
-				}
-				return super.hasFeature(cx, featureIndex);
-			};
-		};
-		
+    private static void doTest(final double expected, final String src) throws Exception {
 		final ContextAction action = new ContextAction() {
             @Override
 			public Object run(final Context cx) {
@@ -53,7 +38,7 @@ public class NativeGlobalTest {
 				return null;
 			}
 		};
-		Utils.runWithAllOptimizationLevels(myContextFactory, action);
+		Utils.runWithAllOptimizationLevels(action);
 	}
 
 }

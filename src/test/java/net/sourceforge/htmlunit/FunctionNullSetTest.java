@@ -1,13 +1,12 @@
 package net.sourceforge.htmlunit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.lang.reflect.Method;
 
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
@@ -24,24 +23,6 @@ public class FunctionNullSetTest {
      */
     @Test
     public void setFunctionToNull() throws Exception {
-        setFunctionToNull(true, true);
-        setFunctionToNull(false, false);
-    }
-
-    /**
-     * @param expectedNull is the object setter is called (which sets the object value to null)
-     */
-    private static void setFunctionToNull(final boolean hasFeature, final boolean expectedNull) throws Exception {
-
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_FUNCTION_NULL_SETTER == featureIndex) {
-                    return hasFeature;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
         final String script = "function onclick() {onclick=null}";
         final ContextAction action = new ContextAction() {
             @Override
@@ -64,7 +45,7 @@ public class FunctionNullSetTest {
 
                     realFunction_.call(cx, jsObj, jsObj, new Object[0]);
 
-                    assertEquals(expectedNull, jsObj.onclick_ == null);
+                    assertNull(jsObj.onclick_);
                 }
                 catch (final Exception e) {
                     throw new RuntimeException(e);
@@ -73,7 +54,7 @@ public class FunctionNullSetTest {
             }
         };
 
-        Utils.runWithOptimizationLevel(cf, action, -1);
+        Utils.runWithOptimizationLevel(action, -1);
     }
 
     public static class MyHostObject extends ScriptableObject {

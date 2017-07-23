@@ -1,8 +1,6 @@
 package net.sourceforge.htmlunit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.lang.reflect.Method;
 
@@ -10,7 +8,6 @@ import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.ScriptableObject;
 
 /**
@@ -28,24 +25,6 @@ public class WriteReadOnlyPropertyTest {
 	 */
 	@Test
 	public void testWriteReadOnly_accepted() throws Exception {
-		testWriteReadOnly(true);
-	}
-
-	/**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void testWriteReadOnly_throws() throws Exception {
-		try {
-			testWriteReadOnly(false);
-			fail();
-		}
-		catch (EcmaError e) {
-			assertTrue(e.getMessage(), e.getMessage().contains("Cannot set property [Foo].myProp that has only a getter"));
-		}
-	}
-
-	void testWriteReadOnly(final boolean acceptWriteReadOnly) throws Exception {
 		final Method readMethod = Foo.class.getMethod("getMyProp");
 		final Foo foo = new Foo("hello");
         foo.defineProperty("myProp", null, readMethod, null, ScriptableObject.EMPTY);
@@ -59,25 +38,13 @@ public class WriteReadOnlyPropertyTest {
 				final ScriptableObject top = cx.initStandardObjects();
 				ScriptableObject.putProperty(top, "foo", foo);
 				
-				System.out.println(cx.evaluateString(top, script, "script", 0, null));
+				assertEquals(123, cx.evaluateString(top, script, "script", 0, null));
 				return null;
 			}
 		};
 		
-		final ContextFactory contextFactory = makeContextFactory(acceptWriteReadOnly);
+		final ContextFactory contextFactory = new ContextFactory();
 		contextFactory.call(action);
-	}
-	
-	ContextFactory makeContextFactory(final boolean acceptWriteReadOnly) {
-		return new ContextFactory() {
-			@Override
-			protected boolean hasFeature(final Context cx, final int featureIndex) {
-				if (Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY == featureIndex) {
-					return acceptWriteReadOnly;
-				}
-				return super.hasFeature(cx, featureIndex);
-			}
-		};
 	}
 	
 	/** @see https://sourceforge.net/p/htmlunit/bugs/1633/ */
@@ -100,7 +67,7 @@ public class WriteReadOnlyPropertyTest {
 			}
 		};
 
-		final ContextFactory contextFactory = makeContextFactory(true);
+		final ContextFactory contextFactory = new ContextFactory();
 		contextFactory.call(action);
 	}
 

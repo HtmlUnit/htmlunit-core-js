@@ -1,13 +1,11 @@
 package net.sourceforge.htmlunit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextAction;
 import org.mozilla.javascript.Scriptable;
-import org.mozilla.javascript.regexp.SubString;
 
 /**
  * Tests for NativeRegExp object.
