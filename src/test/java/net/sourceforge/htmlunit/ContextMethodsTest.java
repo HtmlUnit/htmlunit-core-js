@@ -7,13 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.ContextFactory;
-import org.mozilla.javascript.ErrorReporter;
-import org.mozilla.javascript.Evaluator;
-import org.mozilla.javascript.Script;
-import org.mozilla.javascript.Scriptable;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
+import net.sourceforge.htmlunit.corejs.javascript.Evaluator;
+import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=481152">Bug 481152 - 

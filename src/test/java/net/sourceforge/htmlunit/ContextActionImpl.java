@@ -1,7 +1,7 @@
 package net.sourceforge.htmlunit;
 
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 
 public abstract class ContextActionImpl implements ContextAction {
     @Override

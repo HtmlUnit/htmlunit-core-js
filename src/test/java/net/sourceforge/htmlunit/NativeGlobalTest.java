@@ -3,9 +3,10 @@ package net.sourceforge.htmlunit;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ContextAction;
-import org.mozilla.javascript.Scriptable;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Tests for NativeGlobal object.

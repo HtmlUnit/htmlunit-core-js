@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.mozilla.javascript.regexp.RegExpImpl;
-import org.mozilla.javascript.regexp.SubString;
+
+import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
+import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 
 /**
  * Test that some fields in RegExpImpl are protected.
