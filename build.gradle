@@ -1,0 +1,134 @@
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
+
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+
+jar {
+    version = '2.31-SNAPSHOT'
+}
+
+group = "net.sourceforge.htmlunit"
+archivesBaseName = "htmlunit-core-js"
+version = "2.31-SNAPSHOT"
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'target/repackaged-rhino/src'
+        }
+        resources {
+            srcDirs 'target/repackaged-rhino/src'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+}
+
+
+task generateSources() {
+    doLast {
+        delete('target/repackaged-rhino/src/net/sourceforge/htmlunit/corejs')
+
+        copy {
+            into 'target/repackaged-rhino/src/net/sourceforge/htmlunit/corejs'
+            from '../htmlunit-rhino-fork/src/org/mozilla'
+            from ('../htmlunit-rhino-fork/toolsrc/org/mozilla') {
+                include 'javascript/tools/debugger/**/*.java'
+                include 'javascript/tools/shell/**/*.java'
+                include 'javascript/tools/*.java'
+            }
+            filter { line -> line.replaceAll('org\\.mozilla', 'net.sourceforge.htmlunit.corejs') }
+            filter { line -> line.replaceAll('org/mozilla', 'net/sourceforge/htmlunit/corejs') }
+        }
+
+        delete('target/rhinoDiff.txt')
+        exec {
+            workingDir '../htmlunit-rhino-fork'
+            commandLine 'cmd', '/c', '"git.exe" diff upstream/master..HEAD >> ..\\htmlunit-core-js\\target\\rhinoDiff.txt'
+        }
+    }
+}
+compileJava.dependsOn generateSources
+
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+
+artifacts {
+    archives sourcesJar
+}
+
+
+signing {
+    sign configurations.archives
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.withXml {
+                def root = asNode()
+
+                root.appendNode("name", "HtmlUnit Core JS")
+
+                def o = root.appendNode("organization")
+                o.appendNode("name", "Gargoyle Software Inc.")
+                o.appendNode("url", "http://www.GargoyleSoftware.com/")
+
+                root.appendNode("packaging", "jar")
+                root.appendNode("url", "http://htmlunit.sourceforge.net")
+                root.appendNode('description', "HtmlUnit adaptation of Mozilla Rhino Javascript engine for Java. Changes are documented by a diff (rhinoDiff.txt) contained in the generated jar files.")
+
+                def l = root.appendNode("licenses").appendNode("license")
+                l.appendNode("name", "Mozilla Public License, Version 2.0")
+                l.appendNode("url", "http://www.mozilla.org/MPL/2.0/index.txt")
+                l.appendNode("distribution", "repo")
+
+                def scm = root.appendNode("scm")
+                scm.appendNode("connection", "scm:git:git@github.com:HtmlUnit/htmlunit-core-js.git")
+                scm.appendNode("developerConnection", "scm:git:git@github.com:HtmlUnit/htmlunit-core-js.git")
+                scm.appendNode("url", "https://github.com/htmlunit")
+
+                def ds = root.appendNode("developers")
+                def d = ds.appendNode("developer")
+                d.appendNode("name", "Mozilla Rhino Team")
+                d.appendNode("id", "MozillaRhinoTeam")
+                d = ds.appendNode("developer")
+                d.appendNode("name", "HtmlUnit Team")
+                d.appendNode("id", "HtmlUnitTeam")
+            }
+        }
+    }
+}
