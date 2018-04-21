@@ -10,13 +10,13 @@ import org.junit.Test;
  */
 public class RegExpUnescapedSlashTest {
 
-	/**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void testUnescapedSlashInSquareBrackets() throws Exception {
-		final String script = "var o = /[/]/;";
-		
-		Utilities.executeScript(script);
-	}
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testUnescapedSlashInSquareBrackets() throws Exception {
+        final String script = "var o = /[/]/;";
+        
+        Utilities.executeScript(script);
+    }
 }

@@ -10,14 +10,14 @@ import org.junit.Test;
  */
 public class UpperCaseHexTest {
 
-	/**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void testUpperCaseHex() throws Exception {
-		final String script = "var a = encodeURIComponent('$ a ;');\n"
-			+ "if (a != '%24%20a%20%3B') throw 'got: >' + a + '<'";
-		
-		Utilities.executeScript(script);
-	}
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testUpperCaseHex() throws Exception {
+        final String script = "var a = encodeURIComponent('$ a ;');\n"
+            + "if (a != '%24%20a%20%3B') throw 'got: >' + a + '<'";
+        
+        Utilities.executeScript(script);
+    }
 }

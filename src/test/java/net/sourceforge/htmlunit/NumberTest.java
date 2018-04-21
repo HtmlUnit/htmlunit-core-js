@@ -10,15 +10,15 @@ import org.junit.Test;
 public class NumberTest {
 
     /**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void test() throws Exception {
-		final String script = "var n = 2.274341322658976E-309;\n"
-			+ "var s = '' + n;\n"
-			+ "if (s != '2.274341322658976e-309') throw 'got ' + s";
-		
-		Utilities.executeScript(script);
-		Utilities.executeScript("'' + 1");
-	}
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test() throws Exception {
+        final String script = "var n = 2.274341322658976E-309;\n"
+            + "var s = '' + n;\n"
+            + "if (s != '2.274341322658976e-309') throw 'got ' + s";
+        
+        Utilities.executeScript(script);
+        Utilities.executeScript("'' + 1");
+    }
 }

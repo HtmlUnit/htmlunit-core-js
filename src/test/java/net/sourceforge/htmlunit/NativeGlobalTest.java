@@ -15,11 +15,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public class NativeGlobalTest {
 
-	/**
-	 * Test for parseInt.
-	 */
-	@Test
-	public void parseInt() throws Exception {
+    /**
+     * Test for parseInt.
+     */
+    @Test
+    public void parseInt() throws Exception {
         doTest(8, "parseInt('08')");
 
         doTest(0, "parseInt('08', 8)");
@@ -27,19 +27,19 @@ public class NativeGlobalTest {
         doTest(Double.NaN, "parseInt('8', 8)");
 
         doTest(8, "parseInt('8')");
-	}
+    }
 
     private static void doTest(final double expected, final String src) throws Exception {
-		final ContextAction action = new ContextAction() {
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				final Scriptable scope = cx.initStandardObjects();
-				Object result = cx.evaluateString(scope, src, "test.js", 0, null);
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                Object result = cx.evaluateString(scope, src, "test.js", 0, null);
                 assertEquals(expected, result);
-				return null;
-			}
-		};
-		Utils.runWithAllOptimizationLevels(action);
-	}
+                return null;
+            }
+        };
+        Utils.runWithAllOptimizationLevels(action);
+    }
 
 }

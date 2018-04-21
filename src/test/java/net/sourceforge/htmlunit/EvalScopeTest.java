@@ -19,7 +19,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class EvalScopeTest {
 
     @Test
-	public void eval() {
+    public void eval() {
         eval(createFunction("output=host1.eval('f')"), "exception");
         eval(createFunction("output=eval('f')"), "3");
         eval(createFunction("arr=['f'];output=eval(arr.join(''))"), "3");
@@ -51,13 +51,13 @@ public class EvalScopeTest {
                 return super.hasFeature(cx, featureIndex);
             }
         };
-		final ContextAction action = new ContextAction() {
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				try {
-					final MyHostObject prototype = new MyHostObject();
-					final Method readMethod = MyHostObject.class.getMethod("jsxGet_id");
-					prototype.defineProperty("id", null, readMethod , null, ScriptableObject.EMPTY);
+            public Object run(final Context cx) {
+                try {
+                    final MyHostObject prototype = new MyHostObject();
+                    final Method readMethod = MyHostObject.class.getMethod("jsxGet_id");
+                    prototype.defineProperty("id", null, readMethod , null, ScriptableObject.EMPTY);
 
                     final MyHostObject host1 = new MyHostObject(1);
                     host1.setPrototype(prototype);
@@ -75,18 +75,18 @@ public class EvalScopeTest {
                         result = ((Number) result).intValue();
                     }
                     assertEquals(expected, result.toString());
-					return null;
-				}
-				catch (final Exception e) {
-					throw new RuntimeException(e);
-				}
-			}
-		};
+                    return null;
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
 
-		Utils.runWithAllOptimizationLevels(cf, action);
-	}
+        Utils.runWithAllOptimizationLevels(cf, action);
+    }
 
-	public static class MyHostObject extends ScriptableObject {
+    public static class MyHostObject extends ScriptableObject {
         private int id_;
 
         private MyHostObject() {
@@ -97,12 +97,12 @@ public class EvalScopeTest {
         }
 
         @Override
-		public String getClassName() {
-			return getClass().getSimpleName();
-		}
+        public String getClassName() {
+            return getClass().getSimpleName();
+        }
 
-		public int jsxGet_id() {
-			return id_;
-		}
-	}
+        public int jsxGet_id() {
+            return id_;
+        }
+    }
 }

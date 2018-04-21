@@ -16,49 +16,49 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public class ScriptRuntimeTest {
 
-	@Test
+    @Test
     public void functionDeclaredForwardInBlock() {
-	    final String script =
-	              "function test () {\n"
-	            + "  if (true) {\n"
-	            + "    try {\n"
+        final String script =
+                  "function test () {\n"
+                + "  if (true) {\n"
+                + "    try {\n"
                 + "      output += '' + foo;\n"
                 + "    } catch (e) {\n"
                 + "      output += 'exception';\n"
                 + "    }\n"
                 + "    function foo() {}\n"
-	            + "  }\n"
-	            + "};\n"
-	            + "var output = '';\n"
-	            + "test();\n"
-	            + "output";
+                + "  }\n"
+                + "};\n"
+                + "var output = '';\n"
+                + "test();\n"
+                + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
         test(script, "exception", feature, false);
         test(script, "function foo() {\n}", feature, true);
     }
 
-	@Test
+    @Test
     public void functionDeclaredForwardInBlockAsVar() {
-	    final String script =
-	              "function test () {\n"
-	            + "  if (true) {\n"
-	            + "    try {\n"
+        final String script =
+                  "function test () {\n"
+                + "  if (true) {\n"
+                + "    try {\n"
                 + "      output += '' + foo;\n"
                 + "    } catch (e) {\n"
                 + "      output += 'exception';\n"
                 + "    }\n"
                 + "    var foo = function() {}\n"
-	            + "  }\n"
-	            + "};\n"
-	            + "var output = '';\n"
-	            + "test();\n"
-	            + "output";
+                + "  }\n"
+                + "};\n"
+                + "var output = '';\n"
+                + "test();\n"
+                + "output";
         final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
         test(script, "undefined", feature, false);
         test(script, "undefined", feature, true);
     }
 
-	@Test
+    @Test
     public void functionDeclaredForwardInBlock2() {
         final String script =
                   "var output = '';\n"
@@ -76,8 +76,8 @@ public class ScriptRuntimeTest {
         test(script, "function foo() {\n}", feature, true);
     }
 
-	private static void test(final String script, final Object expected,
-	        final int feature, final boolean featureValue) {
+    private static void test(final String script, final Object expected,
+            final int feature, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(Context cx, int featureIndex) {
@@ -90,22 +90,22 @@ public class ScriptRuntimeTest {
 
         final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				try {
-					Scriptable scope = cx.initStandardObjects();
-					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-					assertEquals(expected, o);
-					return o;
-				} catch (final Exception e) {
-					throw new RuntimeException(e);
-				}
-			}
-		};
+            public Object run(final Context cx) {
+                try {
+                    Scriptable scope = cx.initStandardObjects();
+                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
+                    assertEquals(expected, o);
+                    return o;
+                } catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
 
-		Utils.runWithOptimizationLevel(cf, action, -1);
-	}
+        Utils.runWithOptimizationLevel(cf, action, -1);
+    }
 
-	@Test
+    @Test
     public void enumChangeObject() {
         final String script =
                 "var value = {\n"

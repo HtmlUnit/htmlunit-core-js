@@ -13,30 +13,30 @@ import org.junit.internal.runners.TestMethod;
  */
 public class RhinoPatchedRunner extends JUnit4ClassRunner {
 
-	private boolean runWithOriginalRhino;
-	public static final String PROPERTY_RHINO = "rhino";
-	public static final String PROPERTY_RHINO_VALUE_ORIGINAL = "original";
+    private boolean runWithOriginalRhino;
+    public static final String PROPERTY_RHINO = "rhino";
+    public static final String PROPERTY_RHINO_VALUE_ORIGINAL = "original";
 
 
-	public RhinoPatchedRunner(final Class<?> klass) throws InitializationError {
-		super(klass);
-		
-		runWithOriginalRhino = PROPERTY_RHINO_VALUE_ORIGINAL.equalsIgnoreCase(System.getProperty(PROPERTY_RHINO));
-	}
+    public RhinoPatchedRunner(final Class<?> klass) throws InitializationError {
+        super(klass);
+        
+        runWithOriginalRhino = PROPERTY_RHINO_VALUE_ORIGINAL.equalsIgnoreCase(System.getProperty(PROPERTY_RHINO));
+    }
 
 
-	@Override
-	protected TestMethod wrapMethod(final Method method) {
-		if (runWithOriginalRhino) {
-			return new TestMethod(method, getTestClass())
-			{
-				@Override
-				protected Class<? extends Throwable> getExpectedException() {
-					return Throwable.class;
-				}
-			};
-		}
-		return super.wrapMethod(method);
-	}
-	
+    @Override
+    protected TestMethod wrapMethod(final Method method) {
+        if (runWithOriginalRhino) {
+            return new TestMethod(method, getTestClass())
+            {
+                @Override
+                protected Class<? extends Throwable> getExpectedException() {
+                    return Throwable.class;
+                }
+            };
+        }
+        return super.wrapMethod(method);
+    }
+    
 }

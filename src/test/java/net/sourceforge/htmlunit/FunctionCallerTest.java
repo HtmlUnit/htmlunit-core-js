@@ -49,9 +49,9 @@ public class FunctionCallerTest {
                 + "  for (i in f) s += i + ',';\n"
                 + "  return s;\n"
                 + "}\n"
-    			+ "function g() {\n"
-    			+ "  return f();\n"
-    			+ "}\n"
+                + "function g() {\n"
+                + "  return f();\n"
+                + "}\n"
                 + "g();\n";
         final ContextAction action = new ContextAction() {
             @Override
@@ -67,35 +67,35 @@ public class FunctionCallerTest {
     }
 
     /**
-	 * Property caller should be defined only during function execution
-	 */
-	@Test
-	public void callee() throws Exception {
-		final String script = "function f() {\n"
-			+ "  var c = arguments.callee.caller;\n"
-			+ "  if (c) throw 'got: ' + c;\n"
-			+ "  if (g.caller) throw 'got: ' + c;\n"
-			+ "  g();\n"
-			+ "  if (g.caller) throw 'after g() got: ' + g.caller;\n"
-			+ "}\n"
-			+ "function g() {\n"
-			+ "  var c = arguments.callee.caller;\n"
-			+ "  if (c != f) throw 'got: ' + c;\n"
-			+ "}\n"
-			+ "f();\n";
-		
-		final ContextAction action = new ContextAction() {
+     * Property caller should be defined only during function execution
+     */
+    @Test
+    public void callee() throws Exception {
+        final String script = "function f() {\n"
+            + "  var c = arguments.callee.caller;\n"
+            + "  if (c) throw 'got: ' + c;\n"
+            + "  if (g.caller) throw 'got: ' + c;\n"
+            + "  g();\n"
+            + "  if (g.caller) throw 'after g() got: ' + g.caller;\n"
+            + "}\n"
+            + "function g() {\n"
+            + "  var c = arguments.callee.caller;\n"
+            + "  if (c != f) throw 'got: ' + c;\n"
+            + "}\n"
+            + "f();\n";
+        
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				final Scriptable scope = cx.initStandardObjects();
-				
-				cx.evaluateString(scope, script, "test.js", 1, null);
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                
+                cx.evaluateString(scope, script, "test.js", 1, null);
 
-				return null;
-			}
-		};
-		Utils.runWithOptimizationLevel(action, -1);
-	}
+                return null;
+            }
+        };
+        Utils.runWithOptimizationLevel(action, -1);
+    }
 
     /**
      * Tests the caller arguments
@@ -170,10 +170,10 @@ public class FunctionCallerTest {
     @Test
     public void callerArgumentsCallee() throws Exception {
         final String script = "function f() {\n"
-	        + "  var caller = arguments.callee.caller;\n"
-	        + "  output += (caller == g) + ', ';\n"
-	        + "  output += (caller.arguments.callee == g);\n"
-	        + "}\n"
+            + "  var caller = arguments.callee.caller;\n"
+            + "  output += (caller == g) + ', ';\n"
+            + "  output += (caller.arguments.callee == g);\n"
+            + "}\n"
             + "function g() {\n"
             + "  f(123)\n"
             + "}\n"

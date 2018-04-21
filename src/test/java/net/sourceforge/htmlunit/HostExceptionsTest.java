@@ -18,82 +18,82 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class HostExceptionsTest {
 
-	/**
-	 * JS catch block should always catch JS exceptions
-	 */
-	@Test
-	public void testCatchJSException() throws Exception {
-		doTest("foo.willThrowJSException");
-	}
+    /**
+     * JS catch block should always catch JS exceptions
+     */
+    @Test
+    public void testCatchJSException() throws Exception {
+        doTest("foo.willThrowJSException");
+    }
 
-	/**
-	 * If configured, JS catch block should not catch Java exception 
-	 */
-	@Test
-	public void testDontCatchJavaException_inGetter() throws Exception {
-		try {
-			doTest("foo.willThrowJavaException");
-		}
-		catch(final Exception e)
-		{
-			assertSame(MyScriptable.javaException, e.getCause());
-		}
-	}
+    /**
+     * If configured, JS catch block should not catch Java exception 
+     */
+    @Test
+    public void testDontCatchJavaException_inGetter() throws Exception {
+        try {
+            doTest("foo.willThrowJavaException");
+        }
+        catch(final Exception e)
+        {
+            assertSame(MyScriptable.javaException, e.getCause());
+        }
+    }
 
-	/**
-	 * If configured, JS catch block should not catch Java exception 
-	 */
-	@Test
-	public void testDontCatchJavaException_inFunction() throws Exception {
-		try {
-			doTest("foo.throwJavaException()");
-			fail("Should have throw!");
-		}
-		catch(final Exception e)
-		{
-			assertSame(MyScriptable.javaException, e.getCause());
-		}
-	}
+    /**
+     * If configured, JS catch block should not catch Java exception 
+     */
+    @Test
+    public void testDontCatchJavaException_inFunction() throws Exception {
+        try {
+            doTest("foo.throwJavaException()");
+            fail("Should have throw!");
+        }
+        catch(final Exception e)
+        {
+            assertSame(MyScriptable.javaException, e.getCause());
+        }
+    }
 
-	private static void doTest(final String jsExpression) throws Exception {
-		final String script = "var foo = new MyScriptable(); try { " + jsExpression + "} catch(e) {}";
+    private static void doTest(final String jsExpression) throws Exception {
+        final String script = "var foo = new MyScriptable(); try { " + jsExpression + "} catch(e) {}";
 
-		final ContextAction action = new ContextAction() {
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				final Scriptable scope = cx.initStandardObjects();
-				try {
-					ScriptableObject.defineClass(scope, MyScriptable.class);
-				}
-				catch (final Exception e) {
-					throw new RuntimeException();
-				}
-				
-				cx.evaluateString(scope, script, "test.js", 0, null);
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                try {
+                    ScriptableObject.defineClass(scope, MyScriptable.class);
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException();
+                }
+                
+                cx.evaluateString(scope, script, "test.js", 0, null);
 
-				return null;
-			}
-		};
-		Utils.runWithAllOptimizationLevels(action);
-	}
+                return null;
+            }
+        };
+        Utils.runWithAllOptimizationLevels(action);
+    }
 
-	public static class MyScriptable extends ScriptableObject {
-		static RuntimeException javaException = new NullPointerException();
-		@Override
-		public String getClassName() {
-			return "MyScriptable";
-		}
-		
-		public String jsGet_willThrowJavaException() {
-			throw javaException;
-		}
+    public static class MyScriptable extends ScriptableObject {
+        static RuntimeException javaException = new NullPointerException();
+        @Override
+        public String getClassName() {
+            return "MyScriptable";
+        }
+        
+        public String jsGet_willThrowJavaException() {
+            throw javaException;
+        }
 
-		public String jsGet_willThrowJSException() {
-			throw Context.reportRuntimeError("this is a JS exception");
-		}
-		
-		public void jsFunction_throwJavaException() {
-			throw javaException;
-		}
-	}
+        public String jsGet_willThrowJSException() {
+            throw Context.reportRuntimeError("this is a JS exception");
+        }
+        
+        public void jsFunction_throwJavaException() {
+            throw javaException;
+        }
+    }
 }

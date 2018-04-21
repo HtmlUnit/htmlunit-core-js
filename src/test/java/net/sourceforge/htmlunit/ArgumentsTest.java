@@ -32,7 +32,7 @@ public class ArgumentsTest {
     }
 
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -59,7 +59,7 @@ public class ArgumentsTest {
         runScript(script, "[object Arguments]");
     }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -104,7 +104,7 @@ public class ArgumentsTest {
         runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
     }
 
-	/**
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -119,11 +119,11 @@ public class ArgumentsTest {
     }
 
     private static void runScript(final String script, final Object expectedResult) {
-    	runScript(script, expectedResult, Integer.MAX_VALUE, false);
-	}
+        runScript(script, expectedResult, Integer.MAX_VALUE, false);
+    }
 
     private static void runScript(final String script, final Object expectedResult,
-			final int featureToSet, final boolean featureValue) {
+            final int featureToSet, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {
             @Override
             protected boolean hasFeature(final Context cx, final int featureIndex) {

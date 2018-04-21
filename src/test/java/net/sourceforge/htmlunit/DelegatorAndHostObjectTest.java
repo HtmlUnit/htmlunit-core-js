@@ -21,57 +21,57 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class DelegatorAndHostObjectTest {
 
-	public static class MyHostObject extends ScriptableObject {
-		private int x;
+    public static class MyHostObject extends ScriptableObject {
+        private int x;
 
-		@Override
-		public String getClassName() {
-			return getClass().getSimpleName();
-		}
+        @Override
+        public String getClassName() {
+            return getClass().getSimpleName();
+        }
 
-		public Delegator jsFunction_createDelegator() {
-			return new Delegator(this);
-		}
+        public Delegator jsFunction_createDelegator() {
+            return new Delegator(this);
+        }
 
-		public int jsFunction_methodWithParam(final MyHostObject param) {
-			return 123;
-		}
+        public int jsFunction_methodWithParam(final MyHostObject param) {
+            return 123;
+        }
 
-		public int jsFunction_foo() {
-			return 42;
-		}
+        public int jsFunction_foo() {
+            return 42;
+        }
 
-		public int jsGet_x() {
-			return x;
-		}
+        public int jsGet_x() {
+            return x;
+        }
 
-		public void jsSet_x(int s) {
-			this.x = s;
-		}
-	}
+        public void jsSet_x(int s) {
+            this.x = s;
+        }
+    }
 
-	@Test
-	public void delegatorAndHostObjectFunction() {
-		test("new MyHostObject().createDelegator().foo()", 42);
-	}
+    @Test
+    public void delegatorAndHostObjectFunction() {
+        test("new MyHostObject().createDelegator().foo()", 42);
+    }
 
-	@Test
-	public void delegatorAndHostObjectGetterSetter() {
-		test("var t = new MyHostObject().createDelegator(); t.x = 12; t.x;", 12);
-	}
+    @Test
+    public void delegatorAndHostObjectGetterSetter() {
+        test("var t = new MyHostObject().createDelegator(); t.x = 12; t.x;", 12);
+    }
 
-	@Test
-	public void delegatorAsParameter() {
-		test("var t = new MyHostObject().createDelegator(); t.methodWithParam(t);", 123);
-	}
+    @Test
+    public void delegatorAsParameter() {
+        test("var t = new MyHostObject().createDelegator(); t.methodWithParam(t);", 123);
+    }
 
-	@Test
-	public void delegatorAnd__defineGetter__() {
-		final String script = "var t = new MyHostObject().createDelegator();\n"
-			+ "t.__defineGetter__('foo', function(a) { return 'hello' });\n"
-		    + "t.foo;";
-		test(script, "hello");
-	}
+    @Test
+    public void delegatorAnd__defineGetter__() {
+        final String script = "var t = new MyHostObject().createDelegator();\n"
+            + "t.__defineGetter__('foo', function(a) { return 'hello' });\n"
+            + "t.foo;";
+        test(script, "hello");
+    }
 
     @Test
     public void strictEquals() {
@@ -83,22 +83,22 @@ public class DelegatorAndHostObjectTest {
         test("var o = new MyHostObject(); o.createDelegator() === o.createDelegator()", true);
     }
 
-	private static void test(final String script, final Object expected) {
-		final ContextAction action = new ContextAction() {
+    private static void test(final String script, final Object expected) {
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				try {
-					Scriptable scope = cx.initStandardObjects();
-					ScriptableObject.defineClass(scope, MyHostObject.class);
-					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-					assertEquals(expected, o);
-					return o;
-				} catch (final Exception e) {
-					throw new RuntimeException(e);
-				}
-			}
-		};
+            public Object run(final Context cx) {
+                try {
+                    Scriptable scope = cx.initStandardObjects();
+                    ScriptableObject.defineClass(scope, MyHostObject.class);
+                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
+                    assertEquals(expected, o);
+                    return o;
+                } catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
 
-		Utils.runWithAllOptimizationLevels(action);
-	}
+        Utils.runWithAllOptimizationLevels(action);
+    }
 }

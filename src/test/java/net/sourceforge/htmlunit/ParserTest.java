@@ -18,28 +18,28 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class ParserTest {
 
-	public static class MyHostObject extends ScriptableObject {
-		@Override
-		public String getClassName() {
-			return getClass().getSimpleName();
-		}
-	}
+    public static class MyHostObject extends ScriptableObject {
+        @Override
+        public String getClassName() {
+            return getClass().getSimpleName();
+        }
+    }
 
-	@Test
+    @Test
     public void normalFunctionDefinition() {
-	    final String script = "var o = new MyHostObject();\n"
-	            + "o.click = function() {\n"
-	            + "  output = 'hello';\n"
-	            + "};\n"
-	            + "var output;\n"
-	            + "o.click();\n"
-	            + "output";
+        final String script = "var o = new MyHostObject();\n"
+                + "o.click = function() {\n"
+                + "  output = 'hello';\n"
+                + "};\n"
+                + "var output;\n"
+                + "o.click();\n"
+                + "output";
         test(script, "hello");
     }
 
-	/**
-	 * Test <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
-	 */
+    /**
+     * Test <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
+     */
     @Test
     public void functionObjectMethod() {
         final String script = "var o = new MyHostObject();\n"
@@ -60,22 +60,22 @@ public class ParserTest {
         }
     }
 
-	private static void test(final String script, final Object expected) {
+    private static void test(final String script, final Object expected) {
         final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				try {
-					Scriptable scope = cx.initStandardObjects();
-					ScriptableObject.defineClass(scope, MyHostObject.class);
-					final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-					assertEquals(expected, o);
-					return o;
-				} catch (final Exception e) {
-					throw new RuntimeException(e);
-				}
-			}
-		};
+            public Object run(final Context cx) {
+                try {
+                    Scriptable scope = cx.initStandardObjects();
+                    ScriptableObject.defineClass(scope, MyHostObject.class);
+                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
+                    assertEquals(expected, o);
+                    return o;
+                } catch (final Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
 
-		Utils.runWithAllOptimizationLevels(action);
-	}
+        Utils.runWithAllOptimizationLevels(action);
+    }
 }

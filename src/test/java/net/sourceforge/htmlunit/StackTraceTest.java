@@ -16,37 +16,37 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public class StackTraceTest {
     
-	/**
-	 * As of CVS head on May, 11. 2009, stacktrace information is lost when a call to some
-	 * native function has been made.
-	 */
-	@Test
+    /**
+     * As of CVS head on May, 11. 2009, stacktrace information is lost when a call to some
+     * native function has been made.
+     */
+    @Test
     public void testFailureStackTrace() {
         final String lineSeparator = System.getProperty("line.separator");
         final String source1 = "function f2() { throw 'hello'; }; f2();";
         final String source2 = "function f2() { 'H'.toLowerCase(); throw 'hello'; }; f2();";
         
         runWithExpectedStackTrace(source1,
-                "	at test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // works
+                "\tat test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // works
         runWithExpectedStackTrace(source2,
-                "	at test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // fails
+                "\tat test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // fails
     }
 
-	private static void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {
+    private static void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {
         final ContextAction action = new ContextAction() {
             @Override
-        	public Object run(final Context cx) {
-        		final Scriptable scope = cx.initStandardObjects();
-        		try {
-        			cx.evaluateString(scope, _source, "test.js", 0, null);
-        		}
-        		catch (final JavaScriptException e) {
-        			assertEquals(_expectedStackTrace, e.getScriptStackTrace());
-        			return null;
-        		}
-        		throw new RuntimeException("Exception expected!");
-        	}
+            public Object run(final Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                try {
+                    cx.evaluateString(scope, _source, "test.js", 0, null);
+                }
+                catch (final JavaScriptException e) {
+                    assertEquals(_expectedStackTrace, e.getScriptStackTrace());
+                    return null;
+                }
+                throw new RuntimeException("Exception expected!");
+            }
         };
         Utils.runWithOptimizationLevel(action, -1);
-	}
+    }
  }

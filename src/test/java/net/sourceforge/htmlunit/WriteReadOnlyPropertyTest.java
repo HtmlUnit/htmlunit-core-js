@@ -21,73 +21,73 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class WriteReadOnlyPropertyTest {
 
-	/**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void testWriteReadOnly_accepted() throws Exception {
-		final Method readMethod = Foo.class.getMethod("getMyProp");
-		final Foo foo = new Foo("hello");
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testWriteReadOnly_accepted() throws Exception {
+        final Method readMethod = Foo.class.getMethod("getMyProp");
+        final Foo foo = new Foo("hello");
         foo.defineProperty("myProp", null, readMethod, null, ScriptableObject.EMPTY);
 
-		final String script = "foo.myProp = 123; foo.myProp";
+        final String script = "foo.myProp = 123; foo.myProp";
 
-		final ContextAction action = new ContextAction() {
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
+            public Object run(final Context cx) {
 
-				final ScriptableObject top = cx.initStandardObjects();
-				ScriptableObject.putProperty(top, "foo", foo);
-				
-				assertEquals(123, cx.evaluateString(top, script, "script", 0, null));
-				return null;
-			}
-		};
-		
-		final ContextFactory contextFactory = new ContextFactory();
-		contextFactory.call(action);
-	}
-	
-	/** @see https://sourceforge.net/p/htmlunit/bugs/1633/ */
-	@Test
-	public void testWriteReadOnlyNoCorruption() throws Exception {
-		final String script = ""
-			+ "var proto = Object.create(Object.prototype, \n"
-			+ "    {myProp: {get: function() { return 'hello'; }}\n"
-			+ "});\n"
-			+ "var o1 = Object.create(proto), o2 = Object.create(proto);\n"
-			+ "o2.myProp = 'bar'; result = o1.myProp;";
+                final ScriptableObject top = cx.initStandardObjects();
+                ScriptableObject.putProperty(top, "foo", foo);
+                
+                assertEquals(123, cx.evaluateString(top, script, "script", 0, null));
+                return null;
+            }
+        };
+        
+        final ContextFactory contextFactory = new ContextFactory();
+        contextFactory.call(action);
+    }
+    
+    /** @see https://sourceforge.net/p/htmlunit/bugs/1633/ */
+    @Test
+    public void testWriteReadOnlyNoCorruption() throws Exception {
+        final String script = ""
+            + "var proto = Object.create(Object.prototype, \n"
+            + "    {myProp: {get: function() { return 'hello'; }}\n"
+            + "});\n"
+            + "var o1 = Object.create(proto), o2 = Object.create(proto);\n"
+            + "o2.myProp = 'bar'; result = o1.myProp;";
 
-		final ContextAction action = new ContextAction() {
+        final ContextAction action = new ContextAction() {
             @Override
-			public Object run(final Context cx) {
-				final ScriptableObject top = cx.initStandardObjects();
-				Object result = cx.evaluateString(top, script, "script", 0, null);
-				assertEquals("Prototype was corrupted", "hello", result);
-				return null;
-			}
-		};
+            public Object run(final Context cx) {
+                final ScriptableObject top = cx.initStandardObjects();
+                Object result = cx.evaluateString(top, script, "script", 0, null);
+                assertEquals("Prototype was corrupted", "hello", result);
+                return null;
+            }
+        };
 
-		final ContextFactory contextFactory = new ContextFactory();
-		contextFactory.call(action);
-	}
+        final ContextFactory contextFactory = new ContextFactory();
+        contextFactory.call(action);
+    }
 
-	/**
-	 * Simple utility allowing to better see the concerned scope while debugging
-	 */
-	static class Foo extends ScriptableObject {
-		final String prop_;
-		Foo(final String label) {
-			prop_ = label;
-		}
+    /**
+     * Simple utility allowing to better see the concerned scope while debugging
+     */
+    static class Foo extends ScriptableObject {
+        final String prop_;
+        Foo(final String label) {
+            prop_ = label;
+        }
 
-		@Override
-		public String getClassName() {
-			return "Foo";
-		}
-		
-		public String getMyProp() {
-			return prop_;
-		}
-	};
+        @Override
+        public String getClassName() {
+            return "Foo";
+        }
+        
+        public String getMyProp() {
+            return prop_;
+        }
+    };
 }

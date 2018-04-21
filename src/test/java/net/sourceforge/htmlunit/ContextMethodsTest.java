@@ -22,45 +22,45 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  */
 public class ContextMethodsTest {
-	
-	/**
-	 * When {@link Context#compileString(String, String, int, Object)} is protected and not final,
-	 * we can capture code passed to eval.
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void captureEvalScript() throws Exception {
-		final List<String> compiled = new ArrayList<>();
-		final ContextFactory cf = new ContextFactory() {
-			@Override
-			protected Context makeContext() {
-				return new Context(this)
-				{
-					@Override
-					protected Script compileString(String source, Evaluator compiler,
-							ErrorReporter compilationErrorReporter, String sourceName,
-							int lineno, Object securityDomain) {
-						compiled.add(source);
-						return super.compileString(source, compiler, compilationErrorReporter,
-								sourceName, lineno, securityDomain);
-					}
-				};
-			}
-		};
-		
-		final String source = "eval('1 + 2')";
-		
-		final ContextAction action = new ContextAction() {
+    
+    /**
+     * When {@link Context#compileString(String, String, int, Object)} is protected and not final,
+     * we can capture code passed to eval.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void captureEvalScript() throws Exception {
+        final List<String> compiled = new ArrayList<>();
+        final ContextFactory cf = new ContextFactory() {
             @Override
-			public Object run(Context cx) {
-				final Scriptable scope = cx.initStandardObjects();
-				final Script script = cx.compileString(source, "", 1, (Object) null);
-				return script.exec(cx, scope);
-			};
-		};
-		cf.call(action);
-		
-		final String[] expected = { "eval('1 + 2')", "1 + 2" };
-		assertEquals(Arrays.asList(expected), compiled);
-	}
+            protected Context makeContext() {
+                return new Context(this)
+                {
+                    @Override
+                    protected Script compileString(String source, Evaluator compiler,
+                            ErrorReporter compilationErrorReporter, String sourceName,
+                            int lineno, Object securityDomain) {
+                        compiled.add(source);
+                        return super.compileString(source, compiler, compilationErrorReporter,
+                                sourceName, lineno, securityDomain);
+                    }
+                };
+            }
+        };
+        
+        final String source = "eval('1 + 2')";
+        
+        final ContextAction action = new ContextAction() {
+            @Override
+            public Object run(Context cx) {
+                final Scriptable scope = cx.initStandardObjects();
+                final Script script = cx.compileString(source, "", 1, (Object) null);
+                return script.exec(cx, scope);
+            };
+        };
+        cf.call(action);
+        
+        final String[] expected = { "eval('1 + 2')", "1 + 2" };
+        assertEquals(Arrays.asList(expected), compiled);
+    }
 }

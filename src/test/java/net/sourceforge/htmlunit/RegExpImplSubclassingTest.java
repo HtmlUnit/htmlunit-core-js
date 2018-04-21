@@ -67,15 +67,15 @@ public class RegExpImplSubclassingTest {
     }
     
     
-	/**
-	 * @throws Exception if the test fails
-	 */
-	@Test
-	public void testChangeAttributesFromSubclass() throws Exception {
-		final MyTestRegExpImplSubclass myTestRegExpImplSubclass = new MyTestRegExpImplSubclass();
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testChangeAttributesFromSubclass() throws Exception {
+        final MyTestRegExpImplSubclass myTestRegExpImplSubclass = new MyTestRegExpImplSubclass();
 
-		myTestRegExpImplSubclass.setInput("testInput");
-		assertEquals("testInput", myTestRegExpImplSubclass.getInput());
+        myTestRegExpImplSubclass.setInput("testInput");
+        assertEquals("testInput", myTestRegExpImplSubclass.getInput());
 
         myTestRegExpImplSubclass.setMultiline(true);
         assertTrue(myTestRegExpImplSubclass.isMultiline());
@@ -94,5 +94,5 @@ public class RegExpImplSubclassingTest {
 
         myTestRegExpImplSubclass.setRightContext(null);
         assertEquals(null, myTestRegExpImplSubclass.getRightContext());
-	}
+    }
 }

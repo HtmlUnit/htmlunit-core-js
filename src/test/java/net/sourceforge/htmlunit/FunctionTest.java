@@ -17,13 +17,13 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public class FunctionTest {
     
-	/**
-	 * Test for bug #600479
-	 * https://bugzilla.mozilla.org/show_bug.cgi?id=600479
-	 * Syntax of function built from Function's constructor string parameter was not correct
-	 * when this string contained "//".  
-	 */
-	@Test
+    /**
+     * Test for bug #600479
+     * https://bugzilla.mozilla.org/show_bug.cgi?id=600479
+     * Syntax of function built from Function's constructor string parameter was not correct
+     * when this string contained "//".  
+     */
+    @Test
     public void testFunctionWithSlashSlash() {
         assertEvaluates(true, "new Function('return true//;').call()");
     }

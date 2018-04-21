@@ -27,7 +27,7 @@ public class PrimitiveTypeScopeResolutionTest {
             + "}";
 
         String str1 = "String.prototype.foo = function() { return 'from 1'}; scope2.f()";
-    	testWithTwoScopes(str1, str2);
+        testWithTwoScopes(str1, str2);
     }
     
     /**
@@ -41,43 +41,43 @@ public class PrimitiveTypeScopeResolutionTest {
             + "}";
 
         String str1 = "String.prototype.foo = 'from 1'; scope2.f()";
-    	testWithTwoScopes(str1, str2);
+        testWithTwoScopes(str1, str2);
     }
 
     private static void testWithTwoScopes(final String scriptScope1, final String scriptScope2) {
-    	final ContextAction action = new ContextAction()
-    	{
+        final ContextAction action = new ContextAction()
+        {
             @Override
-    		public Object run(final Context cx)
-    		{
-    	        final Scriptable scope1 = cx.initStandardObjects(new MySimpleScriptableObject("scope1"));
-    	        final Scriptable scope2 = cx.initStandardObjects(new MySimpleScriptableObject("scope2"));
-    	        cx.evaluateString(scope2, scriptScope2, "source2", 1, null);
+            public Object run(final Context cx)
+            {
+                final Scriptable scope1 = cx.initStandardObjects(new MySimpleScriptableObject("scope1"));
+                final Scriptable scope2 = cx.initStandardObjects(new MySimpleScriptableObject("scope2"));
+                cx.evaluateString(scope2, scriptScope2, "source2", 1, null);
 
-    	        scope1.put("scope2", scope1, scope2);
+                scope1.put("scope2", scope1, scope2);
 
-    	        return cx.evaluateString(scope1, scriptScope1, "source1", 1, null);
-    		}
-    	};
-    	Utils.runWithAllOptimizationLevels(action);
+                return cx.evaluateString(scope1, scriptScope1, "source1", 1, null);
+            }
+        };
+        Utils.runWithAllOptimizationLevels(action);
     }
 
-	/**
-	 * Simple utility allowing to better see the concerned scope while debugging
-	 */
-	static class MySimpleScriptableObject extends ScriptableObject {
-		private String label_;
-		MySimpleScriptableObject(String label) {
-			label_ = label;
-		}
-		@Override
-		public String getClassName() {
-			return "MySimpleScriptableObject";
-		}
-		
-		@Override
-		public String toString() {
-			return label_;
-		}
-	};
+    /**
+     * Simple utility allowing to better see the concerned scope while debugging
+     */
+    static class MySimpleScriptableObject extends ScriptableObject {
+        private String label_;
+        MySimpleScriptableObject(String label) {
+            label_ = label;
+        }
+        @Override
+        public String getClassName() {
+            return "MySimpleScriptableObject";
+        }
+        
+        @Override
+        public String toString() {
+            return label_;
+        }
+    };
 }
