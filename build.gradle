@@ -63,6 +63,10 @@ task generateSources() {
 compileJava.dependsOn generateSources
 
 
+javadoc {
+    options.addStringOption('Xdoclint:html', '-quiet')
+}
+
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
@@ -76,7 +80,7 @@ task sourcesJar(type: Jar) {
 
 
 artifacts {
-    archives sourcesJar
+    archives sourcesJar, javadocJar
 }
 
 
