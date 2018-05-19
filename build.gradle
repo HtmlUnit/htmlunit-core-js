@@ -10,12 +10,12 @@ apply plugin: 'signing'
 
 
 jar {
-    version = '2.31-SNAPSHOT'
+    version = '2.31'
 }
 
 group = "net.sourceforge.htmlunit"
 archivesBaseName = "htmlunit-core-js"
-version = "2.31-SNAPSHOT"
+version = "2.31"
 
 sourceSets {
     main {
