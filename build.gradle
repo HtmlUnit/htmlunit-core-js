@@ -9,13 +9,27 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 
-jar {
-    version = '2.31'
-}
-
 group = "net.sourceforge.htmlunit"
 archivesBaseName = "htmlunit-core-js"
-version = "2.31"
+version = "2.32-SNAPSHOT"
+
+
+jar {
+    manifest {
+        attributes([
+                    'Application-Name': archivesBaseName,
+                    'Version': project.version,
+                    'Date': new Date().format("yyyy-MM-dd HH-mm-ss z")
+                    ], 'Application')
+        attributes([
+                    'Java-Runtime': System.getProperty('java.runtime.name'),
+                    'Java-Version': System.getProperty('java.runtime.version'),
+                    'Java-Target': targetCompatibility,
+                    'OS-Name': System.getProperty('os.name'),
+                    'OS-Version': System.getProperty('os.version')
+                    ], 'Build')
+    }
+}
 
 sourceSets {
     main {
