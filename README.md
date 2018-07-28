@@ -61,7 +61,7 @@ This part is intended for committer who are packaging a release.
 * Build and deploy the artifacts 
 
 ```
-   gradlew clean uploadArchives
+   gradlew clean test uploadArchives -i
 ```
 
 * Go to [Sonatype staging repositories](https://oss.sonatype.org/index.html#stagingRepositories) and process the deploy
@@ -71,12 +71,11 @@ This part is intended for committer who are packaging a release.
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-core-js
     * click Releases > Draft new release
-    * fill the tag and title field with the release number (e.g. 1.1.0)
+    * fill the tag and title field with the release number (e.g. 2.32)
     * write some notes about the release
     * and publish the release 
-
-* Update the version number in pom.xml to start next snapshot development
-* Update the htmlunit pom to use the new release
+    * Update the version number in build.gradle to start next snapshot development
+    * Update the htmlunit pom to use the new release
 
 ## Authors
 
