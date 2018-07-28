@@ -52,11 +52,10 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 This part is intended for committer who are packaging a release.
 
-* Check all your files are checked in
-* Execute "gradlew clean test" to be sure all tests are passing
-* Update the version number in pom.xml
-* Execute "gradlew clean test" to be sure all tests are passing
-* Commit the changes
+    * Check all your files are checked in
+    * Update the version number in build.gradle
+    * Execute "gradlew clean test" to be sure all tests are passing
+    * Commit the changes
 
 
 * Build and deploy the artifacts 
