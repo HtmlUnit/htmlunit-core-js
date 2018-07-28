@@ -81,8 +81,8 @@ This part is intended for committer who are packaging a release.
 
 ## Authors
 
-* **RBRi**
-* all the contributors to CSSParser
+* **Mozilla Rhino Team**
+* **HtmlUnit Team**
 
 ## License
 
@@ -90,4 +90,4 @@ This project is licensed under the Apache 2.0 License
 
 ## Acknowledgments
 
-Many thanks to all of you contributing to HtmlUnit/CSSParser/Rhino in the past.
+Many thanks to all of you contributing to HtmlUnit/Rhino in the past.
