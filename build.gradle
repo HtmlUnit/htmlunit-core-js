@@ -11,7 +11,7 @@ apply plugin: 'signing'
 
 group = "net.sourceforge.htmlunit"
 archivesBaseName = "htmlunit-core-js"
-version = "2.33"
+version = "2.34-SNAPSHOT"
 
 
 jar {
@@ -70,7 +70,7 @@ task generateSources() {
         delete('target/rhinoDiff.txt')
         exec {
             workingDir '../htmlunit-rhino-fork'
-            commandLine 'cmd', '/c', '"git.exe" diff rhino/master..HEAD >> ..\\htmlunit-core-js\\target\\rhinoDiff.txt'
+            commandLine 'cmd', '/c', '"git.exe" diff upstream/master..HEAD >> ..\\htmlunit-core-js\\target\\rhinoDiff.txt'
         }
     }
 }
