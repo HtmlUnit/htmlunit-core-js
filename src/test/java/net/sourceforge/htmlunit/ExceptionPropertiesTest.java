@@ -61,9 +61,8 @@ public class ExceptionPropertiesTest {
 
     @Test
     public void stack() {
-        testIt("try { null.method() } catch (e) { e.stack }", "@myScript.js:1" + LS);
-        final String expectedStack = "f()@myScript.js:2" + LS
-            + "@myScript.js:4" + LS;
+        testIt("try { null.method() } catch (e) { e.stack }", "\tat myScript.js:1" + LS);
+        final String expectedStack = "\tat myScript.js:2 (f)" + LS + "\tat myScript.js:4" + LS;
         testIt("function f() {\n null.method(); \n}\n try { f() } catch (e) { e.stack }", expectedStack);
     }
 
@@ -71,6 +70,8 @@ public class ExceptionPropertiesTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
+                cx.setLanguageVersion(Context.VERSION_ES6);
+
                 try {
                     final ScriptableObject scope = cx.initStandardObjects();
                     final Object o = cx.evaluateString(scope, script,
