@@ -7,6 +7,9 @@ and "htmlunit-core-js" which has the test cases and packaging.
 
 Notice that "org.mozilla.*" is renamed to "net.sourceforge.htmlunit.corejs.*"
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-core-js)
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
