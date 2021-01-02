@@ -48,8 +48,8 @@ gradlew jar
 
 ## Contributing
 
-TODO
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Pull Requests and and all other Community Contributions are essential for open source software.
+Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
 
 ## Deployment and Versioning
 
