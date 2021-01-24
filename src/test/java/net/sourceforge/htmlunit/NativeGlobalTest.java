@@ -34,7 +34,7 @@ public class NativeGlobalTest {
             @Override
             public Object run(final Context cx) {
                 cx.setLanguageVersion(Context.VERSION_ES6);
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 Object result = cx.evaluateString(scope, src, "test.js", 0, null);
                 assertEquals(expected, result);
                 return null;

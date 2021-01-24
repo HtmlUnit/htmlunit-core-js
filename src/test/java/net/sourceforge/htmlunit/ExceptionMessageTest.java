@@ -43,7 +43,7 @@ public class ExceptionMessageTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
 
                     cx.evaluateString(scope, script, "test_script", 1, null);
                     throw new RuntimeException("Should have failed!");
@@ -80,14 +80,14 @@ public class ExceptionMessageTest {
                 return super.hasFeature(cx, featureIndex);
             }
         };
-        
+
         final String script = "o.readonlyProp = 123";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     final MyHostObject prototype = new MyHostObject();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Method readMethod = MyHostObject.class.getMethod("jsxGet_x");

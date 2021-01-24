@@ -136,7 +136,7 @@ public class ArgumentsTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals(expectedResult, result);
                 return null;
@@ -177,7 +177,7 @@ public class ArgumentsTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals(expected, o);
                     return o;

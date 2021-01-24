@@ -17,7 +17,7 @@ public class Utilities {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 return cx.evaluateString(scope, script, "myScript.js", 1, null);
             }
         };
@@ -32,7 +32,7 @@ public class Utilities {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 return cx.evaluateString(scope, script, "myScript.js", 1, null);
             }
         };

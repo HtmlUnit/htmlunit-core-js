@@ -17,12 +17,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=481152">Bug 481152 - 
- * Open Context class for extension</a>  
+ * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=481152">Bug 481152 -
+ * Open Context class for extension</a>
  * @author Marc Guillemot
  */
 public class ContextMethodsTest {
-    
+
     /**
      * When {@link Context#compileString(String, String, int, Object)} is protected and not final,
      * we can capture code passed to eval.
@@ -47,19 +47,19 @@ public class ContextMethodsTest {
                 };
             }
         };
-        
+
         final String source = "eval('1 + 2')";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Script script = cx.compileString(source, "", 1, (Object) null);
                 return script.exec(cx, scope);
             };
         };
         cf.call(action);
-        
+
         final String[] expected = { "eval('1 + 2')", "1 + 2" };
         assertEquals(Arrays.asList(expected), compiled);
     }

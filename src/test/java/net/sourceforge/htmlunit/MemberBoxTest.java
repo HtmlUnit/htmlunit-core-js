@@ -26,7 +26,7 @@ public class MemberBoxTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
 
                     cx.evaluateString(scope, script, "test_script", 1, null);

@@ -14,7 +14,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * Unit tests for <a
  * href="https://bugzilla.mozilla.org/show_bug.cgi?id=539875">Bug 539875 -
  * Delegator incompatible with host objects with functions</a>.
- * 
+ *
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
@@ -88,7 +88,7 @@ public class DelegatorAndHostObjectTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals(expected, o);

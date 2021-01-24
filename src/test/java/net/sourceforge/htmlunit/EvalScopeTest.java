@@ -61,11 +61,11 @@ public class EvalScopeTest {
 
                     final MyHostObject host1 = new MyHostObject(1);
                     host1.setPrototype(prototype);
-                    cx.initStandardObjects(host1);
+                    cx.initSafeStandardObjects(host1);
 
                     final MyHostObject host2 = new MyHostObject(2);
                     host2.setPrototype(prototype);
-                    cx.initStandardObjects(host2);
+                    cx.initSafeStandardObjects(host2);
 
                     ScriptableObject.defineProperty(host1, "host1", host1, ScriptableObject.EMPTY);
                     ScriptableObject.defineProperty(host1, "host2", host2, ScriptableObject.EMPTY);

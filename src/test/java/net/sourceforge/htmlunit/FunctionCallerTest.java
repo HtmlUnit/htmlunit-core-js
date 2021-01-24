@@ -29,7 +29,7 @@ public class FunctionCallerTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals(Boolean.TRUE, result);
                 return null;
@@ -56,7 +56,7 @@ public class FunctionCallerTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("", result);
                 return null;
@@ -83,12 +83,12 @@ public class FunctionCallerTest {
             + "  if (c != f) throw 'got: ' + c;\n"
             + "}\n"
             + "f();\n";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                
+                final Scriptable scope = cx.initSafeStandardObjects();
+
                 cx.evaluateString(scope, script, "test.js", 1, null);
 
                 return null;
@@ -116,12 +116,12 @@ public class FunctionCallerTest {
             + "var output = '';\n"
             + "f();\n"
             + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                
+                final Scriptable scope = cx.initSafeStandardObjects();
+
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("2-2", result);
                 return null;
@@ -154,8 +154,8 @@ public class FunctionCallerTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                
+                final Scriptable scope = cx.initSafeStandardObjects();
+
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("2-hello-2", result);
                 return null;
@@ -180,12 +180,12 @@ public class FunctionCallerTest {
             + "var output = '';\n"
             + "g();\n"
             + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
-                
+                final Scriptable scope = cx.initSafeStandardObjects();
+
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("true, true", result);
                 return null;

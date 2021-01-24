@@ -16,12 +16,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  */
 public class FunctionTest {
-    
+
     /**
      * Test for bug #600479
      * https://bugzilla.mozilla.org/show_bug.cgi?id=600479
      * Syntax of function built from Function's constructor string parameter was not correct
-     * when this string contained "//".  
+     * when this string contained "//".
      */
     @Test
     public void testFunctionWithSlashSlash() {
@@ -32,7 +32,7 @@ public class FunctionTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object rep = cx.evaluateString(scope, source, "test.js", 0, null);
                 assertEquals(expected, rep);
                 return null;

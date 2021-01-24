@@ -17,7 +17,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 /**
  * Test setting ReadOnly property behavior.
  *
- * The same web browser (e.g. FF) may allow setting read-only property, 
+ * The same web browser (e.g. FF) may allow setting read-only property,
  * ignores setting the read-only property, or even throw an exception.
  *
  * So, it is the ScriptableObject itself to decide which action according to the property name
@@ -33,12 +33,12 @@ public class SetReadOnlyPropertyTest {
     @Test
     public void onlyGetterError() {
         final String script = "o.readonlyProp = 123;o.readonlyProp";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     final MyHostObject prototype = new MyHostObject();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Method readMethod = MyHostObject.class.getMethod("jsxGet_x");

@@ -9,8 +9,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=374918">Bug 374918 - 
- * String primitive prototype wrongly resolved when used with many top scopes</a>  
+ * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=374918">Bug 374918 -
+ * String primitive prototype wrongly resolved when used with many top scopes</a>
  * @author Marc Guillemot
  */
 @RunWith(RhinoPatchedRunner.class)
@@ -29,7 +29,7 @@ public class PrimitiveTypeScopeResolutionTest {
         String str1 = "String.prototype.foo = function() { return 'from 1'}; scope2.f()";
         testWithTwoScopes(str1, str2);
     }
-    
+
     /**
      */
     @Test
@@ -50,8 +50,8 @@ public class PrimitiveTypeScopeResolutionTest {
             @Override
             public Object run(final Context cx)
             {
-                final Scriptable scope1 = cx.initStandardObjects(new MySimpleScriptableObject("scope1"));
-                final Scriptable scope2 = cx.initStandardObjects(new MySimpleScriptableObject("scope2"));
+                final Scriptable scope1 = cx.initSafeStandardObjects(new MySimpleScriptableObject("scope1"));
+                final Scriptable scope2 = cx.initSafeStandardObjects(new MySimpleScriptableObject("scope2"));
                 cx.evaluateString(scope2, scriptScope2, "source2", 1, null);
 
                 scope1.put("scope2", scope1, scope2);
@@ -74,7 +74,7 @@ public class PrimitiveTypeScopeResolutionTest {
         public String getClassName() {
             return "MySimpleScriptableObject";
         }
-        
+
         @Override
         public String toString() {
             return label_;

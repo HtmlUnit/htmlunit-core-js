@@ -28,11 +28,11 @@ public class NativeObjectTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("1", result);
                 return null;
@@ -54,11 +54,11 @@ public class NativeObjectTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("undefined", result);
                 return null;

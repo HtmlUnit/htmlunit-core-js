@@ -34,11 +34,11 @@ public class NativeErrorTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("true", result);
                 return null;
@@ -67,11 +67,11 @@ public class NativeErrorTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals("string", result);
                 return null;
@@ -110,11 +110,11 @@ public class NativeErrorTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        
+
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
                 assertEquals(expected, result);
                 return null;

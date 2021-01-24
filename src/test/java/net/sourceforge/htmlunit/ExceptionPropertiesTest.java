@@ -73,7 +73,7 @@ public class ExceptionPropertiesTest {
                 cx.setLanguageVersion(Context.VERSION_ES6);
 
                 try {
-                    final ScriptableObject scope = cx.initStandardObjects();
+                    final ScriptableObject scope = cx.initSafeStandardObjects();
                     final Object o = cx.evaluateString(scope, script,
                             "myScript.js", 1, null);
                     assertEquals(expected, o);

@@ -36,18 +36,18 @@ public class WriteReadOnlyPropertyTest {
             @Override
             public Object run(final Context cx) {
 
-                final ScriptableObject top = cx.initStandardObjects();
+                final ScriptableObject top = cx.initSafeStandardObjects();
                 ScriptableObject.putProperty(top, "foo", foo);
-                
+
                 assertEquals(123, cx.evaluateString(top, script, "script", 0, null));
                 return null;
             }
         };
-        
+
         final ContextFactory contextFactory = new ContextFactory();
         contextFactory.call(action);
     }
-    
+
     /** @see https://sourceforge.net/p/htmlunit/bugs/1633/ */
     @Test
     public void testWriteReadOnlyNoCorruption() throws Exception {
@@ -61,7 +61,7 @@ public class WriteReadOnlyPropertyTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final ScriptableObject top = cx.initStandardObjects();
+                final ScriptableObject top = cx.initSafeStandardObjects();
                 Object result = cx.evaluateString(top, script, "script", 0, null);
                 assertEquals("Prototype was corrupted", "hello", result);
                 return null;
@@ -85,7 +85,7 @@ public class WriteReadOnlyPropertyTest {
         public String getClassName() {
             return "Foo";
         }
-        
+
         public String getMyProp() {
             return prop_;
         }

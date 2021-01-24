@@ -27,7 +27,7 @@ public class HostExceptionsTest {
     }
 
     /**
-     * If configured, JS catch block should not catch Java exception 
+     * If configured, JS catch block should not catch Java exception
      */
     @Test
     public void testDontCatchJavaException_inGetter() throws Exception {
@@ -41,7 +41,7 @@ public class HostExceptionsTest {
     }
 
     /**
-     * If configured, JS catch block should not catch Java exception 
+     * If configured, JS catch block should not catch Java exception
      */
     @Test
     public void testDontCatchJavaException_inFunction() throws Exception {
@@ -61,14 +61,14 @@ public class HostExceptionsTest {
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initStandardObjects();
+                final Scriptable scope = cx.initSafeStandardObjects();
                 try {
                     ScriptableObject.defineClass(scope, MyScriptable.class);
                 }
                 catch (final Exception e) {
                     throw new RuntimeException();
                 }
-                
+
                 cx.evaluateString(scope, script, "test.js", 0, null);
 
                 return null;
@@ -83,7 +83,7 @@ public class HostExceptionsTest {
         public String getClassName() {
             return "MyScriptable";
         }
-        
+
         public String jsGet_willThrowJavaException() {
             throw javaException;
         }
@@ -91,7 +91,7 @@ public class HostExceptionsTest {
         public String jsGet_willThrowJSException() {
             throw Context.reportRuntimeError("this is a JS exception");
         }
-        
+
         public void jsFunction_throwJavaException() {
             throw javaException;
         }

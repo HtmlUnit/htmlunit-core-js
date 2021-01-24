@@ -13,7 +13,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Unit tests for {@link org.mozilla.javascript.Parser}
- * 
+ *
  * @author Ahmed Ashour
  */
 public class ParserTest {
@@ -55,7 +55,7 @@ public class ParserTest {
         }
         catch(final RuntimeException e) {
             if (!(e.getCause() instanceof EvaluatorException)) {
-               throw e; 
+               throw e;
             }
         }
     }
@@ -65,7 +65,7 @@ public class ParserTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals(expected, o);

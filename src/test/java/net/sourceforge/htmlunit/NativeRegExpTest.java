@@ -49,7 +49,7 @@ public class NativeRegExpTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals(expected, o);
                     return o;

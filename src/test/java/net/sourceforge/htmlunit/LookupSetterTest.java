@@ -10,7 +10,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 public class LookupSetterTest {
-    private final String defineSetterAndGetterX = 
+    private final String defineSetterAndGetterX =
         "Foo.__defineSetter__('x', function() {}); \n"
         + "Foo.__defineGetter__('x', function() {return 'hello' });\n";
 
@@ -42,7 +42,7 @@ public class LookupSetterTest {
         final ContextAction action = new ContextActionImpl() {
             @Override
             protected Object doRun(Context cx) throws Exception {
-                final Scriptable scope = cx.initStandardObjects(new TopScope());
+                final Scriptable scope = cx.initSafeStandardObjects(new TopScope());
                 ScriptableObject.defineClass(scope, Foo.class);
                 cx.evaluateString(scope, defineSetterAndGetterX, "initX", 1, null);
                 Object result = String.valueOf(cx.evaluateString(scope, src, "test", 1, null));

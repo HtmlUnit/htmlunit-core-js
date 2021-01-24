@@ -29,7 +29,7 @@ public class FunctionNullSetTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    final Scriptable scope = cx.initStandardObjects();
+                    final Scriptable scope = cx.initSafeStandardObjects();
                     final MyHostObject prototype = new MyHostObject();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Method getterMethod = MyHostObject.class.getMethod("jsxGet_onclick");

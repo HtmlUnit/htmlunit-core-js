@@ -11,7 +11,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Unit tests for {@link ScriptableObject}
- * 
+ *
  * @author Ahmed Ashour
  */
 public class ScriptableObjectTest {
@@ -43,7 +43,7 @@ public class ScriptableObjectTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals("function", o);

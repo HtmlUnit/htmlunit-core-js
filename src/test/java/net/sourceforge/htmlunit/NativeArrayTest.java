@@ -45,7 +45,7 @@ public class NativeArrayTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     return o;

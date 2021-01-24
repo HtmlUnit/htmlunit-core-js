@@ -11,7 +11,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Unit tests for {@link org.mozilla.javascript.ScriptRuntime}
- * 
+ *
  * @author Ahmed Ashour
  */
 public class ScriptRuntimeTest {
@@ -92,7 +92,7 @@ public class ScriptRuntimeTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals(expected, o);
                     return o;
@@ -131,7 +131,7 @@ public class ScriptRuntimeTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initStandardObjects();
+                    Scriptable scope = cx.initSafeStandardObjects();
                     final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
                     assertEquals(expected, o);
                     return o;
@@ -149,7 +149,7 @@ public class ScriptRuntimeTest {
      */
     @Test
     public void apply() throws Exception {
-        final String script = 
+        final String script =
                   "  var myObject = {'length': 2, '0': 'eat', '1': 'bananas'};\n"
                 + "  function test() {\n"
                 + "    test2.apply(null, myObject);\n"
