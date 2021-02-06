@@ -7,6 +7,8 @@ and "htmlunit-core-js" which has the test cases and packaging.
 
 Notice that "org.mozilla.*" is renamed to "net.sourceforge.htmlunit.corejs.*"
 
+:heart: [Sponsor](https://github.com/sponsors/rbri)
+
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-core-js)
 
 
