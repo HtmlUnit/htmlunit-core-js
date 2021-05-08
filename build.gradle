@@ -35,9 +35,11 @@ sourceSets {
     main {
         java {
             srcDirs 'target/repackaged-rhino/src'
+            exclude '**/*.properties'
         }
         resources {
             srcDirs 'target/repackaged-rhino/src'
+            include '**/*.properties'
         }
     }
 }
