@@ -86,20 +86,6 @@ public class NativeErrorTest {
      */
     @Test
     public void stackNewErrorWithoutThrow() throws Exception {
-        stackNewErrorWithoutThrow(true, "string");
-        stackNewErrorWithoutThrow(false, "undefined");
-    }
-
-    private static void stackNewErrorWithoutThrow(final boolean hasFeature, final String expected) throws Exception {
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (Context.FEATURE_HTMLUNIT_ERROR_STACK == featureIndex) {
-                    return hasFeature;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
         final String script = "function test() {\n"
                 + "  var e = new Error();\n"
                 + "  if (e.stack)\n"
@@ -116,12 +102,12 @@ public class NativeErrorTest {
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
                 final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals(expected, result);
+                assertEquals("string", result);
                 return null;
             }
         };
 
-        Utils.runWithAllOptimizationLevels(cf, action);
+        Utils.runWithAllOptimizationLevels(action);
     }
 
 }
