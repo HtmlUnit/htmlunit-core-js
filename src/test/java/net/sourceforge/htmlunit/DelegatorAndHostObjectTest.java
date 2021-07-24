@@ -66,14 +66,6 @@ public class DelegatorAndHostObjectTest {
     }
 
     @Test
-    public void delegatorAnd__defineGetter__() {
-        final String script = "var t = new MyHostObject().createDelegator();\n"
-            + "t.__defineGetter__('foo', function(a) { return 'hello' });\n"
-            + "t.foo;";
-        test(script, "hello");
-    }
-
-    @Test
     public void strictEquals() {
         test("var o = new MyHostObject(); o.createDelegator() === o", true);
     }
