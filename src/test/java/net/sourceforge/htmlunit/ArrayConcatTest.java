@@ -1,6 +1,6 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=477604">Bug 477604 - 

@@ -1,8 +1,9 @@
 package net.sourceforge.htmlunit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -50,13 +51,13 @@ public class FunctionTest {
         assertEvaluates("undefined", script);
     }
 
-    @Test(expected = EcmaError.class)
+    @Test
     public void varUsedLater() {
         String script = "var output = '';\n"
                 + "output += t;\n"
                 + "!function t() {output += 'hi';}();\n"
                 + "output";
-        assertEvaluates("undefined", script);
+        assertThrows(EcmaError.class, () -> assertEvaluates("undefined", script));
     }
 
     @Test

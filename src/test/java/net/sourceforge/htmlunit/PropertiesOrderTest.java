@@ -1,6 +1,6 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test that Object properties are returned in the creation order.

@@ -1,9 +1,9 @@
 package net.sourceforge.htmlunit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
@@ -13,9 +13,9 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
  * We have to update this fields from our subclass.
  * Also tests that the class SubString is public. This
  * is needed to fill the fields with the right values.
- * 
+ *
  * https://bugzilla.mozilla.org/show_bug.cgi?id=598706
- * 
+ *
  * @author Ronald Brill
  */
 public class RegExpImplSubclassingTest {
@@ -65,8 +65,8 @@ public class RegExpImplSubclassingTest {
             this.rightContext = rightContext;
         }
     }
-    
-    
+
+
     /**
      * @throws Exception if the test fails
      */

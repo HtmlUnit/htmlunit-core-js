@@ -1,6 +1,6 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import net.sourceforge.htmlunit.DelegatorAndHostObjectTest.MyHostObject;
 import net.sourceforge.htmlunit.corejs.javascript.Context;

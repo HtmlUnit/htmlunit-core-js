@@ -1,7 +1,6 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -13,7 +12,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * String primitive prototype wrongly resolved when used with many top scopes</a>
  * @author Marc Guillemot
  */
-@RunWith(RhinoPatchedRunner.class)
 public class PrimitiveTypeScopeResolutionTest {
 
     /**

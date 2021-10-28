@@ -3,7 +3,7 @@ package net.sourceforge.htmlunit;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 
-public abstract class ContextActionImpl implements ContextAction {
+public abstract class ContextActionImpl implements ContextAction<Object> {
     @Override
     public Object run(final Context cx) {
         try {
@@ -14,5 +14,6 @@ public abstract class ContextActionImpl implements ContextAction {
             throw new RuntimeException(e);
         }
     }
+
     protected abstract Object doRun(final Context cx) throws Exception;
 }

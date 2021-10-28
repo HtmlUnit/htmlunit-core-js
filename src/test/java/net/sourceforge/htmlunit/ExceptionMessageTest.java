@@ -1,12 +1,12 @@
 package net.sourceforge.htmlunit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -22,7 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class ExceptionMessageTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() throws Exception {
         Locale.setDefault(Locale.ENGLISH); // to be sure that error messages are in English
     }

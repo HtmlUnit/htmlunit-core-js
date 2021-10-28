@@ -1,6 +1,6 @@
 package net.sourceforge.htmlunit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test that regexp like "[/]" are parsed correctly.
