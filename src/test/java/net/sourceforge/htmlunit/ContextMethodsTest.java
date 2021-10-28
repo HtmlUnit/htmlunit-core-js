@@ -50,7 +50,7 @@ public class ContextMethodsTest {
 
         final String source = "eval('1 + 2')";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();

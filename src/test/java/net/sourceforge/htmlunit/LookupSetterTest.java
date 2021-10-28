@@ -39,15 +39,21 @@ public class LookupSetterTest {
     }
 
     private void test(final String expected, final String src) throws Exception {
-        final ContextAction action = new ContextActionImpl() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
-            protected Object doRun(Context cx) throws Exception {
-                final Scriptable scope = cx.initSafeStandardObjects(new TopScope());
-                ScriptableObject.defineClass(scope, Foo.class);
-                cx.evaluateString(scope, defineSetterAndGetterX, "initX", 1, null);
-                Object result = String.valueOf(cx.evaluateString(scope, src, "test", 1, null));
-                assertEquals(expected, result);
-                return null;
+            public Object run(final Context cx) {
+                try {
+                    final Scriptable scope = cx.initSafeStandardObjects(new TopScope());
+                    ScriptableObject.defineClass(scope, Foo.class);
+                    cx.evaluateString(scope, defineSetterAndGetterX, "initX", 1, null);
+                    Object result = String.valueOf(cx.evaluateString(scope, src, "test", 1, null));
+                    assertEquals(expected, result);
+                    return null;
+                } catch (final Exception e) {
+                    if (e instanceof RuntimeException)
+                        throw (RuntimeException) e;
+                    throw new RuntimeException(e);
+                }
             }
         };
 

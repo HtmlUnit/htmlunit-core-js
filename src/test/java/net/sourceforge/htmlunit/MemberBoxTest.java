@@ -22,7 +22,7 @@ public class MemberBoxTest {
     public void descriptionOfIllegalArgumentException() {
         final String script = "var o = new MyHostObject(); o.someFunction(new Object())";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 try {

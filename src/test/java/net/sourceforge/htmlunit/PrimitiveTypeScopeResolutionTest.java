@@ -45,11 +45,9 @@ public class PrimitiveTypeScopeResolutionTest {
     }
 
     private static void testWithTwoScopes(final String scriptScope1, final String scriptScope2) {
-        final ContextAction action = new ContextAction()
-        {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
-            public Object run(final Context cx)
-            {
+            public Object run(final Context cx){
                 final Scriptable scope1 = cx.initSafeStandardObjects(new MySimpleScriptableObject("scope1"));
                 final Scriptable scope2 = cx.initSafeStandardObjects(new MySimpleScriptableObject("scope2"));
                 cx.evaluateString(scope2, scriptScope2, "source2", 1, null);

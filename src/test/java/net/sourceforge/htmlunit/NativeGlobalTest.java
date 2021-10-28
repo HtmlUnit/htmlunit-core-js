@@ -30,7 +30,7 @@ public class NativeGlobalTest {
     }
 
     private static void doTest(final double expected, final String src) throws Exception {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 cx.setLanguageVersion(Context.VERSION_ES6);

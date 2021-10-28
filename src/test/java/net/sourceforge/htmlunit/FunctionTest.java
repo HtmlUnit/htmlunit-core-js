@@ -29,7 +29,7 @@ public class FunctionTest {
     }
 
     private static void assertEvaluates(final Object expected, final String source) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();

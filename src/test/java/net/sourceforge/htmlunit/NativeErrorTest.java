@@ -35,7 +35,7 @@ public class NativeErrorTest {
                 + "test();\n"
                 + "output";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -68,7 +68,7 @@ public class NativeErrorTest {
                 + "test();\n"
                 + "output";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -97,7 +97,7 @@ public class NativeErrorTest {
                 + "test();\n"
                 + "output";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();

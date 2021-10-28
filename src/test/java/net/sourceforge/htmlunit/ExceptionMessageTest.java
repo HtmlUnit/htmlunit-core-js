@@ -39,7 +39,7 @@ public class ExceptionMessageTest {
     }
 
     private static void exceptionMessage(final String script, final String expectedMesage) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 try {
@@ -83,7 +83,7 @@ public class ExceptionMessageTest {
 
         final String script = "o.readonlyProp = 123";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 try {

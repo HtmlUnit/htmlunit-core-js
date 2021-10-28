@@ -58,7 +58,7 @@ public class HostExceptionsTest {
     private static void doTest(final String jsExpression) throws Exception {
         final String script = "var foo = new MyScriptable(); try { " + jsExpression + "} catch(e) {}";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();

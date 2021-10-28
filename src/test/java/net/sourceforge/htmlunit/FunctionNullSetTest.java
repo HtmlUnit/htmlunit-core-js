@@ -25,7 +25,7 @@ public class FunctionNullSetTest {
     @Test
     public void setFunctionToNull() throws Exception {
         final String script = "function onclick() {onclick=null}";
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 try {

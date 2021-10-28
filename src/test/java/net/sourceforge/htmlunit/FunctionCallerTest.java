@@ -26,7 +26,7 @@ public class FunctionCallerTest {
     public void upperScopeVarShouldntBeSetWithVarFunctionWithSameName() throws Exception {
         final String script = "var g = true; (function() { var g = function g() { return 1; };\n"
                 + "return this.g == undefined })();g;\n";
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -53,7 +53,7 @@ public class FunctionCallerTest {
                 + "  return f();\n"
                 + "}\n"
                 + "g();\n";
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -84,7 +84,7 @@ public class FunctionCallerTest {
             + "}\n"
             + "f();\n";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -117,7 +117,7 @@ public class FunctionCallerTest {
             + "f();\n"
             + "output";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -151,7 +151,7 @@ public class FunctionCallerTest {
             + "f();\n"
             + "output";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -181,7 +181,7 @@ public class FunctionCallerTest {
             + "g();\n"
             + "output";
 
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();

@@ -14,7 +14,7 @@ public class Utilities {
      * @param script the script
      */
     static void executeScript(final String script) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -29,7 +29,7 @@ public class Utilities {
      * @param script the script
      */
     static void executeScript(final String script, final int optimizationLevel) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();

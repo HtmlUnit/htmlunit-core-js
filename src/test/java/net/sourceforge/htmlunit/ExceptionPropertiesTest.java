@@ -67,7 +67,7 @@ public class ExceptionPropertiesTest {
     }
 
     private static void testIt(final String script, final Object expected) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 cx.setLanguageVersion(Context.VERSION_ES6);

@@ -45,7 +45,7 @@ public class NativeRegExpTest {
     }
 
     private static void test(final String script, final Object expected) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 try {

@@ -133,7 +133,7 @@ public class ArgumentsTest {
                 return super.hasFeature(cx, featureIndex);
             }
         };
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Scriptable scope = cx.initSafeStandardObjects();
@@ -173,7 +173,7 @@ public class ArgumentsTest {
     }
 
     private static void test(final String script, final Object expected) {
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 try {
