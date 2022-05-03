@@ -11,7 +11,7 @@ apply plugin: 'signing'
 
 group = "net.sourceforge.htmlunit"
 archivesBaseName = "htmlunit-core-js"
-version = "2.61.1"
+version = "2.62.0-SNAPSHOT"
 
 
 jar {
