@@ -69,7 +69,7 @@ This part is intended for committer who are packaging a release.
    gradlew clean test uploadArchives -i
 ```
 
-* Go to [Sonatype staging repositories](https://oss.sonatype.org/index.html#stagingRepositories) and process the deploy
+* Go to [Sonatype staging repositories](https://s01.oss.sonatype.org/index.html#stagingRepositories) and process the deploy
   - select the repository and close it - wait until the close is processed
   - release the package and wait until it is processed
 

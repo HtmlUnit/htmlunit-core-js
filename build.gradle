@@ -9,9 +9,9 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 
-group = "net.sourceforge.htmlunit"
+group = "org.htmlunit"
 archivesBaseName = "htmlunit-core-js"
-version = "2.70.0"
+version = "3.0.0"
 
 
 jar {
@@ -56,18 +56,18 @@ dependencies {
 
 task generateSources() {
     doLast {
-        delete('target/repackaged-rhino/src/net/sourceforge/htmlunit/corejs')
+        delete('target/repackaged-rhino/src/org/htmlunit/corejs')
 
         copy {
-            into 'target/repackaged-rhino/src/net/sourceforge/htmlunit/corejs'
+            into 'target/repackaged-rhino/src/org/htmlunit/corejs'
             from '../htmlunit-rhino-fork/src/org/mozilla'
             from ('../htmlunit-rhino-fork/toolsrc/org/mozilla') {
                 include 'javascript/tools/debugger/**/*.java'
                 include 'javascript/tools/shell/**/*.java'
                 include 'javascript/tools/*.java'
             }
-            filter { line -> line.replaceAll('org\\.mozilla', 'net.sourceforge.htmlunit.corejs') }
-            filter { line -> line.replaceAll('org/mozilla', 'net/sourceforge/htmlunit/corejs') }
+            filter { line -> line.replaceAll('org\\.mozilla', 'org.htmlunit.corejs') }
+            filter { line -> line.replaceAll('org/mozilla', 'org/htmlunit/corejs') }
         }
 
         delete('target/rhinoDiff.txt')
@@ -111,11 +111,11 @@ uploadArchives {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
 
@@ -125,11 +125,11 @@ uploadArchives {
                 root.appendNode("name", "HtmlUnit Core JS")
 
                 def o = root.appendNode("organization")
-                o.appendNode("name", "Gargoyle Software Inc.")
-                o.appendNode("url", "http://www.GargoyleSoftware.com/")
+                o.appendNode("name", "HtmlUnit")
+                o.appendNode("url", "https://www.htmlunit.org/")
 
                 root.appendNode("packaging", "jar")
-                root.appendNode("url", "http://htmlunit.sourceforge.net")
+                root.appendNode("url", "https://www.htmlunit.org")
                 root.appendNode('description', "HtmlUnit adaptation of Mozilla Rhino Javascript engine for Java. Changes are documented by a diff (rhinoDiff.txt) contained in the generated jar files.")
 
                 def l = root.appendNode("licenses").appendNode("license")
