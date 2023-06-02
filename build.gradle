@@ -11,7 +11,7 @@ apply plugin: 'signing'
 
 group = "org.htmlunit"
 archivesBaseName = "htmlunit-core-js"
-version = "3.2.0"
+version = "3.3.0-SNAPSHOT"
 
 
 jar {
@@ -68,6 +68,49 @@ task generateSources() {
             }
             filter { line -> line.replaceAll('org\\.mozilla', 'org.htmlunit.corejs') }
             filter { line -> line.replaceAll('org/mozilla', 'org/htmlunit/corejs') }
+            
+            // filter { line -> line.replaceAll('public static final int VERSION_', '// HtmlUnit public static final int VERSION_') }
+
+            filter { line -> line.replaceAll('version == Context.VERSION_1_0', '/* HtmlUnit version == #Context.VERSION_1_0 */ false') }
+            filter { line -> line.replaceAll('version == Context.VERSION_1_1', '/* HtmlUnit version == #Context.VERSION_1_1 */ false') }
+            filter { line -> line.replaceAll('version == Context.VERSION_1_2', '/* HtmlUnit version == #Context.VERSION_1_2 */ false') }
+            filter { line -> line.replaceAll('version <= Context.VERSION_1_3', '/* HtmlUnit version <= #Context.VERSION_1_3 */ false') }
+            filter { line -> line.replaceAll('version < Context.VERSION_1_3', '/* HtmlUnit version < #Context.VERSION_1_3 */ false') }
+            filter { line -> line.replaceAll('version <= Context.VERSION_1_4', '/* HtmlUnit version <= #Context.VERSION_1_4 */ false') }
+            filter { line -> line.replaceAll('version >= Context.VERSION_1_4', '/* HtmlUnit version >= #Context.VERSION_1_4 */ true') }
+            filter { line -> line.replaceAll('version >= Context.VERSION_1_6', '/* HtmlUnit version >= #Context.VERSION_1_6 */ true') }
+            filter { line -> line.replaceAll('cx.version < Context.VERSION_ES6', '/* HtmlUnit cx.version < #Context.VERSION_ES6 */ false') }
+            filter { line -> line.replaceAll('version < Context.VERSION_ES6', '/* HtmlUnit version < #Context.VERSION_ES6 */ false') }
+
+            filter { line -> line.replaceAll('version == Context.VERSION_DEFAULT', '/* HtmlUnit version == #Context.VERSION_DEFAULT */ false') }
+            filter { line -> line.replaceAll('version != Context.VERSION_DEFAULT', '/* HtmlUnit version != #Context.VERSION_DEFAULT */ true') }
+            filter { line -> line.replaceAll('version == VERSION_DEFAULT \\|\\| version >= VERSION_1_3', '/* HtmlUnit version == #VERSION_DEFAULT \\|\\| version >= #VERSION_1_3 */ true') }
+
+            filter { line -> line.replaceAll('languageVersion < Context.VERSION_ES6', '/* HtmlUnit languageVersion < #Context.VERSION_ES6 */ false') }
+
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) == Context.VERSION_1_2', '/* HtmlUnit cx.getLanguageVersion\\(\\) == #Context.VERSION_1_2 */ false') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) != Context.VERSION_1_2', '/* HtmlUnit cx.getLanguageVersion\\(\\) != #Context.VERSION_1_2 */ true') }
+            filter { line -> line.replaceAll('getLanguageVersion\\(\\) != Context.VERSION_1_2', '/* HtmlUnit getLanguageVersion\\(\\) != #Context.VERSION_1_2 */ true') }
+            filter { line -> line.replaceAll('state.cx.getLanguageVersion\\(\\) >= Context.VERSION_ES6', '/* HtmlUnit state.cx.getLanguageVersion\\(\\) >= #Context.VERSION_ES6 */ true') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) >= Context.VERSION_ES6', '/* HtmlUnit cx.getLanguageVersion\\(\\) >= #Context.VERSION_ES6 */ true') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) < Context.VERSION_ES6', '/* HtmlUnit cx.getLanguageVersion\\(\\) < #Context.VERSION_ES6 */ false') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) < Context.VERSION_1_5', '/* HtmlUnit cx.getLanguageVersion\\(\\) < #Context.VERSION_1_5 */ false') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) < Context.VERSION_1_6', '/* HtmlUnit cx.getLanguageVersion\\(\\) < #Context.VERSION_1_6 */ false') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) <= Context.VERSION_1_7', '/* HtmlUnit cx.getLanguageVersion\\(\\) < #Context.VERSION_1_7 */ false') }
+            filter { line -> line.replaceAll('cx.getLanguageVersion\\(\\) >= Context.VERSION_1_8', '/* HtmlUnit cx.getLanguageVersion\\(\\) >= #Context.VERSION_1_8 */ true') }
+            filter { line -> line.replaceAll('env.getLanguageVersion\\(\\) >= Context.VERSION_ES6', '/* HtmlUnit env.getLanguageVersion\\(\\) >= #Context.VERSION_ES6 */ true') }
+            
+            filter { line -> line.replaceAll('Context.getCurrentContext\\(\\).version >= Context.VERSION_ES6', '/* HtmlUnit Context.getCurrentContext\\(\\).version >= #Context.VERSION_ES6 */ true') }
+            filter { line -> line.replaceAll('Context.getCurrentContext\\(\\).getLanguageVersion\\(\\) >= Context.VERSION_ES6', '/* HtmlUnit Context.getCurrentContext\\(\\).getLanguageVersion\\(\\) >= #Context.VERSION_ES6 */ true') }
+            filter { line -> line.replaceAll('Context.getContext\\(\\).getLanguageVersion\\(\\) < Context.VERSION_ES6', '/* HtmlUnit Context.getContext\\(\\).getLanguageVersion\\(\\) < #Context.VERSION_ES6 */ false') }
+            
+            filter { line -> line.replaceAll('compilerEnv.getLanguageVersion\\(\\) == Context.VERSION_1_2', '/* HtmlUnit compilerEnv.getLanguageVersion\\(\\) == #Context.VERSION_1_2 */ false') }
+            filter { line -> line.replaceAll('compilerEnv.getLanguageVersion\\(\\) < Context.VERSION_1_8', '/* HtmlUnit compilerEnv.getLanguageVersion\\(\\) < #Context.VERSION_1_8 */ false') }
+            filter { line -> line.replaceAll('compilerEnv.getLanguageVersion\\(\\) >= Context.VERSION_1_8', '/* HtmlUnit compilerEnv.getLanguageVersion\\(\\) >= #Context.VERSION_1_8 */ true') }
+            filter { line -> line.replaceAll('parser.compilerEnv.getLanguageVersion\\(\\) >= Context.VERSION_ES6', '/* HtmlUnit parser.compilerEnv.getLanguageVersion\\(\\) >= #Context.VERSION_ES6 */ true') }
+            filter { line -> line.replaceAll('parser.compilerEnv.getLanguageVersion\\(\\) < Context.VERSION_1_7', '/* HtmlUnit parser.compilerEnv.getLanguageVersion\\(\\) < #Context.VERSION_1_7 */ false') }
+            filter { line -> line.replaceAll('compilerEnv.getLanguageVersion\\(\\) >= Context.VERSION_ES6', '/* HtmlUnit compilerEnv.getLanguageVersion\\(\\) >= #Context.VERSION_ES6 */ true') }
+            filter { line -> line.replaceAll('compilerEnv.getLanguageVersion\\(\\) < Context.VERSION_ES6', '/* HtmlUnit compilerEnv.getLanguageVersion\\(\\) < #Context.VERSION_ES6 */ false') }
         }
 
         delete('target/rhinoDiff.txt')
