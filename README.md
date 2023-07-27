@@ -5,11 +5,11 @@ This project is a Rhino fork, maintained to support features needed by HtmlUnit.
 It is split into two projects "htmlunit-rhino-fork", which contains the minimal changes to rhino,
 and "htmlunit-core-js" which has the test cases and packaging.
 
-Notice that "org.mozilla.*" is renamed to "net.sourceforge.htmlunit.corejs.*"
+Notice that "org.mozilla.*" is renamed to "org.htmlunit.corejs.*"
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit-core-js)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js)
 
 
 ## Getting Started
