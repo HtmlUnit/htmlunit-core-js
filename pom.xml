@@ -1,0 +1,519 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.htmlunit</groupId>
+  <artifactId>htmlunit-core-js</artifactId>
+  <version>3.7.0-SNAPSHOT</version>
+  <name>HtmlUnit JavaScript Engine</name>
+  <organization>
+    <name>HtmlUnit</name>
+    <url>https://www.htmlunit.org</url>
+  </organization>
+  <packaging>jar</packaging>
+  <description>HtmlUnit adaptation of Mozilla Rhino Javascript engine for Java. Changes are documented by a diff (rhinoDiff.txt) contained in the generated jar files.</description>
+  <url>https://github.com/HtmlUnit/htmlunit-core-js</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <dependencycheck.version>8.4.2</dependencycheck.version>
+  </properties>
+  <build>
+   <resources>
+     <resource>
+       <directory>src/repackaged-rhino/resources</directory>
+     </resource>
+   </resources>
+   <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/repackaged-rhino/java</source>
+                <source>src/repackaged-rhino-test/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.6.3</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>1.8.0</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>${dependencycheck.version}</version>
+        <configuration>
+          <failBuildOnCVSS>0</failBuildOnCVSS>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4.1</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/src/repackaged-rhino</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+            <fileset>
+              <directory>${basedir}/src/repackaged-rhino-test</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <id>copy-resource-01</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/src/repackaged-rhino/java/org/htmlunit/corejs</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>../htmlunit-rhino-fork/src/org/mozilla</directory>
+                  <includes>
+                    <include>**/*.java</include>
+                  </includes>
+                </resource>
+                <resource>
+                  <directory>../htmlunit-rhino-fork/toolsrc/org/mozilla</directory>
+                  <includes>
+                    <include>javascript/tools/debugger/**/*.java</include>
+                    <include>javascript/tools/shell/**/*.java</include>
+                    <include>javascript/tools/*.java</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-resource-02</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/src/repackaged-rhino/resources/org/htmlunit/corejs</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>../htmlunit-rhino-fork/src/org/mozilla</directory>
+                  <includes>
+                    <include>**/*.properties</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-resources-03</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/repackaged-rhino/resources</directory>
+                  <include>**/*.properties</include>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-resources-04</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/src/repackaged-rhino-test/java/org/htmlunit/corejs</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>../htmlunit-rhino-fork/src/org/mozilla</directory>
+                  <includes>
+                    <include>**/Utils.java</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.google.code.maven-replacer-plugin</groupId>
+        <artifactId>replacer</artifactId>
+        <version>1.5.3</version>
+        <executions>
+          <execution>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>replace</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <basedir>${basedir}/src/repackaged-rhino/java/org/htmlunit/corejs</basedir>
+          <regex>true</regex>
+          <includes>
+            <include>**/*.java</include>
+          </includes>
+          <replacements>
+            <replacement>
+              >
+              <token>org\.mozilla</token>
+              <value>org.htmlunit.corejs</value>
+            </replacement>
+            <replacement>
+              <token>org/mozilla</token>
+              <value>org/htmlunit/corejs</value>
+            </replacement>
+            <replacement>
+              <token>org/mozilla</token>
+              <value>org/htmlunit/corejs</value>
+            </replacement>
+            <replacement>
+              <token>version == Context.VERSION_1_0</token>
+              <value>/* HtmlUnit version == #Context.VERSION_1_0 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version == Context.VERSION_1_1</token>
+              <value>/* HtmlUnit version == #Context.VERSION_1_1 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version == Context.VERSION_1_2</token>
+              <value>/* HtmlUnit version == #Context.VERSION_1_2 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version &lt;= Context.VERSION_1_3</token>
+              <value>/* HtmlUnit version &lt;= #Context.VERSION_1_3 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version &lt; Context.VERSION_1_3</token>
+              <value>/* HtmlUnit version &lt; #Context.VERSION_1_3 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version &lt;= Context.VERSION_1_4</token>
+              <value>/* HtmlUnit version &lt;= #Context.VERSION_1_4 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version >= Context.VERSION_1_4</token>
+              <value>/* HtmlUnit version >= #Context.VERSION_1_4 */ true</value>
+            </replacement>
+            <replacement>
+              <token>version >= Context.VERSION_1_6</token>
+              <value>/* HtmlUnit version >= #Context.VERSION_1_6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>cx.version &lt; Context.VERSION_ES6</token>
+              <value>/* HtmlUnit cx.version &lt; #Context.VERSION_ES6 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version &lt; Context.VERSION_ES6</token>
+              <value>/* HtmlUnit version &lt; #Context.VERSION_ES6 */ false</value>
+            </replacement>
+            <replacement>
+              <token>version == Context.VERSION_DEFAULT</token>
+              <value>/* HtmlUnit version == #Context.VERSION_DEFAULT */ false</value>
+            </replacement>
+            <replacement>
+              <token>version != Context.VERSION_DEFAULT</token>
+              <value>/* HtmlUnit version != #Context.VERSION_DEFAULT */ true</value>
+            </replacement>
+            <replacement>
+              <token>version == VERSION_DEFAULT \|\| version >= VERSION_1_3</token>
+              <value>/* HtmlUnit version == #VERSION_DEFAULT \|\| version >= #VERSION_1_3 */ true</value>
+            </replacement>
+            <replacement>
+              <token>languageVersion &lt; Context.VERSION_ES6</token>
+              <value>/* HtmlUnit languageVersion &lt; #Context.VERSION_ES6 */ false</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) == Context.VERSION_1_2</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) != Context.VERSION_1_2</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
+            </replacement>
+            <replacement>
+              <token>getLanguageVersion\(\) != Context.VERSION_1_2</token>
+              <value>/* HtmlUnit getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
+            </replacement>
+            <replacement>
+              <token>state.cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit state.cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_1_5</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_1_5 */ false</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_1_6</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_1_6 */ false</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) &lt;= Context.VERSION_1_7</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt;= #Context.VERSION_1_7 */ false</value>
+            </replacement>
+            <replacement>
+              <token>cx.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+              <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
+            </replacement>
+            <replacement>
+              <token>env.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit env.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>Context.getCurrentContext\(\).version >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit Context.getCurrentContext\(\).version >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>Context.getCurrentContext\(\).getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit Context.getCurrentContext\(\).getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>Context.getContext\(\).getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+              <value>/* HtmlUnit Context.getContext\(\).getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+            </replacement>
+            <replacement>
+              <token>compilerEnv.getLanguageVersion\(\) == Context.VERSION_1_2</token>
+              <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
+            </replacement>
+            <replacement>
+              <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_8</token>
+              <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_8 */ false</value>
+            </replacement>
+            <replacement>
+              <token>compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+              <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
+            </replacement>
+            <replacement>
+              <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>parser.compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_7</token>
+              <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_7 */ false</value>
+            </replacement>
+            <replacement>
+              <token>compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+              <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+            </replacement>
+            <replacement>
+              <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+              <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+            </replacement>
+          </replacements>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+            </manifest>
+            <manifestEntries>
+              <Url>${project.url}</Url>
+              <Build-Time>${maven.build.timestamp}</Build-Time>
+            </manifestEntries>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <quiet>true</quiet>
+          <doclint>none</doclint>
+          <additionalparam>--allow-script-in-comments</additionalparam>
+          <links>
+            <link>https://docs.oracle.com/javase/8/docs/api/</link>
+          </links>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.10</version>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <downloadJavadocs>true</downloadJavadocs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.0.1</version>
+      </plugin>
+    </plugins>
+  </build>
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git@github.com:HtmlUnit/htmlunit-cssparser.git</connection>
+    <developerConnection>scm:git:git@github.com:HtmlUnit/htmlunit-cssparser.git</developerConnection>
+    <url>https://github.com/htmlunit</url>
+  </scm>
+  <mailingLists></mailingLists>
+  <developers>
+    <developer>
+      <name>Ronald Brill</name>
+      <id>rbri</id>
+      <email>rbri@rbri.de</email>
+      <url>http://www.wetator.org/</url>
+      <timezone>+1</timezone>
+    </developer>
+    <developer>
+      <name>Mozilla Rhino Team</name>
+      <id>MozillaRhinoTeam</id>
+    </developer>
+    <developer>
+      <name>HtmlUnit Team</name>
+      <id>HtmlUnitTeam</id>
+    </developer>
+  </developers>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>sonatype-nexus-staging</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+  </distributionManagement>
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>OSS Sonatype snapshots</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </repository>
+  </repositories>
+</project>

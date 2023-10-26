@@ -8,3 +8,5 @@
 /bin/
 /build/
 /.gradle/
+/src/repackaged-rhino/
+/src/repackaged-rhino-test/
