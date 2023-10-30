@@ -11,6 +11,9 @@ Notice that "org.mozilla.*" is renamed to "org.htmlunit.corejs.*"
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js)
 
+### Project News
+
+[HtmlUnit@mastodon][4] | [HtmlUnit@Twitter][3]
 
 ## Getting Started
 
@@ -57,16 +60,16 @@ Every contribution - from bug reports to feature requests, typos to full new fea
 
 This part is intended for committer who are packaging a release.
 
-    * Check all your files are checked in
-    * Update the version number in build.gradle
-    * Execute "gradlew clean test" to be sure all tests are passing
-    * Commit the changes
+* Check all your files are checked in
+* Execute "mvn -U clean test" to be sure all tests are passing
+* Update the version number in pom.xml and README.md
+* Commit the changes
 
 
 * Build and deploy the artifacts 
 
 ```
-   gradlew clean test uploadArchives -i
+   mvn -up clean deploy
 ```
 
 * Go to [Sonatype staging repositories](https://s01.oss.sonatype.org/index.html#stagingRepositories) and process the deploy
@@ -76,11 +79,16 @@ This part is intended for committer who are packaging a release.
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-core-js
     * click Releases > Draft new release
-    * fill the tag and title field with the release number (e.g. 2.32)
-    * write some notes about the release
+    * fill the tag and title field with the release number (e.g. 3.0.0)
+    * append 
+        * htmlunit-core-js-3.x.x.jar
+        * htmlunit-core-js-3.x.x.jar.asc 
+        * htmlunit-core-js-3.x.x-javadoc.jar
+        * htmlunit-core-js-3.x.x-javadoc.jar.asc
     * and publish the release 
-    * Update the version number in build.gradle to start next snapshot development
-    * Update the htmlunit pom to use the new release
+
+* Update the version number in pom.xml to start next snapshot development
+* Update the htmlunit pom to use the new release
 
 ## Authors
 
@@ -94,3 +102,6 @@ This project is licensed under the Apache 2.0 License
 ## Acknowledgments
 
 Many thanks to all of you contributing to HtmlUnit/Rhino in the past.
+
+[3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
+[4]: https://fosstodon.org/@HtmlUnit
