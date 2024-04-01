@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>3.11.0</version>
+    <version>4.0.0</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -346,8 +346,12 @@
                     <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_8 */ false</value>
                   </replacement>
                   <replacement>
-                    <token>compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
-                    <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
+                    <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+                    <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8 */ true</value>
+                  </replacement>
+                  <replacement>
+                    <token>&amp;&amp; compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+                    <value>&amp;&amp; /* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
                   </replacement>
                   <replacement>
                     <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
