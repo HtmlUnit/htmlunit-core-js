@@ -61,7 +61,14 @@ Every contribution - from bug reports to feature requests, typos to full new fea
 This part is intended for committer who are packaging a release.
 
 * Check all your files are checked in
-* Execute "mvn -U clean test" to be sure all tests are passing
+* Execute these mvn commands to be sure all tests are passing and everything is up to data
+
+```
+   mvn versions:display-plugin-updates
+   mvn versions:display-dependency-updates
+   mvn -U clean test
+```
+
 * Update the version number in pom.xml and README.md
 * Commit the changes
 
