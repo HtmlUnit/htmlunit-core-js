@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.2.0</version>
+    <version>4.3.0-SNAPSHOT</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -124,13 +124,13 @@
                               <outputDirectory>${basedir}/src/repackaged-rhino/java/org/htmlunit/corejs</outputDirectory>
                               <resources>
                                   <resource>
-                                      <directory>../htmlunit-rhino-fork/src/org/mozilla</directory>
+                                      <directory>../htmlunit-rhino-fork/rhino-runtime/src/main/java/org/mozilla</directory>
                                       <includes>
                                           <include>**/*.java</include>
                                       </includes>
                                   </resource>
                                   <resource>
-                                      <directory>../htmlunit-rhino-fork/toolsrc/org/mozilla</directory>
+                                      <directory>../htmlunit-rhino-fork/rhino-tools/src/main/java/org/mozilla</directory>
                                       <includes>
                                           <include>javascript/tools/debugger/**/*.java</include>
                                           <include>javascript/tools/shell/**/*.java</include>
@@ -150,7 +150,7 @@
                             <outputDirectory>${basedir}/src/repackaged-rhino/resources/org/htmlunit/corejs</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../htmlunit-rhino-fork/src/org/mozilla</directory>
+                                    <directory>../htmlunit-rhino-fork/rhino-runtime/src/main/resources/org/mozilla</directory>
                                     <includes>
                                         <include>**/*.properties</include>
                                     </includes>
@@ -502,11 +502,11 @@
     </dependencies>
     <distributionManagement>
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
+            <id>s01-sonatype-nexus-snapshots</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
+            <id>s01-sonatype-nexus-staging</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
