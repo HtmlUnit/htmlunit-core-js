@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.3.0-SNAPSHOT</version>
+    <version>4.3.0</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -90,7 +90,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
                 <configuration>
                     <filesets>
                         <fileset>
@@ -124,7 +124,7 @@
                               <outputDirectory>${basedir}/src/repackaged-rhino/java/org/htmlunit/corejs</outputDirectory>
                               <resources>
                                   <resource>
-                                      <directory>../htmlunit-rhino-fork/rhino-runtime/src/main/java/org/mozilla</directory>
+                                      <directory>../htmlunit-rhino-fork/rhino/src/main/java/org/mozilla</directory>
                                       <includes>
                                           <include>**/*.java</include>
                                       </includes>
@@ -150,7 +150,7 @@
                             <outputDirectory>${basedir}/src/repackaged-rhino/resources/org/htmlunit/corejs</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../htmlunit-rhino-fork/rhino-runtime/src/main/resources/org/mozilla</directory>
+                                    <directory>../htmlunit-rhino-fork/rhino/src/main/resources/org/mozilla</directory>
                                     <includes>
                                         <include>**/*.properties</include>
                                     </includes>
@@ -376,7 +376,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.3.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -386,7 +386,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.4.2</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -458,7 +458,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
             </plugin>
         </plugins>
     </build>
