@@ -26,9 +26,9 @@ public class StackTraceTest {
         final String source2 = "function f2() { 'H'.toLowerCase(); throw 'hello'; }; f2();";
 
         runWithExpectedStackTrace(source1,
-                "\tat test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // works
+                "\tat test.js:0 (f2)" + lineSeparator + "\tat test.js:0" + lineSeparator); // works
         runWithExpectedStackTrace(source2,
-                "\tat test.js (f2)" + lineSeparator + "\tat test.js" + lineSeparator); // fails
+                "\tat test.js:0 (f2)" + lineSeparator + "\tat test.js:0" + lineSeparator); // fails
     }
 
     private static void runWithExpectedStackTrace(final String _source, final String _expectedStackTrace) {

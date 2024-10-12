@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.4.0</version>
+    <version>4.5.0-SNAPSHOT</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -128,6 +128,9 @@
                                       <includes>
                                           <include>**/*.java</include>
                                       </includes>
+                                      <excludes>
+                                          <exclude>javascript/optimizer/**/*.java</exclude>
+                                      </excludes>
                                   </resource>
                                   <resource>
                                       <directory>../htmlunit-rhino-fork/rhino-tools/src/main/java/org/mozilla</directory>
