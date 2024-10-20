@@ -7,48 +7,40 @@ and "htmlunit-core-js" which has the test cases and packaging.
 
 Notice that "org.mozilla.*" is renamed to "org.htmlunit.corejs.*"
 
-:heart: [Sponsor](https://github.com/sponsors/rbri)
-
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js)
+
+:heart: [Sponsor](https://github.com/sponsors/rbri)
 
 ### Project News
 
+**[Developer Blog][5]**
+
 [HtmlUnit@mastodon][4] | [HtmlUnit@Twitter][3]
 
-## Getting Started
+## Start HtmlUnit - core-js Development
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-You simply only need a local git client and gradle installation.
+You simply only need a local maven installation.
 
 
 ### Building
 
-    1. Clone the two projects into sibling folders
-    2. Create eclipse project for "htmlunit-rhino-fork", with 'src' 'testsrc' and 'toolsrc' folder as source folders, while having build/classes as the output folder
-    3. In "htmlunit-rhino-fork", run:
-        - git remote add upstream https://github.com/mozilla/rhino
-        - git fetch upstream
+Create a local clone of the repository and you are ready to start.
 
-        With proxy:
-        - git config --global http.proxy http://proxyhost:port
-
-        To unset proxy:
-        - git config --global --unset http.proxy
-
-
-## Running the tests
+Open a command line window from the root folder of the project and call
 
 ```
-gradlew test
+mvn compile
 ```
 
-## Generating the JARs
+### Running the tests
 
 ```
-gradlew jar
+mvn test
 ```
 
 ## Contributing
@@ -86,12 +78,16 @@ This part is intended for committer who are packaging a release.
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-core-js
     * click Releases > Draft new release
-    * fill the tag and title field with the release number (e.g. 3.0.0)
+    * fill the tag and title field with the release number (e.g. 4.0.0)
     * append 
-        * htmlunit-core-js-3.x.x.jar
-        * htmlunit-core-js-3.x.x.jar.asc 
-        * htmlunit-core-js-3.x.x-javadoc.jar
-        * htmlunit-core-js-3.x.x-javadoc.jar.asc
+        * htmlunit-core-js-4.x.x.jar
+        * htmlunit-core-js-4.x.x.jar.asc 
+        * htmlunit-core-js-4.x.x.pom
+        * htmlunit-core-js-4.x.x.pom.asc 
+        * htmlunit-core-js-4.x.x-javadoc.jar
+        * htmlunit-core-js-4.x.x-javadoc.jar.asc
+        * htmlunit-core-js-4.x.x-sources.jar
+        * htmlunit-core-js-4.x.x-sources.jar.asc
     * and publish the release 
 
 * Update the version number in pom.xml to start next snapshot development
@@ -112,3 +108,4 @@ Many thanks to all of you contributing to HtmlUnit/Rhino in the past.
 
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://fosstodon.org/@HtmlUnit
+[5]: https://htmlunit.github.io/htmlunit-blog/
