@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.7.0</version>
+    <version>4.8.0-SNAPSHOT</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -78,6 +78,7 @@
                 <configuration>
                     <failBuildOnCVSS>0</failBuildOnCVSS>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <nvdDatafeedUrl>https://mirror.cveb.in/nvd/json/cve/1.1/nvdcve-1.1-{0}.json.gz</nvdDatafeedUrl>
                 </configuration>
                 <executions>
                     <execution>

@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
-
+import org.htmlunit.corejs.javascript.CompilerEnvirons;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
@@ -39,10 +40,10 @@ public class ContextMethodsTest {
                     @Override
                     protected Script compileString(String source, Evaluator compiler,
                             ErrorReporter compilationErrorReporter, String sourceName,
-                            int lineno, Object securityDomain) {
+                            int lineno, Object securityDomain, Consumer<CompilerEnvirons> compilerEnvironsProcessor) {
                         compiled.add(source);
                         return super.compileString(source, compiler, compilationErrorReporter,
-                                sourceName, lineno, securityDomain);
+                                sourceName, lineno, securityDomain, compilerEnvironsProcessor);
                     }
                 };
             }
