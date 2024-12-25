@@ -70,7 +70,8 @@ public class ExceptionPropertiesTest {
         final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
-                cx.setLanguageVersion(Context.VERSION_ES6);
+                // no need to do that because we use a patched version
+                // cx.setLanguageVersion(Context.VERSION_ES6);
 
                 try {
                     final ScriptableObject scope = cx.initSafeStandardObjects();
