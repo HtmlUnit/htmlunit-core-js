@@ -188,10 +188,7 @@
                             <outputDirectory>${basedir}/src/repackaged-rhino-test/java/org/htmlunit/corejs</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../htmlunit-rhino-fork/src/org/mozilla</directory>
-                                    <includes>
-                                        <include>**/Utils.java</include>
-                                    </includes>
+                                    <directory>../htmlunit-rhino-fork/testutils/src/main/java/org/mozilla</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -204,178 +201,225 @@
               <version>1.5.3</version>
               <executions>
                 <execution>
+                  <id>replace-souce</id>
                   <phase>process-sources</phase>
                   <goals>
                     <goal>replace</goal>
                   </goals>
+                  <configuration>
+                    <basedir>${basedir}/src/repackaged-rhino/java/org/htmlunit/corejs</basedir>
+                    <regex>true</regex>
+                    <includes>
+                      <include>**/*.java</include>
+                    </includes>
+                    <replacements>
+                      <replacement>
+                        <token>org\.mozilla</token>
+                        <value>org.htmlunit.corejs</value>
+                      </replacement>
+                      <replacement>
+                        <token>org/mozilla</token>
+                        <value>org/htmlunit/corejs</value>
+                      </replacement>
+    
+                      <replacement>
+                        <token>version == Context.VERSION_1_0</token>
+                        <value>/* HtmlUnit version == #Context.VERSION_1_0 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version == Context.VERSION_1_1</token>
+                        <value>/* HtmlUnit version == #Context.VERSION_1_1 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version == Context.VERSION_1_2</token>
+                        <value>/* HtmlUnit version == #Context.VERSION_1_2 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version &lt;= Context.VERSION_1_3</token>
+                        <value>/* HtmlUnit version &lt;= #Context.VERSION_1_3 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version &lt; Context.VERSION_1_3</token>
+                        <value>/* HtmlUnit version &lt; #Context.VERSION_1_3 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version &lt;= Context.VERSION_1_4</token>
+                        <value>/* HtmlUnit version &lt;= #Context.VERSION_1_4 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version >= Context.VERSION_1_4</token>
+                        <value>/* HtmlUnit version >= #Context.VERSION_1_4 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>version >= Context.VERSION_1_6</token>
+                        <value>/* HtmlUnit version >= #Context.VERSION_1_6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.version &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit cx.version &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit version &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version == Context.VERSION_DEFAULT</token>
+                        <value>/* HtmlUnit version == #Context.VERSION_DEFAULT */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version != Context.VERSION_DEFAULT</token>
+                        <value>/* HtmlUnit version != #Context.VERSION_DEFAULT */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>version == VERSION_DEFAULT \|\| version >= VERSION_1_3</token>
+                        <value>/* HtmlUnit version == #VERSION_DEFAULT \|\| version >= #VERSION_1_3 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>languageVersion &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit languageVersion &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) == Context.VERSION_1_2</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) != Context.VERSION_1_2</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>getLanguageVersion\(\) != Context.VERSION_1_2</token>
+                        <value>/* HtmlUnit getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>state.cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit state.cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_1_5</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_1_5 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_1_6</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_1_6 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) &lt;= Context.VERSION_1_7</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt;= #Context.VERSION_1_7 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>env.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit env.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>Context.getCurrentContext\(\).version >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit Context.getCurrentContext\(\).version >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>Context.getCurrentContext\(\).getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit Context.getCurrentContext\(\).getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>Context.getContext\(\).getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit Context.getContext\(\).getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>compilerEnv.getLanguageVersion\(\) == Context.VERSION_1_2</token>
+                        <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_8</token>
+                        <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_8 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+                        <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>&amp;&amp; compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
+                        <value>&amp;&amp; /* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>parser.compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_7</token>
+                        <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_7 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+
+                      <replacement>
+                        <token>cx.hasFeature\(Context.FEATURE_OLD_UNDEF_NULL_THIS\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_OLD_UNDEF_NULL_THIS\) */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.hasFeature\(Context.FEATURE_STRICT_MODE_\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_STRICT_MODE\) */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.hasFeature\(Context.FEATURE_ENUMERATE_IDS_FIRST\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_ENUMERATE_IDS_FIRST\) */ true</value>
+                      </replacement>
+                      <replacement>
+                        <token>context.hasFeature\(Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE\)</token>
+                        <value>/* HtmlUnit context.hasFeature\(Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE\) */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>, useLittleEndian\(\)</token>
+                        <value>/* HtmlUnit , useLittleEndian\(\) */ , true</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.hasFeature\(Context.FEATURE_INTL_402\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_INTL_402\) */ true</value>
+                      </replacement>
+
+                    </replacements>
+                  </configuration>
+                </execution>
+                <execution>
+                  <id>replace-test-souce</id>
+                  <phase>process-test-sources</phase>
+                  <goals>
+                    <goal>replace</goal>
+                  </goals>
+                  <configuration>
+                    <basedir>${basedir}/src/repackaged-rhino-test/java/org/htmlunit/corejs</basedir>
+                    <regex>true</regex>
+                    <includes>
+                      <include>**/*.java</include>
+                    </includes>
+                    <replacements>
+                      <replacement>
+                        <token>org\.mozilla</token>
+                        <value>org.htmlunit.corejs</value>
+                      </replacement>
+                      <replacement>
+                        <token>org/mozilla</token>
+                        <value>org/htmlunit/corejs</value>
+                      </replacement>
+                    </replacements>
+                  </configuration>
                 </execution>
               </executions>
-              <configuration>
-                <basedir>${basedir}/src/repackaged-rhino/java/org/htmlunit/corejs</basedir>
-                <regex>true</regex>
-                <includes>
-                  <include>**/*.java</include>
-                </includes>
-                <replacements>
-                  <replacement>
-                    >
-                    <token>org\.mozilla</token>
-                    <value>org.htmlunit.corejs</value>
-                  </replacement>
-                  <replacement>
-                    <token>org/mozilla</token>
-                    <value>org/htmlunit/corejs</value>
-                  </replacement>
-                  <replacement>
-                    <token>org/mozilla</token>
-                    <value>org/htmlunit/corejs</value>
-                  </replacement>
-                  <replacement>
-                    <token>version == Context.VERSION_1_0</token>
-                    <value>/* HtmlUnit version == #Context.VERSION_1_0 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version == Context.VERSION_1_1</token>
-                    <value>/* HtmlUnit version == #Context.VERSION_1_1 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version == Context.VERSION_1_2</token>
-                    <value>/* HtmlUnit version == #Context.VERSION_1_2 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version &lt;= Context.VERSION_1_3</token>
-                    <value>/* HtmlUnit version &lt;= #Context.VERSION_1_3 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version &lt; Context.VERSION_1_3</token>
-                    <value>/* HtmlUnit version &lt; #Context.VERSION_1_3 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version &lt;= Context.VERSION_1_4</token>
-                    <value>/* HtmlUnit version &lt;= #Context.VERSION_1_4 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version >= Context.VERSION_1_4</token>
-                    <value>/* HtmlUnit version >= #Context.VERSION_1_4 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>version >= Context.VERSION_1_6</token>
-                    <value>/* HtmlUnit version >= #Context.VERSION_1_6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.version &lt; Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit cx.version &lt; #Context.VERSION_ES6 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version &lt; Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit version &lt; #Context.VERSION_ES6 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version == Context.VERSION_DEFAULT</token>
-                    <value>/* HtmlUnit version == #Context.VERSION_DEFAULT */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>version != Context.VERSION_DEFAULT</token>
-                    <value>/* HtmlUnit version != #Context.VERSION_DEFAULT */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>version == VERSION_DEFAULT \|\| version >= VERSION_1_3</token>
-                    <value>/* HtmlUnit version == #VERSION_DEFAULT \|\| version >= #VERSION_1_3 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>languageVersion &lt; Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit languageVersion &lt; #Context.VERSION_ES6 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) == Context.VERSION_1_2</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) != Context.VERSION_1_2</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>getLanguageVersion\(\) != Context.VERSION_1_2</token>
-                    <value>/* HtmlUnit getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>state.cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit state.cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_1_5</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_1_5 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) &lt; Context.VERSION_1_6</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt; #Context.VERSION_1_6 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) &lt;= Context.VERSION_1_7</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt;= #Context.VERSION_1_7 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>cx.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
-                    <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>env.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit env.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>Context.getCurrentContext\(\).version >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit Context.getCurrentContext\(\).version >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>Context.getCurrentContext\(\).getLanguageVersion\(\) >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit Context.getCurrentContext\(\).getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>Context.getContext\(\).getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit Context.getContext\(\).getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>compilerEnv.getLanguageVersion\(\) == Context.VERSION_1_2</token>
-                    <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_8</token>
-                    <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_8 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
-                    <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>&amp;&amp; compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
-                    <value>&amp;&amp; /* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>parser.compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_7</token>
-                    <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_1_7 */ false</value>
-                  </replacement>
-                  <replacement>
-                    <token>compilerEnv.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
-                  </replacement>
-                  <replacement>
-                    <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
-                    <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
-                  </replacement>
-                </replacements>
-              </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -502,6 +546,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.11.3</version>
             <scope>test</scope>
+        </dependency>
+        <!--JUnit Jupiter Engine to depend on the JUnit4 engine and JUnit 4 API  -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.11.3</version>
         </dependency>
     </dependencies>
     <distributionManagement>
