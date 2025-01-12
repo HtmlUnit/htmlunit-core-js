@@ -15,7 +15,7 @@ Notice that "org.mozilla.*" is renamed to "org.htmlunit.corejs.*"
 
 **[Developer Blog](https://htmlunit.github.io/htmlunit-blog/)**
 
-[HtmlUnit@mastodon][4] | [HtmlUnit@Twitter][3]
+[HtmlUnit@mastodon](https://fosstodon.org/@HtmlUnit) | [HtmlUnit@bsky](https://bsky.app/profile/htmlunit.bsky.social) | [HtmlUnit@Twitter](https://twitter.com/HtmlUnit)
 
 ## Start HtmlUnit - core-js Development
 
@@ -105,6 +105,3 @@ This project is licensed under the Apache 2.0 License
 ## Acknowledgments
 
 Many thanks to all of you contributing to HtmlUnit/Rhino in the past.
-
-[3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
-[4]: https://fosstodon.org/@HtmlUnit
