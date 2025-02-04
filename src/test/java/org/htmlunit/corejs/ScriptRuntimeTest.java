@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +30,7 @@ public class ScriptRuntimeTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-        test(script, "exception", feature, false);
-        test(script, "function foo() {}", feature, true);
+        test(script, "function foo() {}");
     }
 
     @Test
@@ -52,9 +49,7 @@ public class ScriptRuntimeTest {
                 + "var output = '';\n"
                 + "test();\n"
                 + "output";
-        final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-        test(script, "undefined", feature, false);
-        test(script, "undefined", feature, true);
+        test(script, "undefined");
     }
 
     @Test
@@ -70,38 +65,7 @@ public class ScriptRuntimeTest {
                 + "  function foo() {}\n"
                 + "}\n"
                 + "output";
-        final int feature = Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-        test(script, "exception", feature, false);
-        test(script, "function foo() {}", feature, true);
-    }
-
-    private static void test(final String script, final Object expected,
-            final int feature, final boolean featureValue) {
-        final ContextFactory cf = new ContextFactory() {
-            @Override
-            protected boolean hasFeature(Context cx, int featureIndex) {
-                if (featureIndex == feature) {
-                    return featureValue;
-                }
-                return super.hasFeature(cx, featureIndex);
-            }
-        };
-
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                try {
-                    Scriptable scope = cx.initSafeStandardObjects();
-                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-                    assertEquals(expected, o);
-                    return o;
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Utils.runWithOptimizationLevel(cf, action, -1);
+        test(script, "function foo() {}");
     }
 
     @Test
