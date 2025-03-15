@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
  */
 public class ReflectTest {
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void constructor() {
         final String script =
@@ -32,6 +35,9 @@ public class ReflectTest {
         test(script, "foo - 1 2 ");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     public void constructorWithTarger() {
         final String script =
