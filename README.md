@@ -1,3 +1,5 @@
+### Latest release Version 4.11.0 / March 24, 2025
+
 # HtmlUnit - core-js
 
 This project is a Rhino fork, maintained to support features needed by HtmlUnit.
