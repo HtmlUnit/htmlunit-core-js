@@ -1,16 +1,13 @@
 package org.htmlunit.corejs;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
  * Tests for NativeRegExp object.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class NativeRegExpTest {
 
@@ -20,7 +17,7 @@ public class NativeRegExpTest {
     @Test
     public void empty() throws Exception {
         final String script = "new RegExp().test('AA')";
-        test(script, Boolean.TRUE);
+        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
     }
 
     /**
@@ -29,7 +26,7 @@ public class NativeRegExpTest {
     @Test
     public void undefined() throws Exception {
         final String script = "new RegExp(undefined).test('AA')";
-        test(script, Boolean.TRUE);
+        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
     }
 
     /**
@@ -40,24 +37,6 @@ public class NativeRegExpTest {
     @Test
     public void changed() throws Exception {
         final String script = "'alpha'.replace(/alpha/, '');/beta/.test('abc beta def');";
-        test(script, Boolean.TRUE);
-    }
-
-    private static void test(final String script, final Object expected) {
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                try {
-                    Scriptable scope = cx.initSafeStandardObjects();
-                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-                    assertEquals(expected, o);
-                    return o;
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
     }
 }

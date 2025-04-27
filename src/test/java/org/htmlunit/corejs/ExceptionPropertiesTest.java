@@ -2,17 +2,17 @@ package org.htmlunit.corejs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.RhinoException;
-import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=549604">bug 549604</a>.
- * This tests verify the properties of a JS exception and ensures that they don't change with different optimization levels.
+ * This tests verify the properties of a JS exception and ensures that they don't change
+ * with different optimization levels.
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class ExceptionPropertiesTest {
     final static String LS = System.getProperty("line.separator");
@@ -29,15 +29,14 @@ public class ExceptionPropertiesTest {
     }
 
     private static void testScriptStackTrace(final String script, final String expectedStackTrace) {
-        testScriptStackTrace(script, expectedStackTrace, -1);
-        testScriptStackTrace(script, expectedStackTrace, 0);
-        testScriptStackTrace(script, expectedStackTrace, 1);
+        testScriptStackTrace(script, expectedStackTrace, true);
+        testScriptStackTrace(script, expectedStackTrace, false);
     }
 
     private static void testScriptStackTrace(final String script, final String expectedStackTrace,
-            final int optimizationLevel) {
+            boolean interpreted) {
         try {
-            Utilities.executeScript(script, optimizationLevel);
+            Utils.executeScript(script, interpreted);
         }
         catch (final RhinoException e) {
             assertEquals(expectedStackTrace, e.getScriptStackTrace());
@@ -46,49 +45,27 @@ public class ExceptionPropertiesTest {
 
     @Test
     public void fileName() {
-        testIt("try { null.method() } catch (e) { e.fileName }", "myScript.js");
-        testIt("try { null.property } catch (e) { e.fileName }", "myScript.js");
+        Utils.assertWithAllModes_ES6("test.js", "try { null.method() } catch (e) { e.fileName }");
+        Utils.assertWithAllModes_ES6("test.js", "try { null.property } catch (e) { e.fileName }");
     }
 
     @Test
     public void lineNumber() {
-        testIt("try { null.method() } catch (e) { e.lineNumber }", 1);
-        testIt("try {\n null.method() \n} catch (e) { e.lineNumber }", 2);
-        testIt("\ntry \n{\n null.method() \n} catch (e) { e.lineNumber }", 4);
+        Utils.assertWithAllModes_ES6(0, "try { null.method() } catch (e) { e.lineNumber }");
+        Utils.assertWithAllModes_ES6(1, "try {\n null.method() \n} catch (e) { e.lineNumber }");
+        Utils.assertWithAllModes_ES6(3, "\ntry \n{\n null.method() \n} catch (e) { e.lineNumber }");
 
-        testIt("function f() {\n null.method(); \n}\n try { f() } catch (e) { e.lineNumber }", 2);
+        Utils.assertWithAllModes_ES6(1, "function f() {\n null.method(); \n}\n try { f() } catch (e) { e.lineNumber }");
     }
 
     @Test
     public void stack() {
-        testIt("try { null.method() } catch (e) { e.stack }", "\tat myScript.js:1" + LS);
-        final String expectedStack = "\tat myScript.js:2 (f)" + LS + "\tat myScript.js:4" + LS;
-        testIt("function f() {\n null.method(); \n}\n try { f() } catch (e) { e.stack }", expectedStack);
-    }
+        Utils.assertWithAllModes_ES6(
+                "\tat test.js:0" + LS,
+                "try { null.method() } catch (e) { e.stack }");
 
-    private static void testIt(final String script, final Object expected) {
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                // no need to do that because we use a patched version
-                // cx.setLanguageVersion(Context.VERSION_ES6);
-
-                try {
-                    final ScriptableObject scope = cx.initSafeStandardObjects();
-                    final Object o = cx.evaluateString(scope, script,
-                            "myScript.js", 1, null);
-                    assertEquals(expected, o);
-                    return o;
-                }
-                catch (final RuntimeException e) {
-                    throw e;
-                }
-                catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        final String expectedStack = "\tat test.js:1 (f)" + LS + "\tat test.js:3" + LS;
+        final String script = "function f() {\n null.method(); \n}\n try { f() } catch (e) { e.stack }";
+        Utils.assertWithAllModes_ES6(expectedStack, script);
     }
 }

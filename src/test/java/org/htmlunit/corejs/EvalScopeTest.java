@@ -4,17 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Method;
 
-import org.junit.jupiter.api.Test;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test scope of 'eval'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class EvalScopeTest {
 
@@ -83,7 +84,7 @@ public class EvalScopeTest {
             }
         };
 
-        Utils.runWithAllOptimizationLevels(cf, action);
+        Utils.runWithAllModes(cf, action);
     }
 
     public static class MyHostObject extends ScriptableObject {

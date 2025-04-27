@@ -2,13 +2,20 @@ package org.htmlunit.corejs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
+import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for getter/setter lookup.
+ *
+ * @author Marc Guillemot
+ * @author Ahmed Ashour
+ * @author Ronald Brill
+ */
 public class LookupSetterTest {
     private final String defineSetterAndGetterX =
         "Foo.__defineSetter__('x', function() {}); \n"
@@ -57,7 +64,7 @@ public class LookupSetterTest {
             }
         };
 
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.runWithAllModes(action);
     }
 
     public static class Foo extends ScriptableObject {

@@ -3,18 +3,20 @@ package org.htmlunit.corejs;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.Test;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
+import org.junit.jupiter.api.Test;
 
 /**
  * It can be useful to avoid that JavaScript catch block can catch internal exceptions in host objects.
  * Indeed it hides these exception and makes more difficult to find the root problems.
  * @see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=519935">Rhino bug 519935</a>
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HostExceptionsTest {
 
@@ -74,7 +76,7 @@ public class HostExceptionsTest {
                 return null;
             }
         };
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.runWithAllModes(action);
     }
 
     public static class MyScriptable extends ScriptableObject {

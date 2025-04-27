@@ -6,12 +6,14 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link ScriptableObject}
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ScriptableObjectTest {
 
@@ -53,6 +55,6 @@ public class ScriptableObjectTest {
             }
         };
 
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.runWithAllModes(action);
     }
 }

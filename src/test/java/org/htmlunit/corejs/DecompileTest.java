@@ -2,15 +2,17 @@ package org.htmlunit.corejs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Script;
+import org.htmlunit.corejs.javascript.testutils.Utils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for {@link Context#decompileScript(Script, int)}.
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class DecompileTest {
 
@@ -29,6 +31,7 @@ public class DecompileTest {
                 return null;
             }
         };
-        Utils.runWithAllOptimizationLevels(action);
+
+        Utils.runWithAllModes(action);
     }
 }

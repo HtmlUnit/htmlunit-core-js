@@ -8,12 +8,14 @@ import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link org.mozilla.javascript.Parser}
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ParserTest {
 
@@ -75,6 +77,6 @@ public class ParserTest {
             }
         };
 
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.runWithAllModes(action);
     }
 }

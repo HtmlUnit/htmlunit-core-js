@@ -1,11 +1,14 @@
 package org.htmlunit.corejs;
 
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test that Object properties are returned in the creation order.
  * (now fixed in Rhino itself)
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class PropertiesOrderTest {
 
@@ -21,9 +24,8 @@ public class PropertiesOrderTest {
         final String script = "var o = {a: 1, b: 1, c: 1, d: 1};\n"
             + "var str = '';\n"
             + "for (var i in o) str += i + ' ';\n"
-            + "if (str != 'a b c d ')\n"
-            + "  throw 'Got: ' + str";
-        
-        Utilities.executeScript(script);
+            + "str";
+
+        Utils.assertWithAllModes_ES6("a b c d ", script);
     }
 }

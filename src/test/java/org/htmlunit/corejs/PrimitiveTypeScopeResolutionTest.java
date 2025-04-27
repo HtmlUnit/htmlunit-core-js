@@ -4,17 +4,18 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=374918">Bug 374918 -
  * String primitive prototype wrongly resolved when used with many top scopes</a>
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class PrimitiveTypeScopeResolutionTest {
 
-    /**
-     */
     @Test
     public void functionCall() {
         String str2 = "function f() { String.prototype.foo = function() { return 'from 2' }; \n"
@@ -27,8 +28,6 @@ public class PrimitiveTypeScopeResolutionTest {
         testWithTwoScopes(str1, str2);
     }
 
-    /**
-     */
     @Test
     public void propertyAccess() {
         String str2 = "function f() { String.prototype.foo = 'from 2'; \n"
@@ -54,7 +53,7 @@ public class PrimitiveTypeScopeResolutionTest {
                 return cx.evaluateString(scope1, scriptScope1, "source1", 1, null);
             }
         };
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.runWithAllModes(action);
     }
 
     /**

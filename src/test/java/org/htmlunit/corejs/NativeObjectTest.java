@@ -1,10 +1,6 @@
 package org.htmlunit.corejs;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,17 +25,7 @@ public class NativeObjectTest {
                 + "test();\n"
                 + "output";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("1", result);
-                return null;
-            }
-        };
-
-       Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("1", script);
     }
 
     /**
@@ -55,17 +41,7 @@ public class NativeObjectTest {
                 + "test();\n"
                 + "output";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("undefined", result);
-                return null;
-            }
-        };
-
-       Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("undefined", script);
     }
 
     /**
@@ -85,20 +61,6 @@ public class NativeObjectTest {
             + "  var p = new f();\n"
             + "  log = log + ' / ' + (p instanceof f);";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                try {
-                    Scriptable scope = cx.initSafeStandardObjects();
-                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-                    assertEquals("before: [object Object] / after: [object Object] / true", o);
-                    return o;
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("before: [object Object] / after: [object Object] / true", script);
     }
 }

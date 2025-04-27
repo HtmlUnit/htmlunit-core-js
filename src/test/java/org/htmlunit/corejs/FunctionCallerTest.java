@@ -1,12 +1,8 @@
 package org.htmlunit.corejs;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Test for a basic implementation of caller property on functions.
@@ -14,6 +10,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class FunctionCallerTest {
 
@@ -26,17 +23,8 @@ public class FunctionCallerTest {
     public void upperScopeVarShouldntBeSetWithVarFunctionWithSameName() throws Exception {
         final String script = "var g = true; (function() { var g = function g() { return 1; };\n"
                 + "return this.g == undefined })();g;\n";
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals(Boolean.TRUE, result);
-                return null;
-            }
-        };
 
-        Utils.runWithOptimizationLevel(action, -1);
+        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
     }
 
     /**
@@ -53,17 +41,8 @@ public class FunctionCallerTest {
                 + "  return f();\n"
                 + "}\n"
                 + "g();\n";
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("", result);
-                return null;
-            }
-        };
 
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("", script);
     }
 
     /**
@@ -84,17 +63,7 @@ public class FunctionCallerTest {
             + "}\n"
             + "f();\n";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-
-                cx.evaluateString(scope, script, "test.js", 1, null);
-
-                return null;
-            }
-        };
-        Utils.runWithOptimizationLevel(action, -1);
+        Utils.assertWithAllModes_ES6(Undefined.instance, script);
     }
 
     /**
@@ -117,17 +86,7 @@ public class FunctionCallerTest {
             + "f();\n"
             + "output";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("2-2", result);
-                return null;
-            }
-        };
-        Utils.runWithOptimizationLevel(action, -1);
+        Utils.assertWithAllModes_ES6("2-2", script);
     }
 
     /**
@@ -151,17 +110,7 @@ public class FunctionCallerTest {
             + "f();\n"
             + "output";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("2-hello-2", result);
-                return null;
-            }
-        };
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("2-hello-2", script);
     }
 
     /**
@@ -181,16 +130,6 @@ public class FunctionCallerTest {
             + "g();\n"
             + "output";
 
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
-
-                final Object result = cx.evaluateString(scope, script, "test.js", 1, null);
-                assertEquals("true, true", result);
-                return null;
-            }
-        };
-        Utils.runWithOptimizationLevel(action, -1);
+        Utils.assertWithAllModes_ES6("true, true", script);
     }
 }

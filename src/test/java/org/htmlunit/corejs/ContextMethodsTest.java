@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-import org.junit.jupiter.api.Test;
 import org.htmlunit.corejs.javascript.CompilerEnvirons;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
@@ -16,6 +15,7 @@ import org.htmlunit.corejs.javascript.ErrorReporter;
 import org.htmlunit.corejs.javascript.Evaluator;
 import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=481152">Bug 481152 -

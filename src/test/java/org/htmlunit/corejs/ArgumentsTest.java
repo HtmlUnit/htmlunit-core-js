@@ -2,18 +2,19 @@ package org.htmlunit.corejs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.testutils.Utils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for Arguments object.
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class ArgumentsTest {
 
@@ -28,7 +29,8 @@ public class ArgumentsTest {
                 + "  return s;\n"
                 + "}\n"
                 + "f();\n";
-        runScript(script, "");
+
+        Utils.assertWithAllModes_ES6("", script);
     }
 
 
@@ -41,7 +43,8 @@ public class ArgumentsTest {
                 + "}\n"
                 + "f(1, 2);\n"
                 + "f.arguments";
-        runScript(script, null);
+
+        Utils.assertWithAllModes_ES6(null, script);
     }
 
     /**
@@ -56,7 +59,7 @@ public class ArgumentsTest {
                 + "f();\n"
                 + "output";
 
-        runScript(script, "[object Arguments]");
+        Utils.assertWithAllModes_ES6("[object Arguments]", script);
     }
 
     /**
@@ -133,6 +136,7 @@ public class ArgumentsTest {
                 return super.hasFeature(cx, featureIndex);
             }
         };
+
         final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
@@ -143,7 +147,7 @@ public class ArgumentsTest {
             }
         };
 
-        Utils.runWithOptimizationLevel(cf, action, -1);
+        Utils.runWithAllModes(cf, action);
     }
 
     /**
@@ -156,7 +160,7 @@ public class ArgumentsTest {
                 + "}\n"
                 + "test1('hello')";
 
-        test(script, "hello");
+        Utils.assertWithAllModes_ES6("hello", script);
     }
 
     /**
@@ -169,24 +173,6 @@ public class ArgumentsTest {
                 + "}\n"
                 + "test1('hello')";
 
-        test(script, "object");
-    }
-
-    private static void test(final String script, final Object expected) {
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                try {
-                    Scriptable scope = cx.initSafeStandardObjects();
-                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-                    assertEquals(expected, o);
-                    return o;
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("object", script);
     }
 }

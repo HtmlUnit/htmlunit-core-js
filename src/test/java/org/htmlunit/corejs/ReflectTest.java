@@ -1,11 +1,6 @@
 package org.htmlunit.corejs;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,7 +27,7 @@ public class ReflectTest {
                 + "Reflect.construct(foo, [1, 2]);\n"
                 + "res;";
 
-        test(script, "foo - 1 2 ");
+        Utils.assertWithAllModes_ES6("foo - 1 2 ", script);
     }
 
     /**
@@ -58,24 +53,6 @@ public class ReflectTest {
                 + "Reflect.construct(foo, [6, 7, 8], bar);\n"
                 + "res;";
 
-        test(script, "foo - 6 7 8 ");
-    }
-
-    private static void test(final String script, final Object expected) {
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                try {
-                    Scriptable scope = cx.initSafeStandardObjects();
-                    final Object o = cx.evaluateString(scope, script, "test_script", 1, null);
-                    assertEquals(expected, o);
-                    return o;
-                } catch (final Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-
-        Utils.runWithAllOptimizationLevels(action);
+        Utils.assertWithAllModes_ES6("foo - 6 7 8 ", script);
     }
 }

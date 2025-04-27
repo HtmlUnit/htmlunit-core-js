@@ -6,12 +6,15 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
  * In certain cases stacktrace if lost in case of exception
  * https://bugzilla.mozilla.org/show_bug.cgi?id=376717
+ *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class StackTraceTest {
 
@@ -46,6 +49,6 @@ public class StackTraceTest {
                 throw new RuntimeException("Exception expected!");
             }
         };
-        Utils.runWithOptimizationLevel(action, -1);
+        Utils.runWithAllModes(action);
     }
  }
