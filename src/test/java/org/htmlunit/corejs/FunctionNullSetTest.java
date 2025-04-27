@@ -11,6 +11,7 @@ import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.testutils.Utils;
 
 /**
  * Checks if setting "functionName = null" is propagated to thisObject.
@@ -55,7 +56,7 @@ public class FunctionNullSetTest {
             }
         };
 
-        Utils.runWithOptimizationLevel(action, -1);
+        Utils.runWithAllModes(action);
     }
 
     public static class MyHostObject extends ScriptableObject {
