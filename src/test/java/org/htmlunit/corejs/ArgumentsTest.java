@@ -121,10 +121,6 @@ public class ArgumentsTest {
         runScript(script, true, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
     }
 
-    private static void runScript(final String script, final Object expectedResult) {
-        runScript(script, expectedResult, Integer.MAX_VALUE, false);
-    }
-
     private static void runScript(final String script, final Object expectedResult,
             final int featureToSet, final boolean featureValue) {
         final ContextFactory cf = new ContextFactory() {

@@ -17,6 +17,6 @@ public class GlobalTest {
     public void test() throws Exception {
         try (Context ctx = ContextFactory.getGlobal().enterContext()) {
             new Global(ctx);
-        };
+        }
     }
 }

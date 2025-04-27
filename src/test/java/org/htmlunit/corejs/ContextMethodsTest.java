@@ -57,7 +57,7 @@ public class ContextMethodsTest {
                 final Scriptable scope = cx.initSafeStandardObjects();
                 final Script script = cx.compileString(source, "", 1, (Object) null);
                 return script.exec(cx, scope);
-            };
+            }
         };
         cf.call(action);
 

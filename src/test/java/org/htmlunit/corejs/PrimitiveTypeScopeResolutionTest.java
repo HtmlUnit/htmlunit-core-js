@@ -73,5 +73,5 @@ public class PrimitiveTypeScopeResolutionTest {
         public String toString() {
             return label_;
         }
-    };
+    }
 }
