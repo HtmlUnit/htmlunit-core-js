@@ -1,10 +1,7 @@
 package org.htmlunit.corejs.javascript.regexp;
 
 import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.regexp.NativeRegExp;
-import org.htmlunit.corejs.javascript.regexp.RECompiled;
-import org.htmlunit.corejs.javascript.regexp.REGlobalData;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,6 +27,6 @@ public class RegExpImplStandaloneTest {
 
         String experiment = "HtmlUniiiiiot";
         final boolean matches = RegExpEngineAccess.matches(cx, experiment, compiled);
-        Assert.assertTrue(matches);
+        Assertions.assertTrue(matches);
     }
 }
