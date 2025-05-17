@@ -1,4 +1,4 @@
-### Latest release Version 4.11.0 / March 24, 2025
+### Latest release Version 4.12.0 / May 17, 2025
 
 # HtmlUnit - core-js
 
