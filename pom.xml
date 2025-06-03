@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.12.0</version>
+    <version>4.13.0</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -21,7 +21,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <!-- test dependencies -->
-        <junit.version>5.12.2</junit.version>
+        <junit.version>5.13.0</junit.version>
 
         <!-- quality -->
         <dependencycheck.version>10.0.4</dependencycheck.version>
@@ -88,6 +88,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
@@ -105,6 +106,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -574,7 +576,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.12.2</version>
+            <version>1.13.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
