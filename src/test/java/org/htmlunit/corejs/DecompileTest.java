@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Script;
-import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**

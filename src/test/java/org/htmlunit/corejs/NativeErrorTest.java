@@ -1,7 +1,6 @@
 package org.htmlunit.corejs;
 
 import org.htmlunit.corejs.javascript.ContextFactory;
-import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**

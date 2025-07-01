@@ -3,7 +3,6 @@ package org.htmlunit.corejs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.htmlunit.corejs.javascript.RhinoException;
-import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**

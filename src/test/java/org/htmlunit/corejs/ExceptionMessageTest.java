@@ -2,7 +2,6 @@ package org.htmlunit.corejs;
 
 import java.util.Locale;
 
-import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

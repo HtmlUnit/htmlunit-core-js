@@ -8,7 +8,6 @@ import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.testutils.Utils;
 import org.junit.jupiter.api.Test;
 
 /**
