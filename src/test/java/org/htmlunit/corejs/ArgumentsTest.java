@@ -78,8 +78,10 @@ public class ArgumentsTest {
                 + "test1('hello', 'world');\n"
                 + "output";
 
-        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
-        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+        // we do a hard coded replacement
+        // runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
+        // runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+        Utils.assertWithAllModes_ES6("2-hi-undefined-you", script);
     }
 
     /**
@@ -102,8 +104,10 @@ public class ArgumentsTest {
                 + "test();\n"
                 + "output";
 
-        runScript(script, "2-world-undefined-undefined", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
-        runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+        // we do a hard coded replacement
+        // runScript(script, "2-world-undefined-undefined", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
+        // runScript(script, "2-hi-undefined-you", Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+        Utils.assertWithAllModes_ES6("2-world-undefined-undefined", script);
     }
 
     /**
@@ -116,8 +120,10 @@ public class ArgumentsTest {
                 + "}\n"
                 + "test1('hello', 'world')";
 
-        runScript(script, false, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
-        runScript(script, true, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+        // we do a hard coded replacement
+        // runScript(script, false, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, true);
+        // runScript(script, true, Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW, false);
+        Utils.assertWithAllModes_ES6(false, script);
     }
 
     private static void runScript(final String script, final Object expectedResult,
