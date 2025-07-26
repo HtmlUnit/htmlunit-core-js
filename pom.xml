@@ -387,6 +387,10 @@
                         <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
                       </replacement>
                       <replacement>
+                        <token>parser.compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
+                      </replacement>
+                      <replacement>
                         <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
                         <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
                       </replacement>
@@ -396,7 +400,7 @@
                         <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_OLD_UNDEF_NULL_THIS\) */ true</value>
                       </replacement>
                       <replacement>
-                        <token>cx.hasFeature\(Context.FEATURE_STRICT_MODE_\)</token>
+                        <token>cx.hasFeature\(Context.FEATURE_STRICT_MODE\)</token>
                         <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_STRICT_MODE\) */ false</value>
                       </replacement>
                       <replacement>
@@ -415,6 +419,16 @@
                         <token>cx.hasFeature\(Context.FEATURE_INTL_402\)</token>
                         <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_INTL_402\) */ true</value>
                       </replacement>
+
+                      <replacement>
+                        <token>NativeJavaObject.init\(scope, sealed\);</token>
+                        <value>/* HtmlUnit NativeJavaObject.init\(scope, sealed\); */</value>
+                      </replacement>
+                      <replacement>
+                        <token>NativeJavaMap.init\(scope, sealed\);</token>
+                        <value>/* HtmlUnit NativeJavaMap.init\(scope, sealed\); */</value>
+                      </replacement>
+
 
                     </replacements>
                   </configuration>
