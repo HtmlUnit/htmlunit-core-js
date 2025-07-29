@@ -419,16 +419,22 @@
                         <token>cx.hasFeature\(Context.FEATURE_INTL_402\)</token>
                         <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_INTL_402\) */ true</value>
                       </replacement>
-
                       <replacement>
-                        <token>NativeJavaObject.init\(scope, sealed\);</token>
-                        <value>/* HtmlUnit NativeJavaObject.init\(scope, sealed\); */</value>
+                        <token>cx.hasFeature\(Context.FEATURE_DYNAMIC_SCOPE\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_DYNAMIC_SCOPE\) */ false</value>
                       </replacement>
                       <replacement>
-                        <token>NativeJavaMap.init\(scope, sealed\);</token>
-                        <value>/* HtmlUnit NativeJavaMap.init\(scope, sealed\); */</value>
+                        <token>Context.getCurrentContext\(\).hasFeature\(Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW\)</token>
+                        <value>/* HtmlUnit Context.getCurrentContext\(\).hasFeature\(Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW\) */ true</value>
                       </replacement>
-
+                      <replacement>
+                        <token>cx.hasFeature\(Context.FEATURE_E4X\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_E4X\) */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>cx.hasFeature\(Context.FEATURE_ENHANCED_JAVA_ACCESS\)</token>
+                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_ENHANCED_JAVA_ACCESS\) */ false</value>
+                      </replacement>
 
                     </replacements>
                   </configuration>
