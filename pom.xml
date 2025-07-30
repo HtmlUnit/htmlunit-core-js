@@ -28,6 +28,10 @@
 
         <!-- plugins -->
         <central-publishing.version>0.8.0</central-publishing.version>
+        <clean-plugin.version>3.5.0</clean-plugin.version>
+        <build-helper-plugin.version>3.6.1</build-helper-plugin.version>
+        <gpg-plugin.version>3.2.8</gpg-plugin.version>
+        <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
     </properties>
 
     <build>
@@ -40,7 +44,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>${build-helper-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>generate-rhino-sources</id>
@@ -73,7 +77,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>${enforcer-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -115,7 +119,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>${clean-plugin.version}</version>
                 <configuration>
                     <filesets>
                         <fileset>
@@ -528,7 +532,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.7</version>
+                <version>${gpg-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
