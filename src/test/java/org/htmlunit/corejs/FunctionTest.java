@@ -66,4 +66,51 @@ public class FunctionTest {
 
         Utils.assertWithAllModes_ES6("undefinedhi", script);
     }
+
+    @Test
+    public void applyThisFromBoundArgs() throws Exception {
+        String script =
+                "var f = function(x) { return this.toString(); };\n"
+                + "var a = f.apply;\n"
+                + "var b = a.bind(f, 'Hello!');\n"
+                + "b([1,2]);";
+
+        Utils.assertWithAllModes_ES6("Hello!", script);
+    }
+
+    @Test
+    public void applyToApplyCallsCorrectFunction() throws Exception {
+        String script =
+                "function foo(x) {return x;};\n"
+                + "Function.prototype.apply.apply(foo, ['b', ['Hello!', 'Goodbye!']]);\n";
+
+        Utils.assertWithAllModes_ES6("Hello!", script);
+    }
+
+    @Test
+    public void applyToApplySetsCorrectFunctionThis() throws Exception {
+        String script =
+                "function foo(x) {return this.toString();};\n"
+                + "Function.prototype.apply.apply(foo, ['b', ['Hello!', 'Goodbye!']]);\n";
+
+        Utils.assertWithAllModes_ES6("b", script);
+    }
+
+    @Test
+    public void applyToCallCallsCorrectFunction() throws Exception {
+        String script =
+                "function foo(x) {return x;};\n"
+                + "foo.call.apply(foo, ['b', 'Hello!']);\n";
+
+        Utils.assertWithAllModes_ES6("Hello!", script);
+    }
+
+    @Test
+    public void applyToCallSetsCorrectFunctionThis() throws Exception {
+        String script =
+                "function foo(x) {return this.toString();};\n"
+                + "foo.call.apply(foo, ['b', 'Hello!']);\n";
+
+        Utils.assertWithAllModes_ES6("b", script);
+    }
 }
