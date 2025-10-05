@@ -21,7 +21,7 @@ public class NativeErrorTest {
                 + "    null.method();\n"
                 + "  } catch (e) {\n"
                 + "    if (e.stack)\n"
-                + "      output += e.stack.indexOf('\tat test.js:4 (test)') != -1;\n"
+                + "      output += e.stack.indexOf('\tat test.js:2 (test)') != -1;\n"
                 + "    else\n"
                 + "      output += 'undefined';\n"
                 + "  }\n"
