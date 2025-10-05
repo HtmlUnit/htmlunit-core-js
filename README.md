@@ -1,4 +1,4 @@
-### Latest release Version 4.16.0 / August 29, 2025
+### Latest release Version 4.17.0 / October 05, 2025
 
 # HtmlUnit - core-js
 
@@ -73,9 +73,8 @@ This part is intended for committer who are packaging a release.
    mvn -up clean deploy
 ```
 
-* Go to [Sonatype staging repositories](https://s01.oss.sonatype.org/index.html#stagingRepositories) and process the deploy
-  - select the repository and close it - wait until the close is processed
-  - release the package and wait until it is processed
+* Go to [Maven Central Portal](https://central.sonatype.com/) and process the deploy
+  - publish the package and wait until it is processed
 
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-core-js

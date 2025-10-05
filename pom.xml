@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.16.0</version>
+    <version>4.17.0</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -347,6 +347,10 @@
                         <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt;= #Context.VERSION_1_7 */ false</value>
                       </replacement>
                       <replacement>
+                        <token>cx.getLanguageVersion\(\) &lt;= Context.VERSION_1_8</token>
+                        <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt;= #Context.VERSION_1_8 */ false</value>
+                      </replacement>
+                      <replacement>
                         <token>cx.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
                         <value>/* HtmlUnit cx.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
                       </replacement>
@@ -519,8 +523,10 @@
                 <version>${javadoc-plugin.version}</version>
                 <configuration>
                     <quiet>true</quiet>
+                    <show>protected</show>
                     <doclint>none</doclint>
-                    <additionalparam>--allow-script-in-comments</additionalparam>
+                    <detectLinks>true</detectLinks>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                     </links>
