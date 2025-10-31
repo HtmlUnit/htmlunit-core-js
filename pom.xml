@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.17.0</version>
+    <version>4.18.0</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -21,18 +21,21 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <!-- test dependencies -->
-        <junit.version>5.13.0</junit.version>
+        <junit.version>5.14.0</junit.version>
+        <junit-launcher.version>1.14.0</junit-launcher.version>
 
         <!-- quality -->
         <dependencycheck.version>10.0.4</dependencycheck.version>
 
         <!-- plugins -->
-        <central-publishing.version>0.8.0</central-publishing.version>
+        <central-publishing.version>0.9.0</central-publishing.version>
         <clean-plugin.version>3.5.0</clean-plugin.version>
         <build-helper-plugin.version>3.6.1</build-helper-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
-        <enforcer-plugin.version>3.6.1</enforcer-plugin.version>
-        <javadoc-plugin.version>3.11.3</javadoc-plugin.version>
+        <enforcer-plugin.version>3.6.2</enforcer-plugin.version>
+        <compiler-plugin.version>3.14.1</compiler-plugin.version>
+        <javadoc-plugin.version>3.12.0</javadoc-plugin.version>
+        <surefire-plugin.version>3.5.4</surefire-plugin.version>
     </properties>
 
     <build>
@@ -480,12 +483,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.3</version>
+                <version>${surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.0</version>
+                <version>${compiler-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -618,7 +621,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.13.0</version>
+            <version>${junit-launcher.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
