@@ -9,7 +9,7 @@ and "htmlunit-core-js" which has the test cases and packaging.
 
 Notice that "org.mozilla.*" is renamed to "org.htmlunit.corejs.*"
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit-core-js)
+[![Maven Central Version](https://img.shields.io/maven-central/v/org.htmlunit/htmlunit-core-js)](https://central.sonatype.com/artifact/org.htmlunit/htmlunit-core-js)
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
