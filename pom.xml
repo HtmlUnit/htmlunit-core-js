@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>4.20.0</version>
+    <version>4.21.0-SNAPSHOT</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -354,6 +354,10 @@
                       <replacement>
                         <token>cx.getLanguageVersion\(\) &lt;= Context.VERSION_1_8</token>
                         <value>/* HtmlUnit cx.getLanguageVersion\(\) &lt;= #Context.VERSION_1_8 */ false</value>
+                      </replacement>
+                      <replacement>
+                        <token>version &lt;= Context.VERSION_1_8</token>
+                        <value>/* HtmlUnit version &lt;= #Context.VERSION_1_8 */ false</value>
                       </replacement>
                       <replacement>
                         <token>cx.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
