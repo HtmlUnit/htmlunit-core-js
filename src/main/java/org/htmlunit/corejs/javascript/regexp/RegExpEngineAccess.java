@@ -3,7 +3,7 @@ package org.htmlunit.corejs.javascript.regexp;
 import org.htmlunit.corejs.javascript.Context;
 
 /**
- * Simple wrapper to to use the RegExp engine without js.
+ * Simple wrapper to use the RegExp engine without js.
  * This is required for implementing input validation.
  *
  * @author Ronald Brill
