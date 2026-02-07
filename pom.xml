@@ -180,6 +180,8 @@
                                       </includes>
                                       <excludes>
                                           <exclude>javascript/tools/shell/**/ExecUtil.java</exclude>
+                                          <exclude>javascript/tools/shell/**/JLineConsole.java</exclude>
+                                          <exclude>javascript/tools/shell/**/JLineConsoleProvider.java</exclude>
                                       </excludes>
                                   </resource>
                               </resources>
