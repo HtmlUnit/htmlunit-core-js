@@ -266,34 +266,6 @@
                       </replacement>
     
                       <replacement>
-                        <token>version == Context.VERSION_1_0</token>
-                        <value>/* HtmlUnit version == #Context.VERSION_1_0 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>version == Context.VERSION_1_1</token>
-                        <value>/* HtmlUnit version == #Context.VERSION_1_1 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>version == Context.VERSION_1_2</token>
-                        <value>/* HtmlUnit version == #Context.VERSION_1_2 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>version &lt;= Context.VERSION_1_3</token>
-                        <value>/* HtmlUnit version &lt;= #Context.VERSION_1_3 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>version &lt; Context.VERSION_1_3</token>
-                        <value>/* HtmlUnit version &lt; #Context.VERSION_1_3 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>version &lt;= Context.VERSION_1_4</token>
-                        <value>/* HtmlUnit version &lt;= #Context.VERSION_1_4 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>version >= Context.VERSION_1_4</token>
-                        <value>/* HtmlUnit version >= #Context.VERSION_1_4 */ true</value>
-                      </replacement>
-                      <replacement>
                         <token>version >= Context.VERSION_1_6</token>
                         <value>/* HtmlUnit version >= #Context.VERSION_1_6 */ true</value>
                       </replacement>
@@ -314,24 +286,8 @@
                         <value>/* HtmlUnit version != #Context.VERSION_DEFAULT */ true</value>
                       </replacement>
                       <replacement>
-                        <token>version == VERSION_DEFAULT \|\| version >= VERSION_1_3</token>
-                        <value>/* HtmlUnit version == #VERSION_DEFAULT \|\| version >= #VERSION_1_3 */ true</value>
-                      </replacement>
-                      <replacement>
                         <token>languageVersion &lt; Context.VERSION_ES6</token>
                         <value>/* HtmlUnit languageVersion &lt; #Context.VERSION_ES6 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>cx.getLanguageVersion\(\) == Context.VERSION_1_2</token>
-                        <value>/* HtmlUnit cx.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>cx.getLanguageVersion\(\) != Context.VERSION_1_2</token>
-                        <value>/* HtmlUnit cx.getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
-                      </replacement>
-                      <replacement>
-                        <token>getLanguageVersion\(\) != Context.VERSION_1_2</token>
-                        <value>/* HtmlUnit getLanguageVersion\(\) != #Context.VERSION_1_2 */ true</value>
                       </replacement>
                       <replacement>
                         <token>state.cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
@@ -384,10 +340,6 @@
                       <replacement>
                         <token>Context.getContext\(\).getLanguageVersion\(\) &lt; Context.VERSION_ES6</token>
                         <value>/* HtmlUnit Context.getContext\(\).getLanguageVersion\(\) &lt; #Context.VERSION_ES6 */ false</value>
-                      </replacement>
-                      <replacement>
-                        <token>compilerEnv.getLanguageVersion\(\) == Context.VERSION_1_2</token>
-                        <value>/* HtmlUnit compilerEnv.getLanguageVersion\(\) == #Context.VERSION_1_2 */ false</value>
                       </replacement>
                       <replacement>
                         <token>compilerEnv.getLanguageVersion\(\) &lt; Context.VERSION_1_8</token>
