@@ -290,6 +290,10 @@
                         <value>/* HtmlUnit languageVersion &lt; #Context.VERSION_ES6 */ false</value>
                       </replacement>
                       <replacement>
+                        <token>cx.version >= Context.VERSION_ES6</token>
+                        <value>/* HtmlUnit cx.version >= #Context.VERSION_ES6 */ true</value>
+                      </replacement>
+                      <replacement>
                         <token>state.cx.getLanguageVersion\(\) >= Context.VERSION_ES6</token>
                         <value>/* HtmlUnit state.cx.getLanguageVersion\(\) >= #Context.VERSION_ES6 */ true</value>
                       </replacement>
@@ -347,7 +351,7 @@
                       </replacement>
                       <replacement>
                         <token>parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
-                        <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8 */ true</value>
+                        <value>/* HtmlUnit parser.compilerEnv.getLanguageVersion\(\) >= #Context.VERSION_1_8 */ true</value>
                       </replacement>
                       <replacement>
                         <token>&amp;&amp; compilerEnv.getLanguageVersion\(\) >= Context.VERSION_1_8</token>
@@ -376,43 +380,43 @@
 
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_OLD_UNDEF_NULL_THIS\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_OLD_UNDEF_NULL_THIS\) */ true</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_OLD_UNDEF_NULL_THIS\) */ true</value>
                       </replacement>
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_STRICT_MODE\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_STRICT_MODE\) */ false</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_STRICT_MODE\) */ false</value>
                       </replacement>
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_ENUMERATE_IDS_FIRST\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_ENUMERATE_IDS_FIRST\) */ true</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_ENUMERATE_IDS_FIRST\) */ true</value>
                       </replacement>
                       <replacement>
                         <token>context.hasFeature\(Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE\)</token>
-                        <value>/* HtmlUnit context.hasFeature\(Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE\) */ false</value>
+                        <value>/* HtmlUnit context.hasFeature\(#Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE\) */ false</value>
                       </replacement>
                       <replacement>
                         <token>, useLittleEndian\(\)</token>
-                        <value>/* HtmlUnit , useLittleEndian\(\) */ , true</value>
+                        <value>/* HtmlUnit , #useLittleEndian\(\) */ , true</value>
                       </replacement>
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_INTL_402\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_INTL_402\) */ true</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_INTL_402\) */ true</value>
                       </replacement>
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_DYNAMIC_SCOPE\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_DYNAMIC_SCOPE\) */ false</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_DYNAMIC_SCOPE\) */ false</value>
                       </replacement>
                       <replacement>
                         <token>Context.getCurrentContext\(\).hasFeature\(Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW\)</token>
-                        <value>/* HtmlUnit Context.getCurrentContext\(\).hasFeature\(Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW\) */ true</value>
+                        <value>/* HtmlUnit Context.getCurrentContext\(\).hasFeature\(#Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW\) */ true</value>
                       </replacement>
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_E4X\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_E4X\) */ false</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_E4X\) */ false</value>
                       </replacement>
                       <replacement>
                         <token>cx.hasFeature\(Context.FEATURE_ENHANCED_JAVA_ACCESS\)</token>
-                        <value>/* HtmlUnit cx.hasFeature\(Context.FEATURE_ENHANCED_JAVA_ACCESS\) */ false</value>
+                        <value>/* HtmlUnit cx.hasFeature\(#Context.FEATURE_ENHANCED_JAVA_ACCESS\) */ false</value>
                       </replacement>
 
                     </replacements>
