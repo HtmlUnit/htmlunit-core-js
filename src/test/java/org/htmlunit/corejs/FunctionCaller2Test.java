@@ -288,381 +288,401 @@ public class FunctionCaller2Test {
         Utils.assertWithAllModes_ES6("true", code);
     }
 
-        @Test
-        public void callerWithBind() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "function callee() {\n"
-                            + "  capturedCaller = callee.caller;\n"
-                            + "}\n"
-                            + "function caller() {\n"
-                            + "  let boundCallee = callee.bind(null);\n"
-                            + "  boundCallee();\n"
-                            + "}\n"
-                            + "caller();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller !== undefined && capturedCaller !== null);\n"
-                            + "res";
+    @Test
+    public void callerWithBind() {
+        String code =
+                "let capturedCaller;\n"
+                        + "function callee() {\n"
+                        + "  capturedCaller = callee.caller;\n"
+                        + "}\n"
+                        + "function caller() {\n"
+                        + "  let boundCallee = callee.bind(null);\n"
+                        + "  boundCallee();\n"
+                        + "}\n"
+                        + "caller();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller !== undefined && capturedCaller !== null);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerInConstructor() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "function Constructor() {\n"
-                            + "  capturedCaller = Constructor.caller;\n"
-                            + "}\n"
-                            + "function createInstance() {\n"
-                            + "  new Constructor();\n"
-                            + "}\n"
-                            + "createInstance();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === createInstance);\n"
-                            + "res";
+    @Test
+    public void callerInConstructor() {
+        String code =
+                "let capturedCaller;\n"
+                        + "function Constructor() {\n"
+                        + "  capturedCaller = Constructor.caller;\n"
+                        + "}\n"
+                        + "function createInstance() {\n"
+                        + "  new Constructor();\n"
+                        + "}\n"
+                        + "createInstance();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === createInstance);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerInMethod() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "let obj = {\n"
-                            + "  method: function() {\n"
-                            + "    capturedCaller = obj.method.caller;\n"
-                            + "  }\n"
-                            + "};\n"
-                            + "function caller() {\n"
-                            + "  obj.method();\n"
-                            + "}\n"
-                            + "caller();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === caller);\n"
-                            + "res";
+    @Test
+    public void callerInMethod() {
+        String code =
+                "let capturedCaller;\n"
+                        + "let obj = {\n"
+                        + "  method: function() {\n"
+                        + "    capturedCaller = obj.method.caller;\n"
+                        + "  }\n"
+                        + "};\n"
+                        + "function caller() {\n"
+                        + "  obj.method();\n"
+                        + "}\n"
+                        + "caller();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === caller);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerWithFunctionConstructor() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "let dynamicFunc = new Function('capturedCaller = arguments.callee.caller');\n"
-                            + "function caller() {\n"
-                            + "  dynamicFunc();\n"
-                            + "}\n"
-                            + "caller();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === caller);\n"
-                            + "res";
+    @Test
+    public void callerWithFunctionConstructor() {
+        String code =
+                "let capturedCaller;\n"
+                        + "let dynamicFunc = new Function('capturedCaller = arguments.callee.caller');\n"
+                        + "function caller() {\n"
+                        + "  dynamicFunc();\n"
+                        + "}\n"
+                        + "caller();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === caller);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerWithEval() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "function outerFunc() {\n"
-                            + "  eval('capturedCaller = (function inner() { return inner.caller; })()');\n"
-                            + "}\n"
-                            + "outerFunc();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller !== undefined);\n"
-                            + "res";
+    @Test
+    public void callerWithEval() {
+        String code =
+                "let capturedCaller;\n"
+                        + "function outerFunc() {\n"
+                        + "  eval('capturedCaller = (function inner() { return inner.caller; })()');\n"
+                        + "}\n"
+                        + "outerFunc();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller !== undefined);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerInIIFE() {
-            String code =
-                    "let capturedCaller = (function() {\n"
-                            + "  return arguments.callee.caller;\n"
-                            + "})();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === null);\n"
-                            + "res";
+    @Test
+    public void callerInIIFE() {
+        String code =
+                "let capturedCaller = (function() {\n"
+                        + "  return arguments.callee.caller;\n"
+                        + "})();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === null);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerWithClosures() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "function outer() {\n"
-                            + "  function inner() {\n"
-                            + "    capturedCaller = inner.caller;\n"
-                            + "  }\n"
-                            + "  return inner;\n"
-                            + "}\n"
-                            + "let innerFunc = outer();\n"
-                            + "function caller() {\n"
-                            + "  innerFunc();\n"
-                            + "}\n"
-                            + "caller();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === caller);\n"
-                            + "res";
+    @Test
+    public void callerWithClosures() {
+        String code =
+                "let capturedCaller;\n"
+                        + "function outer() {\n"
+                        + "  function inner() {\n"
+                        + "    capturedCaller = inner.caller;\n"
+                        + "  }\n"
+                        + "  return inner;\n"
+                        + "}\n"
+                        + "let innerFunc = outer();\n"
+                        + "function caller() {\n"
+                        + "  innerFunc();\n"
+                        + "}\n"
+                        + "caller();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === caller);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void nonStrictCalleeFromStrictCaller() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "function nonStrictCallee() {\n"
-                            + "  capturedCaller = nonStrictCallee.caller;\n"
-                            + "}\n"
-                            + "function strictCaller() {\n"
-                            + "  'use strict';\n"
-                            + "  nonStrictCallee();\n"
-                            + "}\n"
-                            + "strictCaller();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === null);\n"
-                            + "res";
+    @Test
+    public void nonStrictCalleeFromStrictCaller() {
+        String code =
+                "let capturedCaller;\n"
+                        + "function nonStrictCallee() {\n"
+                        + "  capturedCaller = nonStrictCallee.caller;\n"
+                        + "}\n"
+                        + "function strictCaller() {\n"
+                        + "  'use strict';\n"
+                        + "  nonStrictCallee();\n"
+                        + "}\n"
+                        + "strictCaller();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === null);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void strictCalleeFromNonStrictCaller() {
-            String code =
-                    "function strictCallee() {\n"
-                            + "  'use strict';\n"
-                            + "  return strictCallee.caller;\n"
-                            + "}\n"
-                            + "function nonStrictCaller() {\n"
-                            + "  try {\n"
-                            + "    return strictCallee();\n"
-                            + "  } catch(e) {\n"
-                            + "    return 'error';\n"
-                            + "  }\n"
-                            + "}\n"
-                            + "'' + nonStrictCaller();";
+    @Test
+    public void strictCalleeFromNonStrictCaller() {
+        String code =
+                "function strictCallee() {\n"
+                        + "  'use strict';\n"
+                        + "  return strictCallee.caller;\n"
+                        + "}\n"
+                        + "function nonStrictCaller() {\n"
+                        + "  try {\n"
+                        + "    return strictCallee();\n"
+                        + "  } catch(e) {\n"
+                        + "    return 'error';\n"
+                        + "  }\n"
+                        + "}\n"
+                        + "'' + nonStrictCaller();";
 
-            Utils.assertWithAllModes_ES6("error", code);
-        }
+        Utils.assertWithAllModes_ES6("error", code);
+    }
 
-        @Test
-        public void callerPropertyDescriptorSameForDifferentFunctions() {
-            String code =
-                    "function foo1() {}\n"
-                            + "function foo2() {}\n"
-                            + "let desc1 = Object.getOwnPropertyDescriptor(Function.prototype, 'caller');\n"
-                            + "let desc2 = Object.getOwnPropertyDescriptor(Function.prototype, 'caller');\n"
-                            + "let res = '';\n"
-                            + "if (desc1 && desc2) {\n"
-                            + "  res += (desc1.get === desc2.get);\n"
-                            + "  res += ' ' + (desc1.set === desc2.set);\n"
-                            + "}\n"
-                            + "res";
+    @Test
+    public void callerPropertyDescriptorSameForDifferentFunctions() {
+        String code =
+                "function foo1() {}\n"
+                        + "function foo2() {}\n"
+                        + "let desc1 = Object.getOwnPropertyDescriptor(Function.prototype, 'caller');\n"
+                        + "let desc2 = Object.getOwnPropertyDescriptor(Function.prototype, 'caller');\n"
+                        + "let res = '';\n"
+                        + "if (desc1 && desc2) {\n"
+                        + "  res += (desc1.get === desc2.get);\n"
+                        + "  res += ' ' + (desc1.set === desc2.set);\n"
+                        + "}\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true true", code);
-        }
+        Utils.assertWithAllModes_ES6("true true", code);
+    }
 
-        @Test
-        public void callerPropertyNames() {
-            String code =
-                    "let res = '';\n"
-                            + "function test() {}\n"
-                            + "let p = Object.getOwnPropertyNames(test);\n"
-                            + "p.sort();\n"
-                            + "res += p;\n"
-                            + "res";
+    @Test
+    public void callerPropertyNames() {
+        String code =
+                "let res = '';\n"
+                        + "function test() {}\n"
+                        + "let p = Object.getOwnPropertyNames(test);\n"
+                        + "p.sort();\n"
+                        + "res += p;\n"
+                        + "res";
 
-            // todo Utils.assertWithAllModes_ES6("length,name,prototype", code);
-            Utils.assertWithAllModes_ES6("arity,length,name,prototype", code);
-        }
+        // todo Utils.assertWithAllModes_ES6("length,name,prototype", code);
+        Utils.assertWithAllModes_ES6("arity,length,name,prototype", code);
+    }
 
-        @Test
-        public void callerPropertyNamesStrict() {
-            String code =
-                    "'use strict';\n"
-                            + "let res = '';\n"
-                            + "function test() {}\n"
-                            + "let p = Object.getOwnPropertyNames(test);\n"
-                            + "p.sort();\n"
-                            + "res += p;\n"
-                            + "res";
+    @Test
+    public void callerPropertyNamesStrict() {
+        String code =
+                "'use strict';\n"
+                        + "let res = '';\n"
+                        + "function test() {}\n"
+                        + "let p = Object.getOwnPropertyNames(test);\n"
+                        + "p.sort();\n"
+                        + "res += p;\n"
+                        + "res";
 
-            // todo Utils.assertWithAllModes_ES6("length,name,prototype", code);
-            Utils.assertWithAllModes_ES6("arity,length,name,prototype", code);
-        }
+        // todo Utils.assertWithAllModes_ES6("length,name,prototype", code);
+        Utils.assertWithAllModes_ES6("arity,length,name,prototype", code);
+    }
 
-        @Test
-        public void callerShouldBeNullOutsideFunction() {
-            String code =
-                    "let res = '';\n"
-                            + "function test() {\n"
-                            + "  res += ' ' + test.caller;\n"
-                            + "}\n"
-                            + "res += test.caller;\n"
-                            + "test();\n"
-                            + "res += ' ' + test.caller;\n"
-                            + "res";
+    @Test
+    public void callerShouldBeNullOutsideFunction() {
+        String code =
+                "let res = '';\n"
+                        + "function test() {\n"
+                        + "  res += ' ' + test.caller;\n"
+                        + "}\n"
+                        + "res += test.caller;\n"
+                        + "test();\n"
+                        + "res += ' ' + test.caller;\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("null null null", code);
-        }
+        Utils.assertWithAllModes_ES6("null null null", code);
+    }
 
-        @Test
-        public void callerShouldThrowOutsideFunctionStrict() {
-            String code =
-                    "'use strict';\n"
-                            + "let res = '';\n"
-                            + "function test() {\n"
-                            + "  try {\n"
-                            + "    res += ' ' + test.caller;\n"
-                            + "  } catch(e) { res += ' ex'; }"
-                            + "}\n"
-                            + "try {\n"
-                            + "  res += test.caller;\n"
-                            + "} catch(e) { res += 'ex'; }\n"
-                            + "test();\n"
-                            + "try {\n"
-                            + "  res += ' ' + test.caller;\n"
-                            + "} catch(e) { res += ' ex'; }\n"
-                            + "res";
+    @Test
+    public void callerShouldThrowOutsideFunctionStrict() {
+        String code =
+                "'use strict';\n"
+                        + "let res = '';\n"
+                        + "function test() {\n"
+                        + "  try {\n"
+                        + "    res += ' ' + test.caller;\n"
+                        + "  } catch(e) { res += ' ex'; }"
+                        + "}\n"
+                        + "try {\n"
+                        + "  res += test.caller;\n"
+                        + "} catch(e) { res += 'ex'; }\n"
+                        + "test();\n"
+                        + "try {\n"
+                        + "  res += ' ' + test.caller;\n"
+                        + "} catch(e) { res += ' ex'; }\n"
+                        + "res";
 
-            // In strict mode, accessing caller on strict functions should throw
-            Utils.assertWithAllModes_ES6("ex ex ex", code);
-        }
+        // In strict mode, accessing caller on strict functions should throw
+        Utils.assertWithAllModes_ES6("ex ex ex", code);
+    }
 
-        @Test
-        public void arrowFunctionCallerThrows() {
-            String code =
-                    "let arrowFunc = () => {\n"
-                            + "  return arrowFunc.caller;\n"
-                            + "};\n"
-                            + "'' + arrowFunc();";
+    @Test
+    public void arrowFunctionCallerThrows() {
+        String code =
+                "let arrowFunc = () => {\n"
+                        + "  return arrowFunc.caller;\n"
+                        + "};\n"
+                        + "'' + arrowFunc();";
 
-            Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
-        }
+        Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
+    }
 
-        @Test
-        public void arrowFunctionAsCallee() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "let callee = () => {\n"
-                            + "  capturedCaller = callee.caller;\n"
-                            + "};\n"
-                            + "function caller() {\n"
-                            + "  try {\n"
-                            + "    callee();\n"
-                            + "    return 'no-error';\n"
-                            + "  } catch(e) {\n"
-                            + "    return 'error';\n"
-                            + "  }\n"
-                            + "}\n"
-                            + "caller();";
+    @Test
+    public void arrowFunctionAsCallee() {
+        String code =
+                "let capturedCaller;\n"
+                        + "let callee = () => {\n"
+                        + "  capturedCaller = callee.caller;\n"
+                        + "};\n"
+                        + "function caller() {\n"
+                        + "  try {\n"
+                        + "    callee();\n"
+                        + "    return 'no-error';\n"
+                        + "  } catch(e) {\n"
+                        + "    return 'error';\n"
+                        + "  }\n"
+                        + "}\n"
+                        + "caller();";
 
-            Utils.assertWithAllModes_ES6("error", code);
-        }
+        Utils.assertWithAllModes_ES6("error", code);
+    }
 
-        @Test
-        public void generatorFunctionCallerThrows() {
-            String code =
-                    "function* generatorFunc() {\n"
-                            + "  return generatorFunc.caller;\n"
-                            + "}\n"
-                            + "let gen = generatorFunc();\n"
-                            + "gen.next();"
-                            + "'done'";
+    @Test
+    public void generatorFunctionCallerThrows() {
+        String code =
+                "function* generatorFunc() {\n"
+                        + "  return generatorFunc.caller;\n"
+                        + "}\n"
+                        + "let gen = generatorFunc();\n"
+                        + "gen.next();"
+                        + "'done'";
 
-            // todo Utils.assertEcmaErrorES6("TypeError:   k", code);
-            Utils.assertWithAllModes_ES6("done", code);
-        }
+        // todo Utils.assertEcmaErrorES6("TypeError:   k", code);
+        Utils.assertWithAllModes_ES6("done", code);
+    }
 
-        @Test
-        public void deepCallChain() {
-            String code =
-                    "let capturedCaller;\n"
-                            + "function level10() { capturedCaller = level10.caller; }\n"
-                            + "function level9() { level10(); }\n"
-                            + "function level8() { level9(); }\n"
-                            + "function level7() { level8(); }\n"
-                            + "function level6() { level7(); }\n"
-                            + "function level5() { level6(); }\n"
-                            + "function level4() { level5(); }\n"
-                            + "function level3() { level4(); }\n"
-                            + "function level2() { level3(); }\n"
-                            + "function level1() { level2(); }\n"
-                            + "level1();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === level9);\n"
-                            + "res";
+    @Test
+    public void deepCallChain() {
+        String code =
+                "let capturedCaller;\n"
+                        + "function level10() { capturedCaller = level10.caller; }\n"
+                        + "function level9() { level10(); }\n"
+                        + "function level8() { level9(); }\n"
+                        + "function level7() { level8(); }\n"
+                        + "function level6() { level7(); }\n"
+                        + "function level5() { level6(); }\n"
+                        + "function level4() { level5(); }\n"
+                        + "function level3() { level4(); }\n"
+                        + "function level2() { level3(); }\n"
+                        + "function level1() { level2(); }\n"
+                        + "level1();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === level9);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true", code);
-        }
+        Utils.assertWithAllModes_ES6("true", code);
+    }
 
-        @Test
-        public void callerAndArgumentsIndependence() {
-            String code =
-                    "let capturedCaller, capturedArguments;\n"
-                            + "function callee(a, b, c) {\n"
-                            + "  capturedCaller = callee.caller;\n"
-                            + "  capturedArguments = callee.arguments;\n"
-                            + "}\n"
-                            + "function caller() {\n"
-                            + "  callee(1, 2, 3);\n"
-                            + "}\n"
-                            + "caller();\n"
-                            + "let res = '';\n"
-                            + "res += (capturedCaller === caller);\n"
-                            + "res += ' ' + (capturedArguments !== null && capturedArguments !== undefined);\n"
-                            + "res";
+    @Test
+    public void callerAndArgumentsIndependence() {
+        String code =
+                "let capturedCaller, capturedArguments;\n"
+                        + "function callee(a, b, c) {\n"
+                        + "  capturedCaller = callee.caller;\n"
+                        + "  capturedArguments = callee.arguments;\n"
+                        + "}\n"
+                        + "function caller() {\n"
+                        + "  callee(1, 2, 3);\n"
+                        + "}\n"
+                        + "caller();\n"
+                        + "let res = '';\n"
+                        + "res += (capturedCaller === caller);\n"
+                        + "res += ' ' + (capturedArguments !== null && capturedArguments !== undefined);\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true true", code);
-        }
+        Utils.assertWithAllModes_ES6("true true", code);
+    }
 
-        @Test
-        public void callerDescriptorGetterAndSetterSame() {
-            String code =
-                    "let desc = Object.getOwnPropertyDescriptor(Function.prototype, 'caller');\n"
-                            + "let res = '';\n"
-                            + "if (desc) {\n"
-                            + "  res += (desc.get === desc.set);\n"
-                            + "}\n"
-                            + "res";
+    @Test
+    public void callerDescriptorGetterAndSetterSame() {
+        String code =
+                "let desc = Object.getOwnPropertyDescriptor(Function.prototype, 'caller');\n"
+                        + "let res = '';\n"
+                        + "if (desc) {\n"
+                        + "  res += (desc.get === desc.set);\n"
+                        + "}\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("false", code);
-        }
+        Utils.assertWithAllModes_ES6("false", code);
+    }
 
-        @Test
-        public void deleteCaller() {
-            String code =
-                    "function testFunc() {}\n"
-                            + "let res = '';\n"
-                            + "try {\n"
-                            + "  res += delete testFunc.caller;\n"
-                            + "  res += ' ' + ('caller' in testFunc);\n"
-                            + "} catch(e) {\n"
-                            + "  res += 'error';\n"
-                            + "}\n"
-                            + "res";
+    @Test
+    public void deleteCaller() {
+        String code =
+                "function testFunc() {}\n"
+                        + "let res = '';\n"
+                        + "try {\n"
+                        + "  res += delete testFunc.caller;\n"
+                        + "  res += ' ' + ('caller' in testFunc);\n"
+                        + "} catch(e) {\n"
+                        + "  res += 'error';\n"
+                        + "}\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("true true", code);
-        }
+        Utils.assertWithAllModes_ES6("true true", code);
+    }
 
-        @Test
-        public void deleteCallerStrict() {
-            String code =
-                    "'use strict';\n"
-                            + "function testFunc() {}\n"
-                            + "let res = '';\n"
-                            + "try {\n"
-                            + "  delete testFunc.caller;\n"
-                            + "  res += 'no-error';\n"
-                            + "} catch(e) {\n"
-                            + "  res += 'error';\n"
-                            + "}\n"
-                            + "res";
+    @Test
+    public void deleteCallerStrict() {
+        String code =
+                "'use strict';\n"
+                        + "function testFunc() {}\n"
+                        + "let res = '';\n"
+                        + "try {\n"
+                        + "  delete testFunc.caller;\n"
+                        + "  res += 'no-error';\n"
+                        + "} catch(e) {\n"
+                        + "  res += 'error';\n"
+                        + "}\n"
+                        + "res";
 
-            Utils.assertWithAllModes_ES6("no-error", code);
-        }
+        Utils.assertWithAllModes_ES6("no-error", code);
+    }
+
+    @Test
+    public void newFunctionStrict() {
+        String code =
+                "var f = new Function(\"\\\"use strict\\\";\\ngNonStrict();\");\n"
+                        + "var res = '';\n"
+                        + "try {\n"
+                        + "  f();\n"
+                        + "  res += ' no-error';\n"
+                        + "} catch(e) {\n"
+                        + "  res += ' error';\n"
+                        + "}\n"
+
+                        + "function gNonStrict() {\n"
+                        + "  res += gNonStrict.caller;\n"
+                        + "}\n"
+                        + "res";
+
+        Utils.assertWithAllModes_ES6("null no-error", code);
+    }
 }
