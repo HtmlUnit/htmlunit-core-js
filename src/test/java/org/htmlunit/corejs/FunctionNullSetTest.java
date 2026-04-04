@@ -33,7 +33,7 @@ public class FunctionNullSetTest {
                     ScriptableObject.defineClass(scope, MyHostObject.class);
                     final Method getterMethod = MyHostObject.class.getMethod("jsxGet_onclick");
                     final Method setterMethod = MyHostObject.class.getMethod("jsxSet_onclick", Object.class);
-                    prototype.defineProperty("onclick", null, getterMethod , setterMethod, ScriptableObject.EMPTY);
+                    prototype.defineProperty(scope, "onclick", null, getterMethod , setterMethod, ScriptableObject.EMPTY);
 
                     ScriptableObject.defineProperty(scope, "o", prototype, ScriptableObject.DONTENUM);
 

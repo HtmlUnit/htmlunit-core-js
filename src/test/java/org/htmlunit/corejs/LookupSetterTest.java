@@ -6,6 +6,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -86,7 +87,7 @@ public class LookupSetterTest {
         }
     }
 
-    public static class TopScope extends ScriptableObject {
+    public static class TopScope extends TopLevel {
         @Override
         public String getClassName() {
             return "TopScope";

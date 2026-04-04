@@ -4,6 +4,7 @@ import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -43,8 +44,8 @@ public class PrimitiveTypeScopeResolutionTest {
         final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx){
-                final Scriptable scope1 = cx.initSafeStandardObjects(new MySimpleScriptableObject("scope1"));
-                final Scriptable scope2 = cx.initSafeStandardObjects(new MySimpleScriptableObject("scope2"));
+                final Scriptable scope1 = cx.initSafeStandardObjects(new TopLevel(new MySimpleScriptableObject("scope1")));
+                final Scriptable scope2 = cx.initSafeStandardObjects(new TopLevel(new MySimpleScriptableObject("scope2")));
                 cx.evaluateString(scope2, scriptScope2, "source2", 1, null);
 
                 scope1.put("scope2", scope1, scope2);
