@@ -31,6 +31,7 @@
 
         <!-- plugins -->
         <central-publishing.version>0.10.0</central-publishing.version>
+        <build-helper-plugin.version>3.6.1</build-helper-plugin.version>
         <clean-plugin.version>3.5.0</clean-plugin.version>
         <build-helper-plugin.version>3.6.1</build-helper-plugin.version>
         <gpg-plugin.version>3.2.8</gpg-plugin.version>
@@ -51,6 +52,26 @@
          </resource>
        </resources>
        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build-helper-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-module-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/module-info</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
