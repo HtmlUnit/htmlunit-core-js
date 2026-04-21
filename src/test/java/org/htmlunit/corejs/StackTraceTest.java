@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.JavaScriptException;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -37,7 +37,7 @@ public class StackTraceTest {
         final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
+                final TopLevel scope = cx.initSafeStandardObjects();
                 try {
                     cx.evaluateString(scope, _source, "test.js", 0, null);
                 }

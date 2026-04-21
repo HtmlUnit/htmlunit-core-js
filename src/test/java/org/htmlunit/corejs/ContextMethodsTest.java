@@ -14,7 +14,7 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.ErrorReporter;
 import org.htmlunit.corejs.javascript.Evaluator;
 import org.htmlunit.corejs.javascript.Script;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -54,9 +54,9 @@ public class ContextMethodsTest {
         final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(Context cx) {
-                final Scriptable scope = cx.initSafeStandardObjects();
+                final TopLevel scope = cx.initSafeStandardObjects();
                 final Script script = cx.compileString(source, "", 1, (Object) null);
-                return script.exec(cx, scope);
+                return script.exec(cx, scope, scope.getGlobalThis());
             }
         };
         cf.call(action);

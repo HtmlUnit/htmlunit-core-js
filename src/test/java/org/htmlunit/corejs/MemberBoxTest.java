@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.TopLevel;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -26,7 +26,7 @@ public class MemberBoxTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    Scriptable scope = cx.initSafeStandardObjects();
+                    TopLevel scope = cx.initSafeStandardObjects();
                     ScriptableObject.defineClass(scope, MyHostObject.class);
 
                     cx.evaluateString(scope, script, "test_script", 1, null);

@@ -16,8 +16,6 @@ import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.JavaScriptException;
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
 
 /**
@@ -54,7 +52,7 @@ public class Utils {
     public static void executeScript(String script, boolean interpreted) {
         Utils.runWithMode(
                 cx -> {
-                    final Scriptable scope = cx.initStandardObjects();
+                    final TopLevel scope = cx.initStandardObjects();
                     return cx.evaluateString(scope, script, "myScript.js", 1, null);
                 },
                 interpreted);
@@ -231,7 +229,7 @@ public class Utils {
                     if (languageVersion > -1) {
                         cx.setLanguageVersion(languageVersion);
                     }
-                    final Scriptable scope = cx.initStandardObjects();
+                    final TopLevel scope = cx.initStandardObjects();
                     final Object res = cx.evaluateString(scope, script, "test.js", 0, null);
 
                     if (expected instanceof Integer && res instanceof Double) {
@@ -268,7 +266,7 @@ public class Utils {
         runWithAllModes(
                 cx -> {
                     cx.setLanguageVersion(Context.VERSION_ES6);
-                    Scriptable scope = cx.initStandardObjects(new TopLevel());
+                    TopLevel scope = cx.initStandardObjects(new TopLevel());
                     final Object res = cx.evaluateString(scope, script, "test.js", 0, null);
 
                     assertEquals(expected, res);
@@ -425,7 +423,7 @@ public class Utils {
                     if (languageVersion > -1) {
                         cx.setLanguageVersion(languageVersion);
                     }
-                    ScriptableObject scope = cx.initStandardObjects();
+                    TopLevel scope = cx.initStandardObjects();
 
                     T e =
                             assertThrows(

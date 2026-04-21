@@ -1,7 +1,5 @@
 package org.htmlunit.corejs;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.lang.reflect.Method;
 
 import org.htmlunit.corejs.javascript.Context;
@@ -74,7 +72,7 @@ public class EvalScopeTest {
                     ScriptableObject.defineProperty(host1, "host1", host1, ScriptableObject.EMPTY);
                     ScriptableObject.defineProperty(host1, "host2", host2, ScriptableObject.EMPTY);
 
-                    Object result = cx.evaluateString(host1, script, "test_script", 1, null);
+                    Object result = cx.evaluateString(scope1, script, "test_script", 1, null);
                     if (result instanceof Number) {
                         result = ((Number) result).intValue();
                     }

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.TopLevel;
 import org.junit.jupiter.api.Test;
@@ -50,7 +49,7 @@ public class LookupSetterTest {
             @Override
             public Object run(final Context cx) {
                 try {
-                    final Scriptable scope = cx.initSafeStandardObjects(new TopScope());
+                    final TopLevel scope = cx.initSafeStandardObjects(new TopScope());
                     ScriptableObject.defineClass(scope, Foo.class);
                     cx.evaluateString(scope, defineSetterAndGetterX, "initX", 1, null);
                     Object result = String.valueOf(cx.evaluateString(scope, src, "test", 1, null));
