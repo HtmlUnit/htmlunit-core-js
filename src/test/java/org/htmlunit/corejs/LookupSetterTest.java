@@ -87,9 +87,5 @@ public class LookupSetterTest {
     }
 
     public static class TopScope extends TopLevel {
-        @Override
-        public String getClassName() {
-            return "TopScope";
-        }
     }
 }
