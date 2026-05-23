@@ -1,5 +1,3 @@
-### Latest release Version 4.21.0 / December 28, 2025
-
 # HtmlUnit - core-js
 
 This project is a Rhino fork, maintained to support features needed by HtmlUnit.
@@ -21,23 +19,26 @@ Notice that "org.mozilla.*" is renamed to "org.htmlunit.corejs.*"
 
 #### Version 5
 
-Work on HtmlUnit - core-js 5.0 has started. This new major version will require **JDK 17 or higher**.
+Starting with version 5.0.0, **JDK 17 or higher is required**.  
+If you are still on JDK 8, see [Legacy Support (JDK 8)](#legacy-support-jdk-8) below.
 
 
-#### Legacy Support (JDK 8)
+### Latest release Version 5.0.0 / May 24, 2026
 
-If you need to continue using **JDK 8**, please note that versions 4.x will remain available as-is. However,
-**ongoing maintenance and fixes for JDK 8 compatibility are only available through sponsorship**.
 
-Maintaining separate fix versions for JDK 8 requires significant additional effort for __backporting__, testing, and release management.
+<a name="legacy-support-jdk-8"></a>
+### Legacy Support (JDK 8)
 
-**To enable continued JDK 8 support**, please contact me via email to discuss sponsorship options. Sponsorship provides:
+If you need to continue using **JDK 8**, versions 4.x remain available as-is.
+Ongoing maintenance and fixes for JDK 8 are only available through sponsorship —
+please contact me via email to discuss options. Sponsorship provides:
 
-- __Backporting__ security and bug fixes to the 4.x branch
-- Maintaining compatibility with older Java versions
+- Backporting security and bug fixes to the 4.x branch
+- Compatibility maintenance with older Java versions
 - Timely releases for critical issues
 
-Without sponsorship, the 4.x branch will not receive updates. Your support ensures the long-term __sustainability__ of this project across multiple Java versions.
+Without sponsorship, the 4.x branch will not receive further updates.
+
 
 ## Start HtmlUnit - core-js Development
 
@@ -99,16 +100,16 @@ This part is intended for committer who are packaging a release.
 * Create the version on Github
     * login to Github and open project https://github.com/HtmlUnit/htmlunit-core-js
     * click Releases > Draft new release
-    * fill the tag and title field with the release number (e.g. 4.0.0)
+    * fill the tag and title field with the release number (e.g. 5.0.0)
     * append 
-        * htmlunit-core-js-4.x.x.jar
-        * htmlunit-core-js-4.x.x.jar.asc 
-        * htmlunit-core-js-4.x.x.pom
-        * htmlunit-core-js-4.x.x.pom.asc 
-        * htmlunit-core-js-4.x.x-javadoc.jar
-        * htmlunit-core-js-4.x.x-javadoc.jar.asc
-        * htmlunit-core-js-4.x.x-sources.jar
-        * htmlunit-core-js-4.x.x-sources.jar.asc
+        * htmlunit-core-js-5.x.x.jar
+        * htmlunit-core-js-5.x.x.jar.asc 
+        * htmlunit-core-js-5.x.x.pom
+        * htmlunit-core-js-5.x.x.pom.asc 
+        * htmlunit-core-js-5.x.x-javadoc.jar
+        * htmlunit-core-js-5.x.x-javadoc.jar.asc
+        * htmlunit-core-js-5.x.x-sources.jar
+        * htmlunit-core-js-5.x.x-sources.jar.asc
     * and publish the release 
 
 * Update the version number in pom.xml to start next snapshot development
