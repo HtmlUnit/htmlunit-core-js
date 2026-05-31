@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit-core-js</artifactId>
-    <version>5.0.0</version>
+    <version>5.1.0</version>
     <name>HtmlUnit JavaScript Engine</name>
     <organization>
         <name>HtmlUnit</name>
@@ -42,7 +42,7 @@
         <resources-plugin.version>3.3.1</resources-plugin.version> <!--jdoc fails with newer versions-->
         <source-plugin.version>3.4.0</source-plugin.version>
         <javadoc-plugin.version>3.12.0</javadoc-plugin.version>
-        <surefire-plugin.version>3.5.5</surefire-plugin.version>
+        <surefire-plugin.version>3.5.6</surefire-plugin.version>
     </properties>
 
     <build>
