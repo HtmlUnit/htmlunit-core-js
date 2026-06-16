@@ -23,7 +23,7 @@ public class FunctionCallerTest {
         final String script = "var g = true; (function() { var g = function g() { return 1; };\n"
                 + "return this.g == undefined })();g;\n";
 
-        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
+        Utils.assertWithAllModes(Boolean.TRUE, script);
     }
 
     /**
@@ -41,7 +41,7 @@ public class FunctionCallerTest {
                 + "}\n"
                 + "g();\n";
 
-        Utils.assertWithAllModes_ES6("", script);
+        Utils.assertWithAllModes("", script);
     }
 
     /**
@@ -62,7 +62,7 @@ public class FunctionCallerTest {
             + "}\n"
             + "f();\n";
 
-        Utils.assertWithAllModes_ES6(Undefined.instance, script);
+        Utils.assertWithAllModes(Undefined.instance, script);
     }
 
     /**
@@ -85,7 +85,7 @@ public class FunctionCallerTest {
             + "f();\n"
             + "output";
 
-        Utils.assertWithAllModes_ES6("2-2", script);
+        Utils.assertWithAllModes("2-2", script);
     }
 
     /**
@@ -109,7 +109,7 @@ public class FunctionCallerTest {
             + "f();\n"
             + "output";
 
-        Utils.assertWithAllModes_ES6("2-hello-2", script);
+        Utils.assertWithAllModes("2-hello-2", script);
     }
 
     /**
@@ -129,6 +129,6 @@ public class FunctionCallerTest {
             + "g();\n"
             + "output";
 
-        Utils.assertWithAllModes_ES6("true, true", script);
+        Utils.assertWithAllModes("true, true", script);
     }
 }

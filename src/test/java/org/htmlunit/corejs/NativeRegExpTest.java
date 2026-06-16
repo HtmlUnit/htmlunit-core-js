@@ -16,7 +16,7 @@ public class NativeRegExpTest {
     @Test
     public void empty() throws Exception {
         final String script = "new RegExp().test('AA')";
-        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
+        Utils.assertWithAllModes(Boolean.TRUE, script);
     }
 
     /**
@@ -25,7 +25,7 @@ public class NativeRegExpTest {
     @Test
     public void undefined() throws Exception {
         final String script = "new RegExp(undefined).test('AA')";
-        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
+        Utils.assertWithAllModes(Boolean.TRUE, script);
     }
 
     /**
@@ -36,6 +36,6 @@ public class NativeRegExpTest {
     @Test
     public void changed() throws Exception {
         final String script = "'alpha'.replace(/alpha/, '');/beta/.test('abc beta def');";
-        Utils.assertWithAllModes_ES6(Boolean.TRUE, script);
+        Utils.assertWithAllModes(Boolean.TRUE, script);
     }
 }

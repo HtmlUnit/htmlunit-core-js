@@ -19,7 +19,7 @@ public class FunctionCaller2Test {
                         + "test();\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("null true", code);
+        Utils.assertWithAllModes("null true", code);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FunctionCaller2Test {
                         + "topLevelFunc();\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("null", code);
+        Utils.assertWithAllModes("null", code);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class FunctionCaller2Test {
                         + "strictCaller();\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("null", code);
+        Utils.assertWithAllModes("null", code);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "'' + strictFunc();";
 
-        Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
+        Utils.assertEcmaError("TypeError: This operation is not allowed.", code);
     }
 
     @Test
@@ -73,28 +73,28 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "'' + strictFunc();";
 
-        Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
+        Utils.assertEcmaError("TypeError: This operation is not allowed.", code);
     }
 
     @Test
     public void callerExistsOnPrototype() {
         String code = "let res = '';\n" + "res += 'caller' in Function.prototype;\n" + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
     public void accessingFunctionPrototypeCallerThrows() {
         String code = "'' + Function.prototype.caller;";
 
-        Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
+        Utils.assertEcmaError("TypeError: This operation is not allowed.", code);
     }
 
     @Test
     public void settingFunctionPrototypeCallerThrows() {
         String code = "Function.prototype.caller = function() {}; '' + Function.prototype.caller;";
 
-        Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
+        Utils.assertEcmaError("TypeError: This operation is not allowed.", code);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6(
+        Utils.assertWithAllModes(
                 "function/function get caller() {\n    [native code]\n}"
                         + " function/function set caller() {\n    [native code]\n}"
                         + " W-undefined C-true E-false",
@@ -127,7 +127,7 @@ public class FunctionCaller2Test {
                         + "res += Object.keys(testFunc).indexOf('caller') === -1;\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -138,7 +138,7 @@ public class FunctionCaller2Test {
                         + "res += Object.prototype.hasOwnProperty.call(testFunc, 'caller');\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("false", code);
+        Utils.assertWithAllModes("false", code);
     }
 
     @Test
@@ -161,7 +161,7 @@ public class FunctionCaller2Test {
                         + "res += ' ' + (capturedCaller1 === level2);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true true", code);
+        Utils.assertWithAllModes("true true", code);
     }
 
     @Test
@@ -181,7 +181,7 @@ public class FunctionCaller2Test {
                         + "res += (callerAtDepth2 === recursive);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -204,7 +204,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCallerInG === f);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -227,7 +227,7 @@ public class FunctionCaller2Test {
                         + "res += ' ' + (secondCaller === caller2);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true true", code);
+        Utils.assertWithAllModes("true true", code);
     }
 
     @Test
@@ -249,7 +249,7 @@ public class FunctionCaller2Test {
                         + "res += ' ' + (callerAfterExecution === null);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true true", code);
+        Utils.assertWithAllModes("true true", code);
     }
 
     @Test
@@ -267,7 +267,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === caller);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -285,7 +285,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === caller);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -304,7 +304,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller !== undefined && capturedCaller !== null);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -322,7 +322,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === createInstance);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -342,7 +342,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === caller);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -358,7 +358,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === caller);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -373,7 +373,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller !== undefined);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -386,7 +386,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === null);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -408,7 +408,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === caller);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -427,7 +427,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === null);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -446,7 +446,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "'' + nonStrictCaller();";
 
-        Utils.assertWithAllModes_ES6("error", code);
+        Utils.assertWithAllModes("error", code);
     }
 
     @Test
@@ -463,7 +463,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true true", code);
+        Utils.assertWithAllModes("true true", code);
     }
 
     @Test
@@ -476,8 +476,8 @@ public class FunctionCaller2Test {
                         + "res += p;\n"
                         + "res";
 
-        // todo Utils.assertWithAllModes_ES6("length,name,prototype", code);
-        Utils.assertWithAllModes_ES6("arity,length,name,prototype", code);
+        // todo Utils.assertWithAllModes("length,name,prototype", code);
+        Utils.assertWithAllModes("arity,length,name,prototype", code);
     }
 
     @Test
@@ -491,8 +491,8 @@ public class FunctionCaller2Test {
                         + "res += p;\n"
                         + "res";
 
-        // todo Utils.assertWithAllModes_ES6("length,name,prototype", code);
-        Utils.assertWithAllModes_ES6("arity,length,name,prototype", code);
+        // todo Utils.assertWithAllModes("length,name,prototype", code);
+        Utils.assertWithAllModes("arity,length,name,prototype", code);
     }
 
     @Test
@@ -507,7 +507,7 @@ public class FunctionCaller2Test {
                         + "res += ' ' + test.caller;\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("null null null", code);
+        Utils.assertWithAllModes("null null null", code);
     }
 
     @Test
@@ -530,7 +530,7 @@ public class FunctionCaller2Test {
                         + "res";
 
         // In strict mode, accessing caller on strict functions should throw
-        Utils.assertWithAllModes_ES6("ex ex ex", code);
+        Utils.assertWithAllModes("ex ex ex", code);
     }
 
     @Test
@@ -541,7 +541,7 @@ public class FunctionCaller2Test {
                         + "};\n"
                         + "'' + arrowFunc();";
 
-        Utils.assertEcmaErrorES6("TypeError: This operation is not allowed.", code);
+        Utils.assertEcmaError("TypeError: This operation is not allowed.", code);
     }
 
     @Test
@@ -561,7 +561,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "caller();";
 
-        Utils.assertWithAllModes_ES6("error", code);
+        Utils.assertWithAllModes("error", code);
     }
 
     @Test
@@ -575,7 +575,7 @@ public class FunctionCaller2Test {
                         + "'done'";
 
         // todo Utils.assertEcmaErrorES6("TypeError:   k", code);
-        Utils.assertWithAllModes_ES6("done", code);
+        Utils.assertWithAllModes("done", code);
     }
 
     @Test
@@ -597,7 +597,7 @@ public class FunctionCaller2Test {
                         + "res += (capturedCaller === level9);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true", code);
+        Utils.assertWithAllModes("true", code);
     }
 
     @Test
@@ -617,7 +617,7 @@ public class FunctionCaller2Test {
                         + "res += ' ' + (capturedArguments !== null && capturedArguments !== undefined);\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true true", code);
+        Utils.assertWithAllModes("true true", code);
     }
 
     @Test
@@ -630,7 +630,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("false", code);
+        Utils.assertWithAllModes("false", code);
     }
 
     @Test
@@ -646,7 +646,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("true true", code);
+        Utils.assertWithAllModes("true true", code);
     }
 
     @Test
@@ -663,7 +663,7 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("no-error", code);
+        Utils.assertWithAllModes("no-error", code);
     }
 
     @Test
@@ -683,6 +683,6 @@ public class FunctionCaller2Test {
                         + "}\n"
                         + "res";
 
-        Utils.assertWithAllModes_ES6("null no-error", code);
+        Utils.assertWithAllModes("null no-error", code);
     }
 }

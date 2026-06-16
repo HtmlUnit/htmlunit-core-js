@@ -21,6 +21,6 @@ public class ArrayConcatTest {
             + "var b = [1, 2, 3];\n"
             + "'' + (b.concat(a));\n";
 
-        Utils.assertWithAllModes_ES6("1,2,3,1,2,3,,,,,,,,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19", script);
+        Utils.assertWithAllModes("1,2,3,1,2,3,,,,,,,,t10,t11,t12,t13,t14,t15,t16,t17,t18,t19", script);
     }
 }

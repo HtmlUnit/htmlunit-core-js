@@ -24,7 +24,7 @@ public class NativeObjectTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("1", script);
+        Utils.assertWithAllModes("1", script);
     }
 
     /**
@@ -40,7 +40,7 @@ public class NativeObjectTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("undefined", script);
+        Utils.assertWithAllModes("undefined", script);
     }
 
     /**
@@ -60,6 +60,6 @@ public class NativeObjectTest {
             + "  var p = new f();\n"
             + "  log = log + ' / ' + (p instanceof f);";
 
-        Utils.assertWithAllModes_ES6("before: [object Object] / after: [object Object] / true", script);
+        Utils.assertWithAllModes("before: [object Object] / after: [object Object] / true", script);
     }
 }

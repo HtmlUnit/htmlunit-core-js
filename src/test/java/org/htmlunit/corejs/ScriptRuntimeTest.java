@@ -27,7 +27,7 @@ public class ScriptRuntimeTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("function foo() {}", script);
+        Utils.assertWithAllModes("function foo() {}", script);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ScriptRuntimeTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("undefined", script);
+        Utils.assertWithAllModes("undefined", script);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ScriptRuntimeTest {
                 + "}\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("function foo() {}", script);
+        Utils.assertWithAllModes("function foo() {}", script);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ScriptRuntimeTest {
                 + "};"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("0,50,100,xxx,zzz,yyy,", script);
+        Utils.assertWithAllModes("0,50,100,xxx,zzz,yyy,", script);
     }
 
     /**
@@ -108,6 +108,6 @@ public class ScriptRuntimeTest {
                 + "test();"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("2, eat, bananas", script);
+        Utils.assertWithAllModes("2, eat, bananas", script);
     }
 }

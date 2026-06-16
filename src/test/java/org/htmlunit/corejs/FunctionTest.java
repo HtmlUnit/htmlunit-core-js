@@ -19,7 +19,7 @@ public class FunctionTest {
      */
     @Test
     public void testFunctionWithSlashSlash() {
-        Utils.assertWithAllModes_ES6(true, "new Function('return true//;').call()");
+        Utils.assertWithAllModes(true, "new Function('return true//;').call()");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class FunctionTest {
                 + "var t = 1;\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("undefined", script);
+        Utils.assertWithAllModes("undefined", script);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class FunctionTest {
                 + "!function t() {output += 'hi';}();\n"
                 + "output";
 
-        Utils.assertEcmaErrorES6("ReferenceError: \"t\" is not defined. (test#2)", script);
+        Utils.assertEcmaError("ReferenceError: \"t\" is not defined. (test#2)", script);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class FunctionTest {
                 + "!function t() {output += 'hi';}();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("undefinedhi", script);
+        Utils.assertWithAllModes("undefinedhi", script);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class FunctionTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("undefinedhi", script);
+        Utils.assertWithAllModes("undefinedhi", script);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class FunctionTest {
                 + "var b = a.bind(f, 'Hello!');\n"
                 + "b([1,2]);";
 
-        Utils.assertWithAllModes_ES6("Hello!", script);
+        Utils.assertWithAllModes("Hello!", script);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class FunctionTest {
                 "function foo(x) {return x;};\n"
                 + "Function.prototype.apply.apply(foo, ['b', ['Hello!', 'Goodbye!']]);\n";
 
-        Utils.assertWithAllModes_ES6("Hello!", script);
+        Utils.assertWithAllModes("Hello!", script);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class FunctionTest {
                 "function foo(x) {return this.toString();};\n"
                 + "Function.prototype.apply.apply(foo, ['b', ['Hello!', 'Goodbye!']]);\n";
 
-        Utils.assertWithAllModes_ES6("b", script);
+        Utils.assertWithAllModes("b", script);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class FunctionTest {
                 "function foo(x) {return x;};\n"
                 + "foo.call.apply(foo, ['b', 'Hello!']);\n";
 
-        Utils.assertWithAllModes_ES6("Hello!", script);
+        Utils.assertWithAllModes("Hello!", script);
     }
 
     @Test
@@ -111,6 +111,6 @@ public class FunctionTest {
                 "function foo(x) {return this.toString();};\n"
                 + "foo.call.apply(foo, ['b', 'Hello!']);\n";
 
-        Utils.assertWithAllModes_ES6("b", script);
+        Utils.assertWithAllModes("b", script);
     }
 }

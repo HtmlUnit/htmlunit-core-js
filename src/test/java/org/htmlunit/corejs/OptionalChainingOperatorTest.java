@@ -35,7 +35,7 @@ public class OptionalChainingOperatorTest {
                 + "  res += o.b?.c;\n"
                 + "res";
 
-        Utils.assertWithAllModes_ES6("undefined two", script);
+        Utils.assertWithAllModes("undefined two", script);
     }
 
     /**
@@ -48,6 +48,6 @@ public class OptionalChainingOperatorTest {
                 + "  res += o?.['a'];\n"
                 + "res";
 
-        Utils.assertWithAllModes_ES6("true", script);
+        Utils.assertWithAllModes("true", script);
     }
 }

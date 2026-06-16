@@ -24,6 +24,6 @@ public class DojoRegressionTest {
                 + "var test = new NodeList(['abc']);\n"
                 + "'' + nlp.length + ' # ' + test.length";
 
-        Utils.assertWithAllModes_ES6("0 # 1", script);
+        Utils.assertWithAllModes("0 # 1", script);
     }
 }

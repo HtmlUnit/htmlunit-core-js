@@ -30,7 +30,7 @@ public class NativeErrorTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("true", script);
+        Utils.assertWithAllModes("true", script);
     }
 
     /**
@@ -53,7 +53,7 @@ public class NativeErrorTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("string", script);
+        Utils.assertWithAllModes("string", script);
     }
 
     /**
@@ -72,7 +72,7 @@ public class NativeErrorTest {
                 + "test();\n"
                 + "output";
 
-        Utils.assertWithAllModes_ES6("string", script);
+        Utils.assertWithAllModes("string", script);
     }
 
 }

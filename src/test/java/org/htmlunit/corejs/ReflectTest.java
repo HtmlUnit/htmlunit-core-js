@@ -26,7 +26,7 @@ public class ReflectTest {
                 + "Reflect.construct(foo, [1, 2]);\n"
                 + "res;";
 
-        Utils.assertWithAllModes_ES6("foo - 1 2 ", script);
+        Utils.assertWithAllModes("foo - 1 2 ", script);
     }
 
     /**
@@ -52,6 +52,6 @@ public class ReflectTest {
                 + "Reflect.construct(foo, [6, 7, 8], bar);\n"
                 + "res;";
 
-        Utils.assertWithAllModes_ES6("foo - 6 7 8 ", script);
+        Utils.assertWithAllModes("foo - 6 7 8 ", script);
     }
 }

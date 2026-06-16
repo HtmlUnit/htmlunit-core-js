@@ -25,6 +25,6 @@ public class PropertiesOrderTest {
             + "for (var i in o) str += i + ' ';\n"
             + "str";
 
-        Utils.assertWithAllModes_ES6("a b c d ", script);
+        Utils.assertWithAllModes("a b c d ", script);
     }
 }

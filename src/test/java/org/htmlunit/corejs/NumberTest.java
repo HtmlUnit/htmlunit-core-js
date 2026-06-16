@@ -19,7 +19,7 @@ public class NumberTest {
         final String script = "var n = 2.274341322658976E-309;\n"
             + "'' + n;";
 
-        Utils.assertWithAllModes_ES6("2.274341322658976e-309", script);
-        Utils.assertWithAllModes_ES6("1", "'' + 1");
+        Utils.assertWithAllModes("2.274341322658976e-309", script);
+        Utils.assertWithAllModes("1", "'' + 1");
     }
 }

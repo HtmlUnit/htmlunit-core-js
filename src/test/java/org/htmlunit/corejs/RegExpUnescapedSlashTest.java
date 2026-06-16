@@ -20,6 +20,6 @@ public class RegExpUnescapedSlashTest {
     public void testUnescapedSlashInSquareBrackets() throws Exception {
         final String script = "var o = /[/]/;";
 
-        Utils.assertWithAllModes_ES6(Undefined.instance, script);
+        Utils.assertWithAllModes(Undefined.instance, script);
     }
 }

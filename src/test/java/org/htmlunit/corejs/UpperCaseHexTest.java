@@ -17,6 +17,6 @@ public class UpperCaseHexTest {
      */
     @Test
     public void testUpperCaseHex() throws Exception {
-        Utils.assertWithAllModes_ES6("%24%20a%20%3B", "encodeURIComponent('$ a ;');");
+        Utils.assertWithAllModes("%24%20a%20%3B", "encodeURIComponent('$ a ;');");
     }
 }

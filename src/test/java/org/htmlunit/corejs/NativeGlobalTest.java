@@ -15,12 +15,12 @@ public class NativeGlobalTest {
      */
     @Test
     public void parseInt() throws Exception {
-        Utils.assertWithAllModes_ES6(8, "parseInt('08')");
+        Utils.assertWithAllModes(8, "parseInt('08')");
 
-        Utils.assertWithAllModes_ES6(0, "parseInt('08', 8)");
+        Utils.assertWithAllModes(0, "parseInt('08', 8)");
 
-        Utils.assertWithAllModes_ES6(Double.NaN, "parseInt('8', 8)");
+        Utils.assertWithAllModes(Double.NaN, "parseInt('8', 8)");
 
-        Utils.assertWithAllModes_ES6(8, "parseInt('8')");
+        Utils.assertWithAllModes(8, "parseInt('8')");
     }
 }

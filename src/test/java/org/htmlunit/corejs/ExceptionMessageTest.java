@@ -24,13 +24,13 @@ public class ExceptionMessageTest {
      */
     @Test
     public void undefinedFromUndefined() {
-        Utils.assertEcmaErrorES6(
+        Utils.assertEcmaError(
                 "TypeError: Cannot read property \"undefined\" from undefined",
                 "undefined[undefined]");
-        Utils.assertEcmaErrorES6(
+        Utils.assertEcmaError(
                 "TypeError: Cannot set property \"undefined\" of undefined to \"1\"",
                 "undefined[undefined] = 1");
-        Utils.assertEcmaErrorES6(
+        Utils.assertEcmaError(
                 "TypeError: Cannot call method \"undefined\" of undefined",
                 "undefined.undefined()");
     }
