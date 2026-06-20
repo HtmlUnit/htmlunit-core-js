@@ -23,7 +23,7 @@ Starting with version 5.0.0, **JDK 17 or higher is required**.
 If you are still on JDK 8, see [Legacy Support (JDK 8)](#legacy-support-jdk-8) below.
 
 
-### Latest release Version 5.1.0 / May 31, 2026
+### Latest release Version 5.2.0 / June 20, 2026
 
 
 <a name="legacy-support-jdk-8"></a>
